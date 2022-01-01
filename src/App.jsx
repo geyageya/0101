@@ -1,5 +1,24 @@
 import {useState, useEffect,useRef, useCallback, memo} from "react";
 
+const RadioBox =(props) => {
+  return(
+    <div>
+      <input 
+        type="radio" 
+        id={props.id}
+        name={props.name} 
+        value={props.value}
+        onChange={props.onChange}
+      />
+      <label 
+        htmlFor={props.htmlFor}
+      >
+        {props.text}
+      </label>
+    </div>
+  )
+}
+
 const Header=memo(()=>{
   console.log("Child1 Headerレンダリング");
 
@@ -1137,84 +1156,90 @@ let backgroundImage="";
   //------JSX------------------------------------------------------------------------------
   return (
     <div>
-        
-      {/* radiobox 言語 */}
-      <div>
-       <input 
-       type="radio" id="japanese" name="language" value="japanese"
-       onChange={playJapanese}
-       />
-       <label htmlFor="japanese">Japanese（日）</label>
-     </div>
-     
-     <div>
-       <input type="radio" id="english" name="language" value="english"
-       onChange={playEnglish}
-       />
-       <label htmlFor="english">English（英）</label>
-     </div>
-
-     {/* radiobox レベル */}
-     <div>
-       <input 
-       type="radio" id="levelOne" name="level" value="levelOne"
-       onChange={playLevelOne}
-       />
-       <label htmlFor="levelOne">初級</label>
-     </div>
-     
-     <div>
-       <input type="radio" id="levelTwo" name="level" value="levelTwo"
-       onChange={playLevelTwo}
-       />
-       <label htmlFor="levelTwo">中級</label>
-     </div>
-
-     <div>
-       <input type="radio" id="levelThree" name="level" value="levelThree"
-       onChange={playLevelThree}
-       />
-       <label htmlFor="levelThree">上級</label>
-     </div>
+     {/* radiobox 言語*/}
+      <RadioBox
+        id="japanese"
+        name="language"
+        value="japanese"
+        htmlFor="japanese"
+        text ="Japanese（日）"
+        onChange={()=> playJapanese()}
+      />
+      <RadioBox
+        id="english"
+        name="language"
+        value="english"
+        htmlFor="english"
+        text ="English（英）"
+        onChange={()=> playEnglish()}
+      />
+   {/* radiobox レベル*/}
+       <RadioBox
+        id="levelOne" 
+        name="level" 
+        value="levelOne"
+        htmlFor="levelOne"
+        text ="初級"
+        onChange={()=> playLevelOne()}
+      />
+      <RadioBox
+        id="leveTwo" 
+        name="level" 
+        value="levelTwo"
+        htmlFor="levelTwo"
+        text ="中級"
+        onChange={()=> playLevelTwo()}
+      />
+      <RadioBox
+        id="levelThree" 
+        name="level" 
+        value="levelThree"
+        onChange={()=> playLevelThree()}
+        htmlFor="levelThree"
+        text ="初級"
+      />
     
     {/* radiobox エリア */}
-    <div>
-       <input 
-       type="radio" id="Asia" name="area" value="Asia"
-       onChange={chooseAsia}
-       />
-       <label htmlFor="Asia">アジア</label>
-     </div>
-     <div>
-     <input 
-       type="radio" id="Europe" name="area" value="Europe"
-       onChange={chooseEurope}
-       />
-       <label htmlFor="Europe">ヨーロッパ</label>
-     </div>
-     
-     <div>
-       <input type="radio" id="Africa" name="area" value="Africa"
-       onChange={chooseAfrica}
-       />
-       <label htmlFor="Africa">アフリカ</label>
-     </div>
-
-     <div>
-       <input type="radio" id="Americas" name="area" value="Americas"
-       onChange={chooseAmericas}
-       />
-       <label htmlFor="Americas">アメリカ</label>
-     </div>
-
-     <div>
-       <input type="radio" id="Oceania" name="area" value="Oceania"
-       onChange={chooseOceania}
-       />
-       <label htmlFor="Oceania">オセアニア</label>
-     </div>
-
-   
+    <RadioBox
+      id="Asia" 
+      name="area" 
+      value="Asia"
+      onChange={()=> chooseAsia()}
+      htmlFor="Asia"
+      text="アジア"
+    />
+    <RadioBox
+      id="Europe" 
+      name="area" 
+      value="Europe"
+      onChange={()=> chooseEurope()}
+      htmlFor="Europe"
+      text="ヨーロッパ"
+    />
+    <RadioBox
+      id="Africa" 
+      name="area" 
+      value="Africa"
+      onChange={()=> chooseAfrica()}
+      htmlFor="Africa"
+      text="アフリカ"
+    />
+    <RadioBox
+      id="Aerimcas" 
+      name="area" 
+      value="Aerimcas"
+      onChange={()=> chooseAmericas()}
+      htmlFor="Aerimcas"
+      text="アメリカ"
+    />
+    <RadioBox
+      id="Oceania" 
+      name="area" 
+      value="Oceania"
+      onChange={()=> chooseOceania()}
+      htmlFor="Oceania"
+      text="オセアニア"
+    />
 
       {/* 札を並べた後 */}
       {isPlaced ?         
@@ -1251,8 +1276,6 @@ let backgroundImage="";
         {/* <Furigana>
         {basicLists[currentTurn].furigana}
         </Furigana> */}
-
-     
 
         <ClueBox
           placeholder={placeholder}  
