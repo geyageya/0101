@@ -226,8 +226,10 @@ const ListCards =memo((props) =>{
     margin: "50px auto 10px",
     /*子要素の絵札をgrid制御*/
     display: "grid",
-    gridTemplateColumns: "repeat(5, 160px)",
-    gridTemplateRows: "repeat(3, 160px)",
+    gridTemplateColumns: "repeat(8, 100px)",
+    gridTemplateRows: "repeat(6, 100px)",
+    // gridTemplateColumns: "repeat(5, 160px)",
+    // gridTemplateRows: "repeat(3, 160px)",
     justifyCcontent: "center",
     alignContent: "center",
     justifyItems: "center",
@@ -340,8 +342,10 @@ const Card =memo((props) =>{
   /*絵札表示*/
   const card = {
     /*絵札用*/
-    width: "150px",
-    height: "150px",
+    width: "95px",
+    height: "95px",
+    // width: "150px",
+    // height: "150px",
     objectFit: "scale-down", /*原画比率維持*/
     cursor: props.cursor,
     opacity: props.opacity,
@@ -1196,7 +1200,7 @@ let backgroundImage="";
         value="levelThree"
         onChange={()=> playLevelThree()}
         htmlFor="levelThree"
-        text ="初級"
+        text ="上級"
       />
     
     {/* radiobox エリア */}
