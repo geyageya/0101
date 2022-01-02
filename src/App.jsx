@@ -1162,6 +1162,7 @@ let backgroundImage="";
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "left",
+    gap: "15px"
   }
 
   //------JSX------------------------------------------------------------------------------
