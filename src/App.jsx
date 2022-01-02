@@ -563,6 +563,7 @@ const Result = memo((props)=>{
   )
 });//<Result/>----------------------------------------------------------------
 
+
 const Main=(props) => {
 
   //■■■■■useState■■■■■
@@ -1359,12 +1360,25 @@ let backgroundImage="";
 
 }//Main
 
+const Footer = () => {
+  const footer ={
+    textAlign: "center"
+  }
+  return(
+
+    <p style={footer}>©<a href="https://ondoku3.com/">ondoku3.com</a>(声:<a href="https://ondoku3.com/">音読さん)</a></p>
+  )
+}
+
+
+
 const App=()=> {
   console.log("Appレンダリング");
   return(
     <div>
       <Header />
       <Main />
+      <Footer />
     </div>
   )
 } //App
