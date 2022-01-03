@@ -1,4 +1,8 @@
 import {useState, useEffect,useRef, useCallback, memo} from "react";
+import { Header } from './components/Header';
+
+import {Footer} from './components/Footer';
+
 
 const RadioBtn =(props) => {
   return(
@@ -19,45 +23,48 @@ const RadioBtn =(props) => {
   )
 }
 
-const Header=memo(()=>{
-  console.log("Child1 Headerレンダリング");
+<Header />
 
-  const header ={
-    maxWidth: "900px",
-    height:"auto",
-    margin: "0px auto 0",
-    background: "#fff",
-    borderRadius: "4px",
-    padding: "0px",
-    textAlign: "center",
-    fontSize: "14px",
-    fontFamily: "Verdana, sans-serif",
-    position: "relative",
-}
-  return(
-    <div>
-      <header style={header}>
-        <Title>
-          かるたで学ぼう、世界200ヶ国!
-        </Title>
-      </header>
-    </div> 
-  )
-});
 
-const Title=memo((props)=>{
-  console.log("Child 2 Titleレンダリング");
-  const title= {
-    color: "#979797",
-  }
-  return(
-    <h1 
-      style={title}
-    >
-      {props.children}
-    </h1>
-  )
-});
+// const Header=memo(()=>{
+//   console.log("Child1 Headerレンダリング");
+
+//   const header ={
+//     maxWidth: "900px",
+//     height:"auto",
+//     margin: "0px auto 0",
+//     background: "#fff",
+//     borderRadius: "4px",
+//     padding: "0px",
+//     textAlign: "center",
+//     fontSize: "14px",
+//     fontFamily: "Verdana, sans-serif",
+//     position: "relative",
+// }
+//   return(
+//     <div>
+//       <header style={header}>
+//         <Title>
+//           かるたで学ぼう、世界200ヶ国!
+//         </Title>
+//       </header>
+//     </div> 
+//   )
+// });
+
+// const Title=memo((props)=>{
+//   console.log("Child 2 Titleレンダリング");
+//   const title= {
+//     color: "#979797",
+//   }
+//   return(
+//     <h1 
+//       style={title}
+//     >
+//       {props.children}
+//     </h1>
+//   )
+// });
 
 const Button =memo((props) =>{
   console.log("Child1 Buttonレンダリング");
@@ -226,8 +233,9 @@ const ListCards =memo((props) =>{
     margin: "50px auto 10px",
     /*子要素の絵札をgrid制御*/
     display: "grid",
-    gridTemplateColumns: "repeat(8, 100px)",
-    gridTemplateRows: "repeat(6, 100px)",
+     gridTemplateColumns: "repeat(auto-fit, minmax(50px, 1fr)",
+    // gridTemplateColumns: "repeat(8, 100px)",
+    // gridTemplateRows: "repeat(6, 100px)",
     // gridTemplateColumns: "repeat(5, 160px)",
     // gridTemplateRows: "repeat(3, 160px)",
     justifyCcontent: "center",
@@ -318,6 +326,7 @@ const CardGrid =memo((props) => {
 
 const Card =memo((props) =>{
   console.log("Child4 Cardレンダリング");
+
   const handleClick = (selectedId)=> { 
     props.setIsAnswered(true);      //絵札のクリックを不可にする
     props.stopTimer();              //タイマー解除（PCplayer)
@@ -342,13 +351,17 @@ const Card =memo((props) =>{
   /*絵札表示*/
   const card = {
     /*絵札用*/
-    width: "95px",
-    height: "95px",
+    width: "100%",
+    height: "150px",
+    // width: "95px",
+    // height: "95px",
+   
     // width: "150px",
     // height: "150px",
     objectFit: "scale-down", /*原画比率維持*/
     cursor: props.cursor,
     opacity: props.opacity,
+    // filter: "grayScale(100%)"
   }
   return(
     <>
@@ -620,8 +633,8 @@ const effectSounds = [
 
   //    //読み句、絵札をセット（並べ替え、指定枚数選出）
      const setCards =() => {
-      shuffle(basicLists)
-      // shuffle(basicLists).splice(0,195)
+      // shuffle(basicLists)
+      shuffle(basicLists).splice(0,195)
       const result = shuffle([...basicLists]);
       setKarutaLists(result)
     };
@@ -728,7 +741,7 @@ const effectSounds = [
         
     const handleSet = () => {
       setCards();
-      chooseArea();
+      // chooseArea();
       setIsKaruta(true);  //絵札一覧を表示
       setIsPlaced(true);  //「札を並べる」ボタンの反応停止
       playEffect(0);       //効果音 
@@ -1360,15 +1373,16 @@ let backgroundImage="";
 
 }//Main
 
-const Footer = () => {
-  const footer ={
-    textAlign: "center"
-  }
-  return(
+<Footer/>
+// const Footer = () => {
+//   const footer ={
+//     textAlign: "center"
+//   }
+//   return(
 
-    <p style={footer}>©<a href="https://ondoku3.com/">ondoku3.com</a>(声:<a href="https://ondoku3.com/">音読さん)</a></p>
-  )
-}
+//     <p style={footer}>©<a href="https://ondoku3.com/">ondoku3.com</a>(声:<a href="https://ondoku3.com/">音読さん)</a></p>
+//   )
+// }
 
 
 
