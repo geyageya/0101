@@ -1,96 +1,15 @@
-import {useState, useEffect,useRef, useCallback, memo} from "react";
+import {useState, useEffect,useRef, useCallback} from "react";
 import { Header } from './components/Header';
-
 import {Footer} from './components/Footer';
+import { Button } from "./components/Button";
+import {RadioBtn} from "./components/RadioBtn";
+import {ClueBox} from "./components/ClueBox";
+import {PlayArea} from "./components/PlayArea";
+import {Popup} from "./components/Popup";
+import {Result} from "./components/Result";
 
-
-const RadioBtn =(props) => {
-  return(
-    <div>
-      <input 
-        type="radio" 
-        id={props.id}
-        name={props.name} 
-        value={props.value}
-        onChange={props.onChange}
-      />
-      <label 
-        htmlFor={props.htmlFor}
-      >
-        {props.text}
-      </label>
-    </div>
-  )
-}
 
 <Header />
-
-
-// const Header=memo(()=>{
-//   console.log("Child1 Headerレンダリング");
-
-//   const header ={
-//     maxWidth: "900px",
-//     height:"auto",
-//     margin: "0px auto 0",
-//     background: "#fff",
-//     borderRadius: "4px",
-//     padding: "0px",
-//     textAlign: "center",
-//     fontSize: "14px",
-//     fontFamily: "Verdana, sans-serif",
-//     position: "relative",
-// }
-//   return(
-//     <div>
-//       <header style={header}>
-//         <Title>
-//           かるたで学ぼう、世界200ヶ国!
-//         </Title>
-//       </header>
-//     </div> 
-//   )
-// });
-
-// const Title=memo((props)=>{
-//   console.log("Child 2 Titleレンダリング");
-//   const title= {
-//     color: "#979797",
-//   }
-//   return(
-//     <h1 
-//       style={title}
-//     >
-//       {props.children}
-//     </h1>
-//   )
-// });
-
-const Button =memo((props) =>{
-  console.log("Child1 Buttonレンダリング");
-  const button ={
-    width: "100px",
-    padding: "8px",
-    borderRradius: "8px",
-    textAlign: "center",
-    color: "white",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: "20px",
-    display: "block",
-    //Props用
-    background: props.background,
-    cursor: props.cursor,
-  }
-  return(
-    <button 
-      style={button} 
-      onClick={props.onClick}
-    >
-      {props.children}
-    </button>
-  )
-});
 
 // const Furigana =(props) => {
 //   const furigana ={
@@ -107,475 +26,6 @@ const Button =memo((props) =>{
 //   </>
 //   )
 // };
-
-const ClueBox =memo((props) => {
-  console.log("Child1 CluBoxレンダリング");
-  const clueBox ={
-    width: "80%",
-    margin: "40px 3%",
-  }
-  return(
-    <div 
-      style={clueBox}
-    >
-      <input 
-        type="text"
-        size="100"
-        placeholder = "ここに読み句が表示されます"
-        //props用
-        defaultValue={props.placeholder}
-      />
-    </div>
-  )
-});
-
-const PlayArea =memo((props) => {
-  console.log("Child1 PlayAreaレンダリング");
-  const playArea = {
-    height: "750px",
-    margin: "0 auto",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    /* flexで絵札一覧を中央に配置 */
-    display:"flex",
-    justifyContent: "center",
-    position: "relative",
-    //差し込み用(props)
-    backgroundImage: props.backgroundImage, 
-  }
-  return(
-    <main style={playArea}>
-      <ListCards
-        //const CardGrid用
-        karutaLists={props.karutaLists}
-        isAnswered = {props.isAnswered}
-        //handleClick用(useState)
-        basicLists={props.basicLists}
-        currentTurn={props.currentTurn}
-        score={props.score}
-        setIsAnswered={props.setIsAnswered}
-        setIsPopup={props.setIsPopup}
-        setScore={props.setScore}
-        setIsScored={props.setIsScored}
-        //handleClick用(関数実行)
-        stopTimer={props.stopTimer}
-        playEffect={props.playEffect}
-        placeHand={props.placeHand}
-        pcPlayer={props.pcPlayer}
-        // onClick={() =>props.handleClick()} 
-      />
-      {/* player用 */}
-      <MiniArea
-        miniArray = {props.miniCard} 
-        bottom = "0px"
-        left ="0px"
-      />
-      {/* PC用 */}
-      <MiniArea
-        miniArray = {props.miniCardPc} 
-        top = "15px"
-        left ="0px"
-      />
-      </main>
-    )
-});
-
-const MiniArea =memo((props) => {
-  console.log("Child2 MiniArea レンダリング");
-  const miniArea ={
-    position: "absolute",
-    top: props.top,
-    bottom: props.bottom,
-    left: props.left,
-    listStyle: "none",
-    /* ミニ絵札（手前）をflexで配置 */
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "left",
-    gap: "2px",
-  }
-
-  return(
-    <ul style={miniArea}>
-      {props.miniArray.map(picture =>{
-      return(
-        <li key={picture}>
-          <MiniCard src={picture} />
-        </li>
-      )
-      })}
-    </ul>
-  )
-});
-
- /* ミニ絵札*/
-const MiniCard =memo((props) => {
-  console.log("Child3 MiniCardレンダリング");
-  const miniCard = {
-    maxWidth: "50px",
-    maxHeight: "40px",
-  }
-  return(
-    <img 
-      alt="miniCard" 
-      style={miniCard}  
-      src={props.src} 
-    />
-  )
-});
-
-const ListCards =memo((props) =>{
-  console.log("Child2 listCards レンダリング");
-  /* 絵札エリア(Grid) */
-  const listCards = {
-    width: "960px",
-    height: "650px",
-    margin: "50px auto 10px",
-    /*子要素の絵札をgrid制御*/
-    display: "grid",
-     gridTemplateColumns: "repeat(auto-fit, minmax(50px, 1fr)",
-    // gridTemplateColumns: "repeat(8, 100px)",
-    // gridTemplateRows: "repeat(6, 100px)",
-    // gridTemplateColumns: "repeat(5, 160px)",
-    // gridTemplateRows: "repeat(3, 160px)",
-    justifyCcontent: "center",
-    alignContent: "center",
-    justifyItems: "center",
-    alignItems: "start",
-    /* 位置(ShowEfudaが基点） */
-    top: "0px",
-    position: "absolute",
-  }
-  return(
-    <ul style={listCards}>
-      <CardGrid
-        //const CardGrid用
-        karutaLists={props.karutaLists}
-        isAnswered = {props.isAnswered}
-        //handleClick用(useState)
-        basicLists={props.basicLists}
-        currentTurn={props.currentTurn}
-        score={props.score}
-        setIsAnswered={props.setIsAnswered}
-        setIsPopup={props.setIsPopup}
-        setScore={props.setScore}
-        setIsScored={props.setIsScored}
-        //handleClick用(関数実行)
-        stopTimer={props.stopTimer}
-        playEffect={props.playEffect}
-        placeHand={props.placeHand}
-        pcPlayer={props.pcPlayer}
-        // onClick={() =>props.handleClick()} 
-      />
-    </ul>
-  )
-});
-
-const CardGrid =memo((props) => {
-  console.log("Child3 CardGrid レンダリング");
-  const cardGrid = {
-    /*子要素のimg画像を中央に配置*/
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-  }
-   return(
-    <>
-    {props.karutaLists.map((list) =>{
-      return(
-        <li style={cardGrid} key={list.id} >
-          {props.isAnswered ? (
-            <Card
-              src={list.answer} 
-              />
-             ):(
-            <Card
-            //const Card用
-              src={list.answer} 
-              id ={list.id}
-              //handleClick用(useState)
-              basicLists={props.basicLists}
-              currentTurn={props.currentTurn}
-              score={props.score}
-              setIsAnswered={props.setIsAnswered}
-              setIsPopup={props.setIsPopup}
-              setScore={props.setScore}
-              setIsScored={props.setIsScored}
-              //handleClick用(関数実行)
-              stopTimer={props.stopTimer}
-              playEffect={props.playEffect}
-              placeHand={props.placeHand}
-              pcPlayer={props.pcPlayer}
-              // onClick={() =>props.handleClick()} 
-            />
-           )}
-            <Hand
-              src={list.hand}
-            />
-            {/* PC用 */}
-            <Hand
-              src={list.handPc}
-            /> 
-        </li> 
-      )
-    })}
-    </>
-   )
-});
-
-const Card =memo((props) =>{
-  console.log("Child4 Cardレンダリング");
-
-  const handleClick = (selectedId)=> { 
-    props.setIsAnswered(true);      //絵札のクリックを不可にする
-    props.stopTimer();              //タイマー解除（PCplayer)
-    //正解の場合
-    if (selectedId ===props.basicLists[props.currentTurn].id) {　　//配列のIDを比較
-      props.playEffect(1);
-      props.setIsPopup(true);       
-      props.placeHand();
-      //player独自の操作
-      props.setScore(props.score + 1);    //スコア加点
-      props.setIsScored(true)       //ミニ絵札表示（手前）の有無を決める基準
-      //最後の１枚を撮った場合に加点
-      if (props.currentTurn===props.basicLists.length -2)
-      props.setScore(props.score + 2);   
-    }
-    //不正解の場合
-    else{
-      setTimeout(()=>{props.pcPlayer()}, 300);
-    }
-  }//handleClick
-
-  /*絵札表示*/
-  const card = {
-    /*絵札用*/
-    width: "100%",
-    height: "150px",
-    // width: "95px",
-    // height: "95px",
-   
-    // width: "150px",
-    // height: "150px",
-    objectFit: "scale-down", /*原画比率維持*/
-    cursor: props.cursor,
-    opacity: props.opacity,
-    // filter: "grayScale(100%)"
-  }
-  return(
-    <>
-      <img 
-        style = {card}
-        alt ="" 
-        src={props.src}  
-        id ={props.id}
-        onClick={()=>handleClick(props.id)} //handleClick関数をここに移動した場合
-        //表示画像のリンク切れの場合、非表示にする
-        onError={e => e.target.style.display = 'none'}
-      />
-    </>
-  )
-});
-
-const Hand =memo((props) =>{
-  console.log("Child4 Handレンダリング");
-  const hand = {
-    width: "110px",
-    height: "110px",
-    objectFit: "scale-down", /*原画比率維持*/
-    position: "absolute", /*これがないと画像が縦に並ぶ*/
-  }
-  return(
-    <>
-      {/* マジックコード */}
-      {props.src === "" ? 
-      null : 
-      <img 
-        style={hand} 
-        alt =""
-        src={props.src}  
-        onError={e => e.target.style.display = 'none'} 
-        /> 
-      }
-    </> 
-  )
-});
-
-const WindowBtn =memo((props) =>{
-  console.log("Child3 WindowBtn レンダリング");
-  const windowBtn ={
-    display:"block",
-    background: "#3498db",
-    padding: "8px",
-    borderRradius: "4px",
-    textAalign: "center",
-    color: "#fff",
-    boxShadow: "0 4px 0 #287fb9",
-    width: "150px",
-    margin:"5px auto",
-    cursor: "pointer",
-  }
-  return(
-    <div>
-      <button 
-        style = {windowBtn} 
-        onClick={props.onClick}
-      >
-        {props.windowBtnMsg}
-      </button>
-    </div>
-  )
-});
-
-const Popup = memo((props) => {
-  console.log("Child2 Popup レンダリング");
-  const popupWindow ={
-    /* Box枠の設定 */
-    width: "200px",
-    background: "#fff",
-    padding: "30px",
-    boxSshadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-    border:"solid",
-    borderRradius: "4px",
-    margin: "0 auto", /* 画面を中央に配置 */
-    textAlign: "center",/* 画面内要素を中央に */
-    transition: "0.001s",
-    /* 画面の位置設定（基点は親要素のshowEfuda) */
-    position: "absolute",
-    top: "250px",
-    left: "0px",
-    right: "0",
-  }
-  /*メッセージ（ポップアップ）*/
-  const popupMsg ={
-    fontSize:"18px"
-  }
-  /*画像（ポップアップ画面）*/
-  const popupImg = {
-    maxWidth: "150px",
-    maxHeight: "150px",
-  }
-  
-  return(
-    <div style={popupWindow}> 
-      <p style={popupMsg}>
-        {props.popupMsg}
-      </p>
-   
-    {/* 本番用 */}
-    <img 
-      alt="efuda" 
-      style={popupImg} 
-      src={props.basicLists[props.currentTurn].answer} 
-    />
-    <p>
-      {/* {props.basicLists[props.currentTurn].subject}  */}
-      {/* 日本語 */}
-      {props.basicLists[props.currentTurn].daizai}  
-    </p> 
-    <p>
-      {/* {props.basicLists[props.currentTurn].country}  */}
-      {/* 日本語 */}
-      {props.basicLists[props.currentTurn].kuni} 
-    </p> 
-    <img 
-      alt ="flag" 
-      src={props.basicLists[props.currentTurn].flag} 
-    />  
-    
-    {props.currentTurn<props.basicLists.length-3 &&
-      <WindowBtn 
-        onClick={props.onClick} 
-        windowBtnMsg="次" 
-      />
-    } 
-    {props.currentTurn===props.basicLists.length-3 &&
-      <WindowBtn 
-        onClick={props.onClick}  
-        windowBtnMsg="次に取ると、最後の札ももらえます" 
-      />
-    }
-    {props.currentTurn===props.basicLists.length-2 &&
-      <WindowBtn 
-        onClick={props.onClick} 
-        windowBtnMsg="結果を見る" 
-      />
-    } 
-    </div>
-  )
-}); //<Popup/>---------------------------------------------------------
-
-const Result = memo((props)=>{
-  console.log("Child2 resultレンダリング");
-  /* 画面枠（試合結果） */
-  const resultWindow ={
-    width: "200px",
-    background: "#fff",
-    padding: "20px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-    // margin: "0 auto",
-    borderRadius: "4px",
-    textAlign: "center",
-    transition: "1.1s",
-    /* 画面の位置設定（基点は親要素のshowEfuda) */
-    position: "absolute",
-    top: "400px",
-    left: "0px",
-    right: "0",
-  }
-  /*スコア通知（試合結果）*/
-  const resultScore = {
-    fontSize: "24px",
-  }
-  /*メッセージ（試合結果）*/
-    const resultMsg = {
-    fontSize: "24px",
-  }
-  /*画像（試合結果画面）*/
-  const resultImg = {
-    maxWidth: "200px",
-    maxHeight: "200px",
-  }
-
-  return(
-    <div>
-    {/* 本番用 */}
-      <div style={resultWindow}> 
-        <p 
-          style={resultScore}>
-          {props.score}枚取りました。
-        </p>
-
-        {props.score >= props.basicLists.length * 0.5 ? (
-          <> 
-            <p 
-              style={resultMsg}
-              >
-              勝ちました！
-            </p>
-            <img 
-              alt ="prize" 
-              style={resultImg} 
-              src="../images/gold.png" />
-          </>
-          ):(
-            <p 
-              style={resultMsg}
-            >
-              残念！負けました
-            </p>
-          )
-          }
-          <WindowBtn 
-            onClick={props.onClick} 
-            windowBtnMsg="もう一回？" 
-          />
-      </div>
-</div> 
-  )
-});//<Result/>----------------------------------------------------------------
-
 
 const Main=(props) => {
 
@@ -639,14 +89,11 @@ const effectSounds = [
       setKarutaLists(result)
     };
   
-  //エリア別札選出（例：アジア）
-     
-      
+  //エリア別札選出）
     const chooseArea = () => {
       switch (area){
         case "default":
         {
-       
             const Asia= basicLists.filter(list => list.area==="Asia");
             setBasicLists(Asia);
             setKarutaLists(Asia);
@@ -655,10 +102,8 @@ const effectSounds = [
             const result2 = shuffle([...Asia]);
             setKarutaLists(result2)
             setArea("default")
-          
         break
         }
-
         case "Asia":
         {
             const Asia= basicLists.filter(list => list.area==="Asia");
@@ -681,8 +126,8 @@ const effectSounds = [
             setKarutaLists(resultAfrica2)
           break
           }
-          case "Europe":
-            {
+        case "Europe":
+          {
             const Europe= basicLists.filter(list => list.area==="Europe");
             setBasicLists(Europe);
             setKarutaLists(Europe);
@@ -691,10 +136,10 @@ const effectSounds = [
             const resultEurope2 = shuffle([...Europe]);
             setKarutaLists(resultEurope2)
           break
-            }
+          }
 
-          case "Americas":
-            {
+        case "Americas":
+          {
             const Americas= basicLists.filter(list => list.area==="Americas");
             setBasicLists(Americas);
             setKarutaLists(Americas);
@@ -703,8 +148,8 @@ const effectSounds = [
             const resultAmericas2 = shuffle([...Americas]);
             setKarutaLists(resultAmericas2)
           break
-            }
-          case "Oceania":
+          }
+        case "Oceania":
             {
             const Oceania= basicLists.filter(list => list.area==="Oceania");
             setBasicLists(Oceania);
@@ -715,7 +160,7 @@ const effectSounds = [
             setKarutaLists(resultOceania2)
           break
             }
-        default:
+          default:
           {
             const Asia= basicLists.filter(list => list.area==="Asia");
             setBasicLists(Asia);
@@ -755,7 +200,6 @@ const effectSounds = [
       readClue(currentTurn);  //読み句の読みあげ
     }//handleStart 
 
-  
       //読み句一文字づつ表示
       const isFirstRender = useRef(false)
   
@@ -781,8 +225,6 @@ const effectSounds = [
               clueWords = basicLists[currentTurn].clue //英語
           }
           
-          // const clueWords = basicLists[currentTurn].yomiku //日本語
-          // const clueWords = basicLists[currentTurn].clue //英語
           const showClue =()=> {
             if(currentTurn < basicLists.length-1){
               setPlaceholder(prev => prev + clueWords[countLetter.current]);
@@ -803,22 +245,18 @@ const effectSounds = [
   const readClue = (currentNum)=> {
 
     if (currentNum < basicLists.length -1){
-    
       //switch
     switch (language){
       case "default":
         clueSounds.src = basicLists[currentNum].read; //英語
         setLanguage("default")
         break
-
       case "japanese":
         clueSounds.src = basicLists[currentNum].yomu; //日本語
         break
-
       case "english":
         clueSounds.src = basicLists[currentNum].read; //英語
         break
-
       default:
         clueSounds.src = basicLists[currentNum].read; //英語
     }
@@ -840,13 +278,6 @@ const effectSounds = [
   }
   
   //PcPlayer--------------------------------------
-   //PC player timer （useCallback付けると御作動する）
-  //  const startTimer = () => {
-  //     timerRef.current = setTimeout(() => {
-  //       pcPlayer();
-  //     }, 5000);
-  //   };
-
   const startTimer = () => {
     switch (level){
       case "default":
@@ -888,13 +319,6 @@ const effectSounds = [
   };
 
   //timer2 (引数 newCurrentTurn)
-  //useCallback付けると誤作動
-  // const startTimer2 = (newCurrentTurn) => {
-  //   timerRef.current = setTimeout(() => {
-  //     pcPlayer2(newCurrentTurn);
-  //   }, 5000);
-  // };
-
   //switch
   const startTimer2 = (newCurrentTurn) => {
     switch (level){
@@ -1158,20 +582,8 @@ let backgroundImage="";
 
   }
 }
-  // let clusWords=""
 
-  // switch (language){
-  //   case "japanese":
-  //     const clueWords = basicLists[currentTurn].yomiku //日本語
-  //     break
-  //   case "english":
-  //     const clueWords = basicLists[currentTurn].clue //英語
-  //     break
-  //   default:
-  //     const clueWords = basicLists[currentTurn].clue //英語
-  // }
-
-  const radioBox = {
+const radioBox = {
     /* flexで配置 */
     display: "flex",
     flexWrap: "wrap",
@@ -1374,17 +786,6 @@ let backgroundImage="";
 }//Main
 
 <Footer/>
-// const Footer = () => {
-//   const footer ={
-//     textAlign: "center"
-//   }
-//   return(
-
-//     <p style={footer}>©<a href="https://ondoku3.com/">ondoku3.com</a>(声:<a href="https://ondoku3.com/">音読さん)</a></p>
-//   )
-// }
-
-
 
 const App=()=> {
   console.log("Appレンダリング");
