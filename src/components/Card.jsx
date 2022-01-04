@@ -25,11 +25,8 @@ export const Card =(props) =>{
   
     /*絵札表示*/
     const card = {
-      /*絵札用*/
-     
       width: "95px",
       height: "95px",
-     
       // width: "150px",
       // height: "150px",
       objectFit: "scale-down", /*原画比率維持*/
