@@ -2,11 +2,11 @@ import {useState, useEffect,useRef, useCallback} from "react";
 import { Header } from './components/Header';
 import {Footer} from './components/Footer';
 import { Button } from "./components/Button";
-import {RadioBtn} from "./components/RadioBtn";
 import {ClueBox} from "./components/ClueBox";
 import {PlayArea} from "./components/PlayArea";
 import {Popup} from "./components/Popup";
 import {Result} from "./components/Result";
+import {RadioScreen} from "./components/RadioScreen";
 
 
 <Header />
@@ -27,6 +27,9 @@ import {Result} from "./components/Result";
 //   )
 // };
 
+
+
+
 const Main=(props) => {
 
   //■■■■■useState■■■■■
@@ -40,11 +43,11 @@ const Main=(props) => {
    const [score, setScore] = useState(0);                     //スコア・カウント
    const [isScored, setIsScored] = useState(false);           //player得点の有無
   
-   const [isPlaced, setIsPlaced] = useState(false)            //「札を並べる」ボタンの反応制御
+  //  const [isPlaced, setIsPlaced] = useState(false)            //「札を並べる」ボタンの反応制御
    const [isStarted, setIsStarted] = useState(false)           //「ゲーム開始」ボタンの反応制御
    const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
   
-   const [isKaruta, setIsKaruta] = useState(false);           //絵札一覧の表示・非表示
+  //  const [isKaruta, setIsKaruta] = useState(false);           //絵札一覧の表示・非表示
    const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
    const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
 
@@ -55,6 +58,7 @@ const Main=(props) => {
    const [language, setLanguage]= useState("default")
    const [level, setLevel]= useState("default")
    const [area, setArea]= useState("default")
+   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
   
 // Sounds------------------------------------------------------------------
 const effectSounds = [
@@ -81,19 +85,6 @@ const effectSounds = [
       setBasicLists(json);
     },[]);
 
-  //    //読み句、絵札をセット（並べ替え、指定枚数選出）
-     const setCards =() => {
-      // shuffle(basicLists)
-      
-      // shuffle(basicLists).splice(1,190) //World
-      // // console.log(kekka)
-      // console.log(basicLists)
-      // // setBasicLists(kekka)
-      // // const kekka =shuffle([...basicLists]).slice(0,20) //World
-      // // console.log(kekka)
-      // const result = shuffle([...basicLists]);
-      // setKarutaLists(result)
-    };
   
   //エリア別札選出）
     const chooseArea = () => {
@@ -188,11 +179,11 @@ const effectSounds = [
         //「札を並べる」ボタンを押すーーーーーーーーーーー
         
     const handleSet = () => {
-      // setCards();
       chooseArea();
-      setIsKaruta(true);  //絵札一覧を表示
-      setIsPlaced(true);  //「札を並べる」ボタンの反応停止
+      // setIsKaruta(true);  //絵札一覧を表示
+      // setIsPlaced(true);  //「札を並べる」ボタンの反応停止
       playEffect(0);       //効果音 
+      setScreen(false)
     };//handleSet
 
     //「ゲーム開始」ボタンを押すーーーーーーーーー
@@ -566,7 +557,7 @@ let backgroundImage="";
 
 {switch(area){
   case "Asia":
-    backgroundImage="url(../images/worldmap1.png)" 
+    backgroundImage="url(../images/worldmap.png)" 
     break
   case "Europe":
     backgroundImage="url(../images/tatami-1.png)" 
@@ -591,117 +582,31 @@ let backgroundImage="";
   }
 }
 
-const radioBox = {
-    /* flexで配置 */
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "left",
-    gap: "15px"
-  }
+
 
   //------JSX------------------------------------------------------------------------------
   return (
     <div>
-
-      <div style={radioBox}>
-        <RadioBtn
-          id="japanese"
-          name="language"
-          value="japanese"
-          htmlFor="japanese"
-          text ="Japanese（日）"
-          onChange={()=> checkJapanese()}
-        />
-        <RadioBtn
-          id="english"
-          name="language"
-          value="english"
-          htmlFor="english"
-          text ="English（英）"
-          onChange={()=> checkEnglish()}
-        />
-      </div>
-
-      <div style={radioBox}>
-        <RadioBtn
-          id="levelOne" 
-          name="level" 
-          value="levelOne"
-          htmlFor="levelOne"
-          text ="初級"
-          onChange={()=> playLevelOne()}
-        />
-        <RadioBtn
-          id="leveTwo" 
-          name="level" 
-          value="levelTwo"
-          htmlFor="levelTwo"
-          text ="中級"
-          onChange={()=> playLevelTwo()}
-        />
-        <RadioBtn
-          id="levelThree" 
-          name="level" 
-          value="levelThree"
-          onChange={()=> playLevelThree()}
-          htmlFor="levelThree"
-          text ="上級"
-        />
-      </div>
-
-      <div style={radioBox}>
-        <RadioBtn
-          id="Asia" 
-          name="area" 
-          value="Asia"
-          onChange={()=> chooseAsia()}
-          htmlFor="Asia"
-          text="アジア"
-        />
-        <RadioBtn
-          id="Europe" 
-          name="area" 
-          value="Europe"
-          onChange={()=> chooseEurope()}
-          htmlFor="Europe"
-          text="ヨーロッパ"
-        />
-        <RadioBtn
-          id="Africa" 
-          name="area" 
-          value="Africa"
-          onChange={()=> chooseAfrica()}
-          htmlFor="Africa"
-          text="アフリカ"
-        />
-        <RadioBtn
-          id="Aerimcas" 
-          name="area" 
-          value="Aerimcas"
-          onChange={()=> chooseAmericas()}
-          htmlFor="Aerimcas"
-          text="アメリカ"
-        />
-        <RadioBtn
-          id="Oceania" 
-          name="area" 
-          value="Oceania"
-          onChange={()=> chooseOceania()}
-          htmlFor="Oceania"
-          text="オセアニア"
-        />
-        <RadioBtn
-          id="World" 
-          name="area" 
-          value="World"
-          onChange={()=> chooseWorld()}
-          htmlFor="World"
-          text="世界"
-        />
-      </div>
-
+     {screen ?
+      <RadioScreen
+        checkEnglish ={checkEnglish}
+        checkJapanese = {checkJapanese}
+        chooseAsia= {chooseAsia}
+        chooseEurope = {chooseEurope}
+        chooseAfrica = {chooseAfrica}
+        chooseAmericas = {chooseAmericas}
+        chooseOceania = {chooseOceania}
+        chooseWorld = {chooseWorld}
+        playLevelOne = {playLevelOne}
+        playLevelTwo = {playLevelTwo}
+        playLevelThree = {playLevelThree}
+        onClick={()=>handleSet()}
+      />
+      :
+      null
+     }
       {/* 札を並べた後 */}
-      {isPlaced ?         
+      {/* {isPlaced ?          */}
         <>
           {/* ゲーム開始ボタンを押した後 */}
           {isStarted ?　　
@@ -722,15 +627,15 @@ const radioBox = {
           }
         </>
       : 
-      　//札を並べていない場合
+      {/* 　//札を並べていない場合
         <Button 
           background="Blue" 
           cursor="pointer" 
           onClick={()=>handleSet()}
         >
           札を並べる
-        </Button>
-      }
+        </Button> */}
+      {/* } */}
 
         {/* <Furigana>
         {basicLists[currentTurn].furigana}
@@ -762,7 +667,7 @@ const radioBox = {
           playEffect={playEffect}
           placeHand={placeHand}
           pcPlayer={pcPlayer}
-          // onClick={()=>handleClick()} 
+          onClick={()=>handleSet()} 
         />
 
       {isPopup ? 
