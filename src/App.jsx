@@ -84,91 +84,94 @@ const effectSounds = [
   //    //読み句、絵札をセット（並べ替え、指定枚数選出）
      const setCards =() => {
       // shuffle(basicLists)
-      shuffle(basicLists).splice(0,195)
-      const result = shuffle([...basicLists]);
-      setKarutaLists(result)
+      
+      // shuffle(basicLists).splice(1,190) //World
+      // // console.log(kekka)
+      // console.log(basicLists)
+      // // setBasicLists(kekka)
+      // // const kekka =shuffle([...basicLists]).slice(0,20) //World
+      // // console.log(kekka)
+      // const result = shuffle([...basicLists]);
+      // setKarutaLists(result)
     };
   
   //エリア別札選出）
     const chooseArea = () => {
       switch (area){
-        case "default":
-        {
-            const Asia= basicLists.filter(list => list.area==="Asia");
-            setBasicLists(Asia);
-            setKarutaLists(Asia);
-            const result = shuffle([...Asia]);
+        case "Asia":
+          {
+            const filtered= basicLists.filter(list => list.area==="Asia");
+            const shuffled=shuffle(filtered).slice(0,5)
+            const result = shuffle([...shuffled]);
             setBasicLists(result)
-            const result2 = shuffle([...Asia]);
+            const result2 = shuffle([...shuffled]);
             setKarutaLists(result2)
             setArea("default")
-        break
-        }
-        case "Asia":
-        {
-            const Asia= basicLists.filter(list => list.area==="Asia");
-            setBasicLists(Asia);
-            setKarutaLists(Asia);
-            const resultAsia = shuffle([...Asia]);
-            setBasicLists(resultAsia)
-            const resultAsia2 = shuffle([...Asia]);
-            setKarutaLists(resultAsia2)
-        break
-        }
-        case "Africa":
-          {
-            const Africa= basicLists.filter(list => list.area==="Africa");
-            setBasicLists(Africa);
-            setKarutaLists(Africa);
-            const resultAfrica = shuffle([...Africa]);
-            setBasicLists(resultAfrica)
-            const resultAfrica2 = shuffle([...Africa]);
-            setKarutaLists(resultAfrica2)
           break
           }
         case "Europe":
           {
-            const Europe= basicLists.filter(list => list.area==="Europe");
-            setBasicLists(Europe);
-            setKarutaLists(Europe);
-            const resultEurope = shuffle([...Europe]);
-            setBasicLists(resultEurope)
-            const resultEurope2 = shuffle([...Europe]);
-            setKarutaLists(resultEurope2)
+            const filtered= basicLists.filter(list => list.area==="Europe");
+            const shuffled=shuffle(filtered).slice(0,5)
+            const result = shuffle([...shuffled]);
+            setBasicLists(result)
+            const result2 = shuffle([...shuffled]);
+            setKarutaLists(result2)
+            setArea("default")
           break
           }
-
+        case "Africa":
+          {
+            const filtered= basicLists.filter(list => list.area==="Africa");
+            const shuffled=shuffle(filtered).slice(0,5)
+            const result = shuffle([...shuffled]);
+            setBasicLists(result)
+            const result2 = shuffle([...shuffled]);
+            setKarutaLists(result2)
+            setArea("default")
+          break
+          }
         case "Americas":
           {
-            const Americas= basicLists.filter(list => list.area==="Americas");
-            setBasicLists(Americas);
-            setKarutaLists(Americas);
-            const resultAmericas = shuffle([...Americas]);
-            setBasicLists(resultAmericas)
-            const resultAmericas2 = shuffle([...Americas]);
-            setKarutaLists(resultAmericas2)
+            const filtered= basicLists.filter(list => list.area==="Americas");
+            const shuffled=shuffle(filtered).slice(0,5)
+            const result = shuffle([...shuffled]);
+            setBasicLists(result)
+            const result2 = shuffle([...shuffled]);
+            setKarutaLists(result2)
+            setArea("default")
           break
           }
         case "Oceania":
-            {
-            const Oceania= basicLists.filter(list => list.area==="Oceania");
-            setBasicLists(Oceania);
-            setKarutaLists(Oceania);
-            const resultOceania = shuffle([...Oceania]);
-            setBasicLists(resultOceania)
-            const resultOceania2 = shuffle([...Oceania]);
-            setKarutaLists(resultOceania2)
+         {
+            const filtered= basicLists.filter(list => list.area==="Oceania");
+            const shuffled=shuffle(filtered).slice(0,5)
+            const result = shuffle([...shuffled]);
+            setBasicLists(result)
+            const result2 = shuffle([...shuffled]);
+            setKarutaLists(result2)
+            setArea("default")
           break
-            }
-          default:
+         }
+
+         case "World":
           {
-            const Asia= basicLists.filter(list => list.area==="Asia");
-            setBasicLists(Asia);
-            setKarutaLists(Asia);
-            const resultDafault = shuffle([...Asia]);
-            setBasicLists(resultDafault)
-            const resultDefault2 = shuffle([...Asia]);
-            setKarutaLists(resultDefault2)
+            const shuffled=shuffle(basicLists).slice(0,5)
+            const result = shuffle([...shuffled]);
+            setBasicLists(result)
+            const result2 = shuffle([...shuffled]);
+            setKarutaLists(result2)
+            setArea("default")
+          break
+         }
+        default: //World
+          {
+            const shuffled=shuffle(basicLists).slice(0,5)
+            const result = shuffle([...shuffled]);
+            setBasicLists(result)
+            const result2 = shuffle([...shuffled]);
+            setKarutaLists(result2)
+            setArea("default")
           }
       }//switch
     }//chooseArea
@@ -185,8 +188,8 @@ const effectSounds = [
         //「札を並べる」ボタンを押すーーーーーーーーーーー
         
     const handleSet = () => {
-      setCards();
-      // chooseArea();
+      // setCards();
+      chooseArea();
       setIsKaruta(true);  //絵札一覧を表示
       setIsPlaced(true);  //「札を並べる」ボタンの反応停止
       playEffect(0);       //効果音 
@@ -555,14 +558,15 @@ const chooseOceania=(e) => {
   setArea("Oceania")
 }
 
+const chooseWorld=(e) => {
+  setArea("World")
+}
+
 let backgroundImage="";
 
 {switch(area){
-  case "default":
-    backgroundImage="url(../images/worldmap.png)" 
-    break
   case "Asia":
-    backgroundImage="url(../images/worldmap2.png)" 
+    backgroundImage="url(../images/worldmap1.png)" 
     break
   case "Europe":
     backgroundImage="url(../images/tatami-1.png)" 
@@ -577,8 +581,12 @@ let backgroundImage="";
     backgroundImage="url(../images/tatami-1.png)" 
   break
 
-  default:
-    backgroundImage="url(../images/worldmap.png)" 
+  case "World":
+    backgroundImage="url(../images/worldmap2.png)" 
+  break
+
+  default: //Worldに同じ
+    backgroundImage="url(../images/worldmap2.png)" 
 
   }
 }
@@ -681,6 +689,14 @@ const radioBox = {
           onChange={()=> chooseOceania()}
           htmlFor="Oceania"
           text="オセアニア"
+        />
+        <RadioBtn
+          id="World" 
+          name="area" 
+          value="World"
+          onChange={()=> chooseWorld()}
+          htmlFor="World"
+          text="世界"
         />
       </div>
 
