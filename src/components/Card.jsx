@@ -5,6 +5,7 @@ export const Card =(props) =>{
     const handleClick = (selectedId)=> { 
       props.setIsAnswered(true);      //絵札のクリックを不可にする
       props.stopTimer();              //タイマー解除（PCplayer)
+
       //正解の場合
       if (selectedId ===props.basicLists[props.currentTurn].id) {　　//配列のIDを比較
         props.playEffect(1);
@@ -36,15 +37,28 @@ export const Card =(props) =>{
     }
     return(
       <>
-        <img 
-          style = {card}
-          alt ="" 
-          src={props.src}  
-          id ={props.id}
-          onClick={()=>handleClick(props.id)} //handleClick関数をここに移動した場合
-          //表示画像のリンク切れの場合、非表示にする
-          onError={e => e.target.style.display = 'none'}
-        />
+        {props.isAnswered ? 
+          <img 
+            style = {card}
+            alt ="" 
+            src={props.src}  
+            id ={props.id}
+
+            //表示画像のリンク切れの場合、非表示にする
+            onError={e => e.target.style.display = 'none'}
+          />
+        :
+          <img 
+            style = {card}
+            alt ="" 
+            src={props.src}  
+            id ={props.id}
+            //表示画像のリンク切れの場合、非表示にする
+            onError={e => e.target.style.display = 'none'}
+            onClick={()=>handleClick(props.id)} //handleClick関数をここに移動した場合
+          />
+       
+        } 
       </>
     )
   };

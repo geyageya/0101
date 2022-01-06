@@ -15,15 +15,17 @@ export const CardGrid =(props) => {
       {props.karutaLists.map((list) =>{
         return(
           <li style={cardGrid} key={list.id} >
-            {props.isAnswered ? (
+            {/* {props.isAnswered ? (
               <Card
                 src={list.answer} 
+                id ={list.id}
                 />
-               ):(
+               ):( */}
               <Card
               //const Card用
                 src={list.answer} 
                 id ={list.id}
+                IsAnswered={props.IsAnswered}
                 //handleClick用(useState)
                 basicLists={props.basicLists}
                 currentTurn={props.currentTurn}
@@ -39,7 +41,7 @@ export const CardGrid =(props) => {
                 pcPlayer={props.pcPlayer}
                 // onClick={() =>props.handleClick()} 
               />
-             )}
+               {/* )}  */}
               <Hand
                 src={list.hand}
               />

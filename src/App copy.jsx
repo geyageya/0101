@@ -19,8 +19,8 @@
    const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
    const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
 
-   const [placeholder, setPlaceholder] = useState('');        //読み句一文字づつ表示
-   const countLetter = useRef(0);                              //読み句文字数カウント 
+  //  const [placeholder, setPlaceholder] = useState('');        //読み句一文字づつ表示
+  //  const countLetter = useRef(0);                              //読み句文字数カウント 
    const timerRef = useRef(null);                              //タイマー設定用  
 
    const [language, setLanguage]= useState("default")

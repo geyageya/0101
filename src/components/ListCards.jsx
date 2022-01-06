@@ -27,11 +27,11 @@ export const ListCards =(props) =>{
         <CardGrid
           //const CardGrid用
           karutaLists={props.karutaLists}
-          isAnswered = {props.isAnswered}
           //handleClick用(useState)
           basicLists={props.basicLists}
           currentTurn={props.currentTurn}
           score={props.score}
+          isAnswered = {props.isAnswered}
           setIsAnswered={props.setIsAnswered}
           setIsPopup={props.setIsPopup}
           setScore={props.setScore}

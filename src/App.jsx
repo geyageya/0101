@@ -8,6 +8,8 @@ import {Popup} from "./components/Popup";
 import {Result} from "./components/Result";
 import {RadioScreen} from "./components/RadioScreen";
 
+import {useCustomeHooks} from "./hooks/useCustomeHooks"
+
 
 <Header />
 
@@ -86,7 +88,7 @@ const effectSounds = [
     },[]);
 
   
-  //エリア別札選出）
+  // //エリア別札選出）
     const chooseArea = () => {
       switch (area){
         case "Asia":
@@ -194,7 +196,7 @@ const effectSounds = [
       readClue(currentTurn);  //読み句の読みあげ
     }//handleStart 
 
-      //読み句一文字づつ表示
+      // //読み句一文字づつ表示
       const isFirstRender = useRef(false)
   
       useEffect(() => { // このeffectは初回レンダー時のみ呼ばれるeffect
@@ -611,7 +613,7 @@ let backgroundImage="";
           {/* ゲーム開始ボタンを押した後 */}
           {isStarted ?　　
             <Button 
-              background="grey" 
+              background="grey"
             >
               ゲーム中
             </Button>
@@ -626,7 +628,7 @@ let backgroundImage="";
             </Button>
           }
         </>
-      : 
+      
       {/* 　//札を並べていない場合
         <Button 
           background="Blue" 
@@ -643,6 +645,11 @@ let backgroundImage="";
 
         <ClueBox
           placeholder={placeholder}  
+          // karutaLists={karutaLists} 
+          // basicLists={basicLists}
+          // currentTurn={currentTurn}
+          // language ={language}
+          // isStarted={isStarted}
         />
 
         <PlayArea 
