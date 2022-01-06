@@ -1,6 +1,7 @@
-import {memo} from "react";
+// import {useState, useEffect,useRef, useCallback, memo} from "react";
 
-export const ClueBox =memo((props) => {
+export const ClueBox =(props) => {
+
     console.log("Child1 CluBoxレンダリング");
     const clueBox ={
       width: "80%",
@@ -19,4 +20,4 @@ export const ClueBox =memo((props) => {
         />
       </div>
     )
-  });
+  };

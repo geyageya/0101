@@ -1,8 +1,8 @@
-import {memo} from "react";
+// import {memo} from "react";
 import { MiniArea } from "./MiniArea";
 import { ListCards } from "./ListCards";
 
-export const PlayArea =memo((props) => {
+export const PlayArea =(props) => {
     console.log("Child1 PlayAreaレンダリング");
     const playArea = {
       height: "750px",
@@ -21,8 +21,9 @@ export const PlayArea =memo((props) => {
         <ListCards
           //const CardGrid用
           karutaLists={props.karutaLists}
-          isAnswered = {props.isAnswered}
+          
           //handleClick用(useState)
+          isAnswered = {props.isAnswered}
           basicLists={props.basicLists}
           currentTurn={props.currentTurn}
           score={props.score}
@@ -51,4 +52,4 @@ export const PlayArea =memo((props) => {
         />
         </main>
       )
-  });
+  };
