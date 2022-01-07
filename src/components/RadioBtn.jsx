@@ -1,6 +1,7 @@
 export const RadioBtn =(props) => {
   return(
-    <div>
+    <div
+     class="">
       <input 
         type="radio" 
         id={props.id}

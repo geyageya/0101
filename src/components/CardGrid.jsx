@@ -3,18 +3,21 @@ import {Hand } from "./Hand";
 
 export const CardGrid =(props) => {
     console.log("Child3 CardGrid レンダリング");
-    const cardGrid = {
-      /*子要素のimg画像を中央に配置*/
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      position: "relative",
-    }
+    // const cardGrid = {
+    //   /*子要素のimg画像を中央に配置*/
+    //   display: "flex",
+    //   alignItems: "center",
+    //   justifyContent: "center",
+    //   position: "relative",
+    // }
      return(
       <>
       {props.karutaLists.map((list) =>{
         return(
-          <li style={cardGrid} key={list.id} >
+          <li 
+            class="relative flex justify-center items-center"
+            // style={cardGrid} 
+            key={list.id} >
             {/* {props.isAnswered ? (
               <Card
                 src={list.answer} 

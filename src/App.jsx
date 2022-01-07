@@ -11,7 +11,7 @@ import {RadioScreen} from "./components/RadioScreen";
 import {useCustomeHooks} from "./hooks/useCustomeHooks"
 
 
-<Header />
+{/* <Header /> */}
 
 // const Furigana =(props) => {
 //   const furigana ={
@@ -713,12 +713,14 @@ let backgroundImage="";
 
 }//Main
 
-<Footer/>
+// <Footer />
 
 const App=()=> {
   console.log("Appレンダリング");
   return(
     <div>
+      
+      {/* <RadioScreen/> */}
       <Header />
       <Main />
       <Footer />

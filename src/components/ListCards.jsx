@@ -4,14 +4,14 @@ export const ListCards =(props) =>{
     console.log("Child2 listCards レンダリング");
     /* 絵札エリア(Grid) */
     const listCards = {
-      width: "960px",
+      width: "500px",
       height: "650px",
       margin: "50px auto 10px",
       /*子要素の絵札をgrid制御*/
-      display: "grid",
+      // display: "grid",
     // gridTemplateColumns: "repeat(auto-fit, minmax(50px, 1fr)",
-      gridTemplateColumns: "repeat(8, 100px)",
-      gridTemplateRows: "repeat(6, 100px)",
+      // gridTemplateColumns: "repeat(8, 100px)",
+      // gridTemplateRows: "repeat(6, 100px)",
       // gridTemplateColumns: "repeat(5, 160px)",
       // gridTemplateRows: "repeat(3, 160px)",
       justifyCcontent: "center",
@@ -23,7 +23,9 @@ export const ListCards =(props) =>{
       position: "absolute",
     }
     return(
-      <ul style={listCards}>
+      <ul 
+        class ="grid gap-1 grid-cols-3 grid-rows-6 justify-center"
+        style={listCards}>
         <CardGrid
           //const CardGrid用
           karutaLists={props.karutaLists}

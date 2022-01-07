@@ -12,6 +12,7 @@ export const ClueBox =(props) => {
         style={clueBox}
       >
         <input 
+          class=" border mx-auto border-gray-300 rounded-md py-2 pl-9 shadow-sm"
           type="text"
           size="100"
           placeholder = "ここに読み句が表示されます"

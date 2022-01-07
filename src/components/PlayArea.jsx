@@ -17,7 +17,9 @@ export const PlayArea =(props) => {
       backgroundImage: props.backgroundImage, 
     }
     return(
-      <main style={playArea}>
+      <main 
+        class =" sm: w-640 md:w-750 flex relative justify-center "
+        style={playArea}>
         <ListCards
           //const CardGrid用
           karutaLists={props.karutaLists}

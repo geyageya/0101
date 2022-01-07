@@ -5,41 +5,47 @@ export const Popup = memo((props) => {
     console.log("Child2 Popup レンダリング");
     const popupWindow ={
       /* Box枠の設定 */
-      width: "200px",
-      background: "#fff",
-      padding: "30px",
-      boxSshadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-      border:"solid",
-      borderRradius: "4px",
-      margin: "0 auto", /* 画面を中央に配置 */
-      textAlign: "center",/* 画面内要素を中央に */
-      transition: "0.001s",
+      // width: "200px",
+      // background: "#fff",
+      // padding: "30px",
+      // boxSshadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+      // border:"solid",
+      // borderRradius: "4px",
+      // margin: "0 auto", /* 画面を中央に配置 */
+      // textAlign: "center",/* 画面内要素を中央に */
+      // transition: "0.001s",
       /* 画面の位置設定（基点は親要素のshowEfuda) */
       position: "absolute",
       top: "250px",
-      left: "0px",
-      right: "0",
+      left: "180px",
+      // right: "0",
     }
     /*メッセージ（ポップアップ）*/
-    const popupMsg ={
-      fontSize:"18px"
-    }
+    // const popupMsg ={
+    //   // fontSize:"18px"
+    // }
     /*画像（ポップアップ画面）*/
-    const popupImg = {
-      maxWidth: "150px",
-      maxHeight: "150px",
-    }
+    // const popupImg = {
+    //   maxWidth: "150px",
+    //   maxHeight: "150px",
+    // }
     
     return(
-      <div style={popupWindow}> 
-        <p style={popupMsg}>
+      <div 
+      class= "w-64 mx-auto p-5 text-center  border-2 rounded-md shadow-black bg-gray-100"
+      style={popupWindow}
+      > 
+        <p 
+        class = "text-lg"
+        // style={popupMsg}
+        >
           {props.popupMsg}
         </p>
      
-      {/* 本番用 */}
       <img 
+        class ="w-24 mx-auto"
         alt="efuda" 
-        style={popupImg} 
+        // style={popupImg} 
         src={props.basicLists[props.currentTurn].answer} 
       />
       <p>
@@ -53,6 +59,7 @@ export const Popup = memo((props) => {
         {props.basicLists[props.currentTurn].kuni} 
       </p> 
       <img 
+        class ="mx-auto"
         alt ="flag" 
         src={props.basicLists[props.currentTurn].flag} 
       />  

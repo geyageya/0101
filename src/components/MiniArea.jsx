@@ -7,16 +7,19 @@ export const MiniArea =(props) => {
       top: props.top,
       bottom: props.bottom,
       left: props.left,
-      listStyle: "none",
+      // listStyle: "none",
       /* ミニ絵札（手前）をflexで配置 */
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "left",
-      gap: "2px",
+      // display: "flex",
+      // flexWrap: "wrap",
+      // justifyContent: "left",
+      // gap: "2px",
     }
   
     return(
-      <ul style={miniArea}>
+      <ul 
+        class="absolute list-none flex flex:wrap justify-start gap-1"
+      
+      style={miniArea}>
         {props.miniArray.map(picture =>{
         return(
           <li key={picture}>
