@@ -149,7 +149,7 @@ const effectSounds = [
 
          case "World":
           {
-            const shuffled=shuffle(basicLists).slice(0,5)
+            const shuffled=shuffle(basicLists).slice(0,18)
             const result = shuffle([...shuffled]);
             setBasicLists(result)
             const result2 = shuffle([...shuffled]);
@@ -159,7 +159,7 @@ const effectSounds = [
          }
         default: //World
           {
-            const shuffled=shuffle(basicLists).slice(0,5)
+            const shuffled=shuffle(basicLists).slice(0,8)
             const result = shuffle([...shuffled]);
             setBasicLists(result)
             const result2 = shuffle([...shuffled]);
