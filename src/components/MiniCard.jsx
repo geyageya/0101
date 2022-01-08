@@ -9,7 +9,7 @@ export const MiniCard =memo((props) => {
     // }
     return(
       <img 
-        class =" w-10 object-contain scale-down "
+        className  =" w-10 object-contain scale-down "
         alt="miniCard" 
         // style={miniCard}  
         src={props.src} 

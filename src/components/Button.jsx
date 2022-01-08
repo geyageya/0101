@@ -18,7 +18,7 @@ export const Button =memo((props) =>{
     }
     return(
       <button 
-        class = "block w-100 mx-auto p-3 rounded bg-sky-500 text-white cursor-pointer...  hover:bg-sky-700 ...   "
+        className  = "shadow-lg block w-100 mx-auto p-3 rounded-full bg-sky-500 text-white cursor-pointer...  hover:bg-sky-700 ...   "
       
         style={button} 
         onClick={props.onClick}

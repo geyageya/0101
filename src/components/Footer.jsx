@@ -7,7 +7,7 @@ export const Footer = (props) => {
   return(
   
     <p 
-      class="text-center"
+      className ="text-center"
       // style={footer}
       >
       ©

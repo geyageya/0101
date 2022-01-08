@@ -28,10 +28,10 @@ export const Card =(props) =>{
     const card = {
       // width: "95px",
       // height: "95px",
-      width: "150px",
-      height: "150px",
-      objectFit: "scale-down", /*原画比率維持*/
-      cursor: props.cursor,
+      // width: "150px",
+      // height: "150px",
+      // objectFit: "scale-down", /*原画比率維持*/
+      // cursor: props.cursor,
       opacity: props.opacity,
       // filter: "grayScale(100%)"
     }
@@ -39,6 +39,7 @@ export const Card =(props) =>{
       <>
         {props.isAnswered ? 
           <img 
+            className ="w-100 object-scale-down opacity-50"
             style = {card}
             alt ="" 
             src={props.src}  
@@ -49,6 +50,7 @@ export const Card =(props) =>{
           />
         :
           <img 
+            className  ="w-50 object-scale-down cursor-pointer"
             style = {card}
             alt ="" 
             src={props.src}  

@@ -6,9 +6,9 @@ export const RadioScreen = (props)=>{
     <div 
       class ="w-full h-screen p-10 bg-lime-100"
       >
-      <h1 class="text-2xl mb-10 text-center">かるたで学ぼう、世界200ケ国</h1>
+      <h1 className ="text-2xl mb-10 text-center">かるたで学ぼう、世界200ケ国</h1>
       <p 
-        class="bg-gray-300"
+        className ="bg-gray-300"
         >
           読み句の言葉（１つだけ選択）
       </p>
@@ -36,7 +36,7 @@ export const RadioScreen = (props)=>{
       >
         場所（１つだけ選択）
       </p>
-      <div className="flex gap-10 m-5">
+      <div className="flex flex-wrap gap-10 m-5">
       <RadioBtn
         id="Asia" 
         name="area" 

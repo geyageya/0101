@@ -24,7 +24,7 @@ export const ListCards =(props) =>{
     }
     return(
       <ul 
-        class ="grid gap-1 grid-cols-3 grid-rows-6 justify-center"
+        className  ="grid gap-1 grid-cols-3 md:grid-cols-6 grid-rows-6 justify-center "
         style={listCards}>
         <CardGrid
           //const CardGrid用

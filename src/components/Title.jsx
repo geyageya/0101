@@ -6,7 +6,7 @@ export const Title=(props)=>{
     // }
     return(
       <h1 
-        class="my-5 p-5  text-center text-3xl md:text-4xl  text-gray-500 md:text-black font-bold"
+        className ="p-5  text-center text-2xl sm:text-3xl  md:text-4xl lg:text-5xl text-gray-500"
         // style={title}
       >
         {props.children}

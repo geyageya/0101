@@ -17,7 +17,7 @@ export const WindowBtn =memo((props) =>{
     return(
       <div>
         <button 
-          class ="w-32 my-5 py-4 rounded-md   bg-sky-500 text-white cursor-pointer...  hover:bg-sky-700 ... "
+          className  ="w-32 my-5 py-4 rounded-md   bg-sky-500 text-white cursor-pointer...  hover:bg-sky-700 ... "
           // style = {windowBtn} 
           onClick={props.onClick}
         >

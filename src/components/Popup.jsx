@@ -32,7 +32,7 @@ export const Popup = memo((props) => {
     
     return(
       <div 
-      class= "w-64 mx-auto p-5 text-center  border-2 rounded-md shadow-black bg-gray-100"
+      className = "w-64 mx-auto p-5 text-center  border-2 rounded-md shadow-black bg-gray-100"
       style={popupWindow}
       > 
         <p 

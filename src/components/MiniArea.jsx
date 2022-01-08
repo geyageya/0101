@@ -3,7 +3,7 @@ import { MiniCard } from "./MiniCard";
 export const MiniArea =(props) => {
     console.log("Child2 MiniArea レンダリング");
     const miniArea ={
-      position: "absolute",
+      // position: "absolute",
       top: props.top,
       bottom: props.bottom,
       left: props.left,
@@ -17,7 +17,7 @@ export const MiniArea =(props) => {
   
     return(
       <ul 
-        class="absolute list-none flex flex:wrap justify-start gap-1"
+        className ="absolute list-none flex flex:wrap justify-start gap-1"
       
       style={miniArea}>
         {props.miniArray.map(picture =>{
