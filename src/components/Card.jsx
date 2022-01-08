@@ -39,7 +39,7 @@ export const Card =(props) =>{
       <>
         {props.isAnswered ? 
           <img 
-            className ="w-100 object-scale-down opacity-50"
+            className ="w-50 object-scale-down opacity-50"
             style = {card}
             alt ="" 
             src={props.src}  

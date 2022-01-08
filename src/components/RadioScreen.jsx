@@ -4,7 +4,7 @@ import { RadioBtn } from "./RadioBtn"
 export const RadioScreen = (props)=>{
   return(
     <div 
-      class ="w-full h-screen p-10 bg-lime-100"
+      className ="w-full h-screen p-10 bg-lime-100"
       >
       <h1 className ="text-2xl mb-10 text-center">かるたで学ぼう、世界200ケ国</h1>
       <p 

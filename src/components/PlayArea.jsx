@@ -18,7 +18,7 @@ export const PlayArea =(props) => {
     }
     return(
       <main 
-        className  =" sm: w-640 md:w-750 flex relative justify-center "
+        className =" sm: w-640 md:w-750 flex relative justify-center "
         style={playArea}>
         <ListCards
           //const CardGrid用

@@ -4,9 +4,9 @@ export const ListCards =(props) =>{
     console.log("Child2 listCards レンダリング");
     /* 絵札エリア(Grid) */
     const listCards = {
-      width: "500px",
-      height: "650px",
-      margin: "50px auto 10px",
+      // width: "500px",
+      // height: "650px",
+      // margin: "50px auto 10px",
       /*子要素の絵札をgrid制御*/
       // display: "grid",
     // gridTemplateColumns: "repeat(auto-fit, minmax(50px, 1fr)",
@@ -14,17 +14,17 @@ export const ListCards =(props) =>{
       // gridTemplateRows: "repeat(6, 100px)",
       // gridTemplateColumns: "repeat(5, 160px)",
       // gridTemplateRows: "repeat(3, 160px)",
-      justifyCcontent: "center",
-      alignContent: "center",
-      justifyItems: "center",
-      alignItems: "start",
+      // justifyCcontent: "center",
+      // alignContent: "center",
+      // justifyItems: "center",
+      // alignItems: "start",
       /* 位置(ShowEfudaが基点） */
       top: "0px",
       position: "absolute",
     }
     return(
       <ul 
-        className  ="grid gap-1 grid-cols-3 md:grid-cols-6 grid-rows-6 justify-center "
+        className  ="grid gap-1 grid-cols-3 grid-rows-2 justify-center mt-10 px-2 mx-1"
         style={listCards}>
         <CardGrid
           //const CardGrid用

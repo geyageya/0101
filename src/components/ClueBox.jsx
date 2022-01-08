@@ -12,9 +12,9 @@ export const ClueBox =(props) => {
         style={clueBox}
       >
         <input 
-          className =" block w-250 mt-150 border mx-auto border-gray-300 rounded-md py-2 pl-9 shadow-sm"
+          className =" block w-100  border mx-auto border-gray-300 rounded-md mt-5 py-2 pl-4 shadow-sm"
           type="text"
-          size="60"
+          size="50"
           placeholder = "ここに読み句が表示されます"
           //props用
           defaultValue={props.placeholder}

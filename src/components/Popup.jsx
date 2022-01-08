@@ -32,18 +32,18 @@ export const Popup = memo((props) => {
     
     return(
       <div 
-      className = "w-64 mx-auto p-5 text-center  border-2 rounded-md shadow-black bg-gray-100"
+      className = "max-w-xs mx-auto p-5 text-center  border-2 rounded-md shadow-black bg-gray-100"
       style={popupWindow}
       > 
         <p 
-        class = "text-lg"
+        className = "text-lg"
         // style={popupMsg}
         >
           {props.popupMsg}
         </p>
      
       <img 
-        class ="w-24 mx-auto"
+        className ="w-24 mx-auto"
         alt="efuda" 
         // style={popupImg} 
         src={props.basicLists[props.currentTurn].answer} 
@@ -59,7 +59,7 @@ export const Popup = memo((props) => {
         {props.basicLists[props.currentTurn].kuni} 
       </p> 
       <img 
-        class ="mx-auto"
+        className ="mx-auto"
         alt ="flag" 
         src={props.basicLists[props.currentTurn].flag} 
       />  

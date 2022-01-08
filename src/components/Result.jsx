@@ -40,7 +40,7 @@ export const Result = memo((props)=>{
         style={resultWindow}
         > 
           <p 
-            class = "my-3 text-xl"
+            className = "my-3 text-xl"
             // style={resultScore}
             >
             {props.score}枚取りました。
@@ -49,20 +49,20 @@ export const Result = memo((props)=>{
           {props.score >= props.basicLists.length * 0.5 ? (
             <> 
               <p 
-              class = "text-xl"
+              className = "text-xl"
                 // style={resultMsg}
                 >
                 勝ちました！
               </p>
               <img 
-                class = "w-48 mx-auto my-5"
+                className = "w-48 mx-auto my-5"
                 alt ="prize" 
                 // style={resultImg} 
                 src="../images/gold.png" />
             </>
             ):(
               <p 
-              class = "text-xl"
+              className = "text-xl"
                 // style={resultMsg}
               >
                 残念！負けました
@@ -70,7 +70,7 @@ export const Result = memo((props)=>{
             )
             }
             <WindowBtn 
-              // class="mx-auto"
+              // className="mx-auto"
               onClick={props.onClick} 
               windowBtnMsg="もう一回？" 
             />
