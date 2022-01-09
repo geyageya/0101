@@ -37,7 +37,7 @@ export const Card =(props) =>{
     }
     return(
       <>
-        {props.isAnswered ? 
+        {/* {props.isAnswered ? 
           <img 
             className ="w-50 object-scale-down opacity-50"
             style = {card}
@@ -48,7 +48,7 @@ export const Card =(props) =>{
             //表示画像のリンク切れの場合、非表示にする
             onError={e => e.target.style.display = 'none'}
           />
-        :
+        : */}
           <img 
             className  ="w-50 object-scale-down cursor-pointer"
             style = {card}
@@ -60,7 +60,7 @@ export const Card =(props) =>{
             onClick={()=>handleClick(props.id)} //handleClick関数をここに移動した場合
           />
        
-        } 
+        {/* }  */}
       </>
     )
   };

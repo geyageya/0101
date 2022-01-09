@@ -604,7 +604,7 @@ let backgroundImage="";
         playLevelThree = {playLevelThree}
         onClick={()=>handleSet()}
       />
-      :
+       :
       null
      }
       {/* 札を並べた後 */}
@@ -717,13 +717,14 @@ let backgroundImage="";
 
 const App=()=> {
   console.log("Appレンダリング");
+  // const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
   return(
     <div>
-      
-      {/* <RadioScreen/> */}
+  
       <Header />
       <Main />
       <Footer />
+    
     </div>
   )
 } //App
