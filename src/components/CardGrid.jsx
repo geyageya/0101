@@ -15,7 +15,7 @@ export const CardGrid =(props) => {
       {props.karutaLists.map((list) =>{
         return(
           <li 
-            className ="relative flex justify-center items-center"
+            className =" max-w-[110px] max-h-[110px] relative flex justify-center items-center laptop:max-w-[150px] laptop:max-h-[150px]"
             // style={cardGrid} 
             key={list.id} >
             {/* {props.isAnswered ? (

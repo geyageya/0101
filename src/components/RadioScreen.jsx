@@ -6,7 +6,7 @@ export const RadioScreen = (props)=>{
     <div 
       className ="w-full h-screen p-10 bg-lime-100"
       >
-      <h1 className ="text-2xl mb-10 text-center">かるたで学ぼう、世界200ケ国</h1>
+      <h1 className ="text-2xl mb-10 text-center">世界200ケ国かるた</h1>
       <p 
         className ="bg-gray-300"
         >
@@ -18,7 +18,7 @@ export const RadioScreen = (props)=>{
           name="language"
           value="japanese"
           htmlFor="japanese"
-          text ="Japanese（日）"
+          text =" 日本語"
           onChange={()=> props.checkJapanese()}
         />
         <RadioBtn
@@ -26,7 +26,7 @@ export const RadioScreen = (props)=>{
           name="language"
           value="english"
           htmlFor="english"
-          text ="English（英）"
+          text =" 英 語"
           onChange={()=> props.checkEnglish()}
         />
       </div>
@@ -43,7 +43,7 @@ export const RadioScreen = (props)=>{
         value="Asia"
         onChange={()=> props.chooseAsia()}
         htmlFor="Asia"
-        text="アジア"
+        text=" アジア"
       />
         <RadioBtn
           id="Europe" 
@@ -51,7 +51,7 @@ export const RadioScreen = (props)=>{
           value="Europe"
           onChange={()=> props.chooseEurope()}
           htmlFor="Europe"
-          text="ヨーロッパ"
+          text=" ヨーロッパ"
         />
         <RadioBtn
           id="Africa" 
@@ -59,7 +59,7 @@ export const RadioScreen = (props)=>{
           value="Africa"
           onChange={()=> props.chooseAfrica()}
           htmlFor="Africa"
-          text="アフリカ"
+          text=" アフリカ"
         />
         <RadioBtn
           id="Aerimcas" 
@@ -67,7 +67,7 @@ export const RadioScreen = (props)=>{
           value="Aerimcas"
           onChange={()=> props.chooseAmericas()}
           htmlFor="Aerimcas"
-          text="アメリカ"
+          text=" アメリカ"
         />
         <RadioBtn
           id="Oceania" 
@@ -75,7 +75,7 @@ export const RadioScreen = (props)=>{
           value="Oceania"
           onChange={()=> props.chooseOceania()}
           htmlFor="Oceania"
-          text="オセアニア"
+          text=" オセアニア"
         />
         <RadioBtn
           id="World" 
@@ -83,7 +83,7 @@ export const RadioScreen = (props)=>{
           value="World"
           onChange={()=> props.chooseWorld()}
           htmlFor="World"
-          text="世界"
+          text=" 世 界"
         />
       </div>
         <p className="bg-gray-300"
@@ -96,7 +96,7 @@ export const RadioScreen = (props)=>{
           name="level" 
           value="levelOne"
           htmlFor="levelOne"
-          text ="初級"
+          text =" 初 級"
           onChange={()=> props.playLevelOne()}
         />
         <RadioBtn
@@ -104,7 +104,7 @@ export const RadioScreen = (props)=>{
           name="level" 
           value="levelTwo"
           htmlFor="levelTwo"
-          text ="中級"
+          text =" 中 級"
           onChange={()=> props.playLevelTwo()}
         />
         <RadioBtn
@@ -113,15 +113,16 @@ export const RadioScreen = (props)=>{
           value="levelThree"
           onChange={()=> props.playLevelThree()}
           htmlFor="levelThree"
-          text ="上級"
+          text =" 上 級"
         />
       </div>
       <Button 
-        background="Blue" 
-        cursor="pointer" 
+        // background="Blue" 
+        // cursor="pointer" 
         onClick={props.onClick} 
+        className = "mt-6 cursor-pointer bg-pink-700"
       >
-        札を並べる
+        札 を 並 べ る
       </Button>
     </div>
   )

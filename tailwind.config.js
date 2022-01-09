@@ -17,7 +17,17 @@ module.exports = {
       'desktop': '1280px',
       // => @media (min-width: 1280px) { ... }
     },
-    extend: [],
+    extend: {
+      // gridTemplateColumns: {
+      // // Simple 16 column grid
+      // '3x100': 'repeat(3, 100px)',
+      // '6x150': 'repeat(6, 150px)',
+      // }
+      padding: {
+        '1/2': '50%',
+        full: '100%',
+    }
   }
   // plugins: [],
+}
 }

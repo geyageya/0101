@@ -17,7 +17,8 @@ export const Popup = memo((props) => {
       /* 画面の位置設定（基点は親要素のshowEfuda) */
       position: "absolute",
       top: "250px",
-      left: "180px",
+      left: "0px",
+      right: "0",
       // right: "0",
     }
     /*メッセージ（ポップアップ）*/
