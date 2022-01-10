@@ -33,7 +33,7 @@ export const Popup = memo((props) => {
     
     return(
       <div 
-      className = "absolute top-[250px] left-0 right-0 mx-auto max-w-xs p-5 border-2 rounded-md text-center bg-gray-100"
+      className = "absolute top-[200px] left-0 right-0 mx-auto max-w-xs p-5 border-2 rounded-md text-center bg-gray-100"
       // style={popupWindow}
       > 
         <p 
