@@ -13,10 +13,10 @@ export const Result = memo((props)=>{
       // borderRadius: "4px",
       // textAlign: "center",
       /* 画面の位置設定（基点は親要素のshowEfuda) */
-      position: "absolute",
-      top: "400px",
-      left: "0px",
-      right: "0",
+      // position: "absolute",
+      // top: "400px",
+      // left: "0px",
+      // right: "0",
     }
     /*スコア通知（試合結果）*/
     // const resultScore = {
@@ -36,8 +36,8 @@ export const Result = memo((props)=>{
       <div>
       {/* 本番用 */}
         <div 
-          className  = "absolute top-[250px] left-0 right-0 mx-auto max-w-xs p-5 border-2  rounded-md text-center bg-gray-100"
-        style={resultWindow}
+          className  = "absolute top-[200px] w-[200px] left-0 right-0 mx-auto max-w-xs p-5 border-2  rounded-md text-center bg-gray-100"
+        // style={resultWindow}
         > 
           <p 
             className = "my-3 text-xl"
