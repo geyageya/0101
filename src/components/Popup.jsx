@@ -15,8 +15,8 @@ export const Popup = memo((props) => {
       // textAlign: "center",/* 画面内要素を中央に */
       // transition: "0.001s",
       /* 画面の位置設定（基点は親要素のshowEfuda) */
-      position: "absolute",
-      top: "250px",
+      // position: "absolute",
+      // top: "-100px",
       left: "0px",
       right: "0",
       // right: "0",
@@ -33,8 +33,8 @@ export const Popup = memo((props) => {
     
     return(
       <div 
-      className = "max-w-xs mx-auto p-5 text-center  border-2 rounded-md shadow-black bg-gray-100"
-      style={popupWindow}
+      className = "absolute top-[350px] left-0 right-0 mx-auto max-w-xs p-5 border-2 rounded-md text-center bg-gray-100"
+      // style={popupWindow}
       > 
         <p 
         className = "text-lg"
@@ -44,7 +44,7 @@ export const Popup = memo((props) => {
         </p>
      
       <img 
-        className ="w-24 mx-auto"
+        className ="max-w-[150px] mx-auto"
         alt="efuda" 
         // style={popupImg} 
         src={props.basicLists[props.currentTurn].answer} 

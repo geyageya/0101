@@ -5,7 +5,7 @@ import { ListCards } from "./ListCards";
 export const PlayArea =(props) => {
     console.log("Child1 PlayAreaレンダリング");
     const playArea = {
-      height: "750px",
+      height: "550px",
       margin: "0 auto",
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
@@ -18,7 +18,7 @@ export const PlayArea =(props) => {
     }
     return(
       <main 
-        className =" sm: w-640 md:w-750 flex relative justify-center "
+        className =" container mx-auto flex relative justify-center "
         style={playArea}>
         <ListCards
           //const CardGrid用

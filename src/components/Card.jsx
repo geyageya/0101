@@ -50,9 +50,8 @@ export const Card =(props) =>{
           />
         : */}
           <img 
-            className  =" block max-w-[90px] max-h-[90px] .object-cover cursor-pointer laptop:max-w-[150px] laptop:max-h-[150px]"
-            // className  =" block max-w-[110px] max-h-28 .object-scale-down cursor-pointer laptop:max-w-[150px] laptop:max-h-[150px]"
-            style = {card}
+            className  =" max-w-[90px] max-h-[90px] cursor-pointer laptop:max-w-[150px] laptop:max-h-[150px]"
+            // style = {card}
             alt ="" 
             src={props.src}  
             id ={props.id}

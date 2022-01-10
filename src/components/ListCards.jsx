@@ -24,9 +24,10 @@ export const ListCards =(props) =>{
     }
     return(
       <ul 
-        className  ="min-w-[300px] grid grid-cols-4 grid-rows-5  justify-center gap-1 mt-5 px-1 laptop:grid-cols-6 laptop:grid-rows-3"
+        className  ="absolute top-4 grid grid-cols-4 grid-rows-5 justify-center gap-1 mt-5 px-1 laptop:grid-cols-6 laptop:grid-rows-3"
         // className  ="grid grid-cols-[100px_100px_100px]  grid-rows-[100px_100px_100px_100px_100px_100px_] justify-center gap-1 mt-5 px-2 "
-        style={listCards}>
+        // style={listCards}
+        >
         <CardGrid
           //const CardGrid用
           karutaLists={props.karutaLists}
