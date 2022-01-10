@@ -5,20 +5,21 @@ import { ListCards } from "./ListCards";
 export const PlayArea =(props) => {
     console.log("Child1 PlayAreaレンダリング");
     const playArea = {
-      height: "550px",
-      margin: "0 auto",
+      // height: "600px",
+      // margin: "0 auto",
+      
+      /* flexで絵札一覧を中央に配置 */
+      // display:"flex",
+      // justifyContent: "center",
+      // position: "relative",
+      //差し込み用(props)
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
-      /* flexで絵札一覧を中央に配置 */
-      display:"flex",
-      justifyContent: "center",
-      position: "relative",
-      //差し込み用(props)
       backgroundImage: props.backgroundImage, 
     }
     return(
       <main 
-        className =" container mx-auto flex relative justify-center "
+        className ="h-[630px] container mx-auto flex relative justify-center "
         style={playArea}>
         <ListCards
           //const CardGrid用

@@ -3,7 +3,7 @@ import {CardGrid} from "./CardGrid";
 export const ListCards =(props) =>{
     console.log("Child2 listCards レンダリング");
     /* 絵札エリア(Grid) */
-    const listCards = {
+    // const listCards = {
       // width: "500px",
       // height: "650px",
       // margin: "50px auto 10px",
@@ -19,12 +19,12 @@ export const ListCards =(props) =>{
       // justifyItems: "center",
       // alignItems: "start",
       /* 位置(ShowEfudaが基点） */
-      top: "0px",
-      position: "absolute",
-    }
+    //   top: "0px",
+    //   position: "absolute",
+    // }
     return(
       <ul 
-        className  ="absolute top-4 grid grid-cols-4 grid-rows-5 justify-center gap-1 mt-5 px-1 laptop:grid-cols-6 laptop:grid-rows-3"
+        className  ="absolute top-[60px] grid grid-cols-3 grid-rows-5 justify-center gap-1 mt-5 px-1 laptop:grid-cols-6 laptop:grid-rows-3"
         // className  ="grid grid-cols-[100px_100px_100px]  grid-rows-[100px_100px_100px_100px_100px_100px_] justify-center gap-1 mt-5 px-2 "
         // style={listCards}
         >

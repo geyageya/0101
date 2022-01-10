@@ -16,7 +16,7 @@ export const Header=(props)=>{
       // position: "relative",
   }
     return(
-        <header className = "laptop:container  mx-auto my-2 border bg-green-500 laptop:bg-red-500"   >
+        <header className = " mx-auto  border bg-green-500laptop:container bg-emerald-400 laptop:bg-red-500"    >
           <Title>
             世界200ヶ国かるた!
           </Title>
