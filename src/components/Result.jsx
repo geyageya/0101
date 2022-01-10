@@ -36,7 +36,7 @@ export const Result = memo((props)=>{
       <div>
       {/* 本番用 */}
         <div 
-          className  = "absolute top-[350px] left-0 right-0 mx-auto max-w-xs p-5 border-2  rounded-md text-center bg-gray-100"
+          className  = "absolute top-[250px] left-0 right-0 mx-auto max-w-xs p-5 border-2  rounded-md text-center bg-gray-100"
         style={resultWindow}
         > 
           <p 

@@ -17,7 +17,7 @@ export const MiniArea =(props) => {
   
     return(
       <ul 
-        className ="absolute w-full px-1 left-1 list-none flex flex:wrap justify-start gap-1"
+        className ="absolute w-full px-1 left-1 list-none flex flex:wrap justify-start"
       
       style={miniArea}>
         {props.miniArray.map(picture =>{
