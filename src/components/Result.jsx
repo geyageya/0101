@@ -36,20 +36,15 @@ export const Result = memo((props)=>{
       <div>
       {/* 本番用 */}
         <div 
-          className  = "absolute top-[200px] w-[200px] left-0 right-0 mx-auto max-w-xs p-5 border-2  rounded-md text-center bg-gray-100"
+          className  = "absolute top-[200px] w-[200px] left-0 right-0 mx-auto max-w-xs p-5 border-2  rounded-md text-center bg-gray-100 shadow-md"
         // style={resultWindow}
         > 
-          <p 
-            className = "my-3 text-xl"
-            // style={resultScore}
-            >
-            {props.score}枚取りました。
-          </p>
+          
   
           {props.score >= props.basicLists.length * 0.5 ? (
             <> 
               <p 
-              className = "text-xl"
+              className = "text-2xl"
                 // style={resultMsg}
                 >
                 勝ちました！
@@ -62,13 +57,19 @@ export const Result = memo((props)=>{
             </>
             ):(
               <p 
-              className = "text-xl"
+              className = "text-2xl"
                 // style={resultMsg}
               >
                 残念！負けました
               </p>
             )
             }
+            <p 
+            className = "my-3 text-xl"
+            // style={resultScore}
+            >
+            {props.score}枚取りました。
+          </p>
             <WindowBtn 
               // className="mx-auto"
               onClick={props.onClick} 

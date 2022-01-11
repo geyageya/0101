@@ -15,11 +15,11 @@ export const PlayArea =(props) => {
       //差し込み用(props)
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
-      backgroundImage: props.backgroundImage, 
+      // backgroundImage: props.backgroundImage, 
     }
     return(
       <main 
-        className ="h-[430px] container mx-auto flex relative justify-center "
+        className ={`h-[430px] bg-sky-100 container mx-auto flex relative justify-center bg-cover bg-no-repeat ${props.backgroundImage} md:h-[650px] lg:h-[520px]`}
         style={playArea}>
         <ListCards
           //const CardGrid用
@@ -44,14 +44,13 @@ export const PlayArea =(props) => {
         {/* player用 */}
         <MiniArea
           miniArray = {props.miniCard} 
-          bottom = "0px"
-          left ="0px"
+          tailwind="bottom-0 left-0"
+         
         />
         {/* PC用 */}
         <MiniArea
           miniArray = {props.miniCardPc} 
-          top = "15px"
-          left ="0px"
+          tailwind="top-[15px] left-0"
         />
         </main>
       )

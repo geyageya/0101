@@ -12,12 +12,12 @@ export const WindowBtn =memo((props) =>{
       // boxShadow: "0 4px 0 #287fb9",
       // width: "150px",
       // margin:"5px auto",
-      cursor: "pointer",
+      // cursor: "pointer",
     }
     return(
       <div>
         <button 
-          className  ="w-32 my-5 py-4 rounded-md   bg-sky-500 text-white cursor-pointer...  hover:bg-sky-700 ... "
+          className  ="w-32 my-5 py-4 rounded-md cursor-pointer bg-sky-500 text-white   hover:bg-sky-700 transform hover:scale-110 transition-transform"
           // style = {windowBtn} 
           onClick={props.onClick}
         >

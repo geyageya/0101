@@ -33,11 +33,11 @@ export const Popup = memo((props) => {
     
     return(
       <div 
-      className = "absolute top-[200px] w-[200px] left-0 right-0 mx-auto max-w-xs p-5 border-2 rounded-md text-center bg-gray-100"
+      className = "absolute top-[200px] w-[200px] left-0 right-0 mx-auto max-w-xs p-5 border-2 rounded-md text-center bg-gray-100 shadow-md"
       // style={popupWindow}
       > 
         <p 
-        className = "text-lg"
+        className = "text-2xl"
         // style={popupMsg}
         >
           {props.popupMsg}

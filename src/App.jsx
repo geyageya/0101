@@ -614,16 +614,18 @@ let backgroundImage="";
           {/* ゲーム開始ボタンを押した後 */}
           {isStarted ?　　
             <Button 
-              background="grey"
+              // background="grey" 
+              tailwind ="bg-gray-500 text-black"
             >
               ゲーム中
             </Button>
             :             
             // ゲーム開始ボタンを押す前
             <Button 
-              background="red" 
-              cursor="pointer" 
+              // background="red" 
+              // cursor="pointer" 
               onClick={()=> handleStart()}
+              tailwind="bg-red-600 text-white cursor-pointer transform hover:scale-110 transition-transform"
             >
               ゲーム開始
             </Button>

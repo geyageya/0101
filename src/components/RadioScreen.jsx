@@ -120,7 +120,7 @@ export const RadioScreen = (props)=>{
         // background="Blue" 
         // cursor="pointer" 
         onClick={props.onClick} 
-        className = "mt-6 cursor-pointer bg-pink-700"
+        tailwind="bg-red-600 text-white cursor-pointer transform hover:scale-110 transition-transform"
       >
         札 を 並 べ る
       </Button>

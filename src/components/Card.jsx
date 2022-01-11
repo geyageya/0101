@@ -50,7 +50,7 @@ export const Card =(props) =>{
           />
         : */}
           <img 
-            className  =" max-w-[90px] max-h-[90px] cursor-pointer laptop:max-w-[150px] laptop:max-h-[150px]"
+            className  ="max-w-[90px] max-h-[90px] cursor-pointer md:max-w-[130px] md:max-h-[130px] lg:max-w-[150px] lg:max-w-[150px]"
             // style = {card}
             alt ="" 
             src={props.src}  

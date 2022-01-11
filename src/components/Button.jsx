@@ -2,7 +2,7 @@ import {memo} from "react";
 
 export const Button =memo((props) =>{
     console.log("Child1 Buttonレンダリング");
-    const button ={
+    // const button ={
       // width: "100px",
       // padding: "8px",
       // borderRradius: "8px",
@@ -15,12 +15,11 @@ export const Button =memo((props) =>{
       //Props用
       // background: props.background,
       // cursor: props.cursor,
-    }
+    // }
     return(
       <button 
-        className  = "shadow-lg text-xl block w-100 mx-auto p-3 rounded-full bg-sky-500 text-white cursor-pointer...  hover:bg-sky-700 ...   "
-      
-        style={button} 
+        className  = {`w-100 p-3 block mx-auto text-lg rounded-full shadow-lg ${props.tailwind}`}
+        // style={button} 
         onClick={props.onClick}
       >
         {props.children}
