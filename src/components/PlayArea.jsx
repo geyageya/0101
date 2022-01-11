@@ -7,15 +7,14 @@ export const PlayArea =(props) => {
     const playArea = {
    
       //差し込み用(props)
-      // backgroundSize: "cover",
-      // backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
       // backgroundImage: props.backgroundImage, 
     }
     return(
-      <div 
-        className ={`h-[430px] bg-sky-100 mx-auto relative flex justify-center bg-contain bg-no-repeat ${props.backgroundImage} md:h-[650px] lg:h-[520px]`}
-        // style="backgroundImage:url(../images/worldmap.png)"
-        >
+      <main 
+        className ={`h-[430px] bg-sky-100 mx-auto relative flex  justify-center bg-cover bg-no-repeat ${props.backgroundImage} md:h-[650px] lg:h-[520px]`}
+        style={playArea}>
         <ListCards
           //const CardGrid用
           karutaLists={props.karutaLists}
@@ -39,14 +38,15 @@ export const PlayArea =(props) => {
         {/* player用 */}
         <MiniArea
           miniArray = {props.miniCard} 
-          tailwind="bottom-0 left-0"
+          tailwind="bottom-0 left-0 items-end"
          
         />
         {/* PC用 */}
         <MiniArea
           miniArray = {props.miniCardPc} 
-          tailwind="top-[15px] left-0"
+          tailwind="top-[15px] left-0 items-start"
         />
-        </div>
+        {/* items-start, items-end 札を上下線にそって配列。外側が直線、内側が凸凹*/}
+        </main>
       )
   };
