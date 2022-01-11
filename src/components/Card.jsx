@@ -7,7 +7,7 @@ export const Card =(props) =>{
       props.stopTimer();              //タイマー解除（PCplayer)
 
       //正解の場合
-      if (selectedId ===props.basicLists[props.currentTurn].id) {　　//配列のIDを比較
+      if (selectedId ===props.basicLists[props.currentTurn].id) {//配列のIDを比較
         props.playEffect(1);
         props.setIsPopup(true);       
         props.placeHand();
@@ -25,16 +25,7 @@ export const Card =(props) =>{
     }//handleClick
   
     /*絵札表示*/
-    const card = {
-      // width: "95px",
-      // height: "95px",
-      // width: "150px",
-      // height: "150px",
-      // objectFit: "scale-down", /*原画比率維持*/
-      // cursor: props.cursor,
-      opacity: props.opacity,
-      // filter: "grayScale(100%)"
-    }
+    
     return(
       <>
         {/* {props.isAnswered ? 

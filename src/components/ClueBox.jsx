@@ -4,8 +4,7 @@ export const ClueBox =(props) => {
 
     console.log("Child1 CluBoxレンダリング");
     const clueBox ={
-      // width: "80%",
-      // margin: "40px 3%",
+      margin: "40px 3%",
     }
     return(
       <div 

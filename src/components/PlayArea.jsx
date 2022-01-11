@@ -5,22 +5,17 @@ import { ListCards } from "./ListCards";
 export const PlayArea =(props) => {
     console.log("Child1 PlayAreaレンダリング");
     const playArea = {
-      // height: "600px",
-      // margin: "0 auto",
-      
-      /* flexで絵札一覧を中央に配置 */
-      // display:"flex",
-      // justifyContent: "center",
-      // position: "relative",
+   
       //差し込み用(props)
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
+      // backgroundSize: "cover",
+      // backgroundRepeat: "no-repeat",
       // backgroundImage: props.backgroundImage, 
     }
     return(
-      <main 
-        className ={`h-[430px] bg-sky-100 container mx-auto flex relative justify-center bg-cover bg-no-repeat ${props.backgroundImage} md:h-[650px] lg:h-[520px]`}
-        style={playArea}>
+      <div 
+        className ={`h-[430px] bg-sky-100 mx-auto relative flex justify-center bg-contain bg-no-repeat ${props.backgroundImage} md:h-[650px] lg:h-[520px]`}
+        // style="backgroundImage:url(../images/worldmap.png)"
+        >
         <ListCards
           //const CardGrid用
           karutaLists={props.karutaLists}
@@ -52,6 +47,6 @@ export const PlayArea =(props) => {
           miniArray = {props.miniCardPc} 
           tailwind="top-[15px] left-0"
         />
-        </main>
+        </div>
       )
   };

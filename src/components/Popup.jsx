@@ -3,50 +3,19 @@ import { WindowBtn } from "./WindowBtn";
 
 export const Popup = memo((props) => {
     console.log("Child2 Popup レンダリング");
-    const popupWindow ={
-      /* Box枠の設定 */
-      // width: "200px",
-      // background: "#fff",
-      // padding: "30px",
-      // boxSshadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-      // border:"solid",
-      // borderRradius: "4px",
-      // margin: "0 auto", /* 画面を中央に配置 */
-      // textAlign: "center",/* 画面内要素を中央に */
-      // transition: "0.001s",
-      /* 画面の位置設定（基点は親要素のshowEfuda) */
-      // position: "absolute",
-      // top: "-100px",
-      // left: "0px",
-      // right: "0",
-      // right: "0",
-    }
-    /*メッセージ（ポップアップ）*/
-    // const popupMsg ={
-    //   // fontSize:"18px"
-    // }
-    /*画像（ポップアップ画面）*/
-    // const popupImg = {
-    //   maxWidth: "150px",
-    //   maxHeight: "150px",
-    // }
     
     return(
       <div 
-      className = "absolute top-[200px] w-[200px] left-0 right-0 mx-auto max-w-xs p-5 border-2 rounded-md text-center bg-gray-100 shadow-md"
-      // style={popupWindow}
+      className = "absolute top-[200px] w-[220px] left-0 right-0 mx-auto p-5 border-2 rounded-md text-center bg-gray-100 shadow-md"
       > 
         <p 
-        className = "text-2xl"
-        // style={popupMsg}
+        className = " text-red-600 text-xl md:text-2xl"     
         >
           {props.popupMsg}
         </p>
-     
       <img 
         className ="max-w-[150px] mx-auto"
         alt="efuda" 
-        // style={popupImg} 
         src={props.basicLists[props.currentTurn].answer} 
       />
       <p>
@@ -74,7 +43,7 @@ export const Popup = memo((props) => {
       {props.currentTurn===props.basicLists.length-3 &&
         <WindowBtn 
           onClick={props.onClick}  
-          windowBtnMsg="次に取ると、最後の札ももらえます" 
+          windowBtnMsg="次取ると、最後の札がもらえます" 
         />
       }
       {props.currentTurn===props.basicLists.length-2 &&

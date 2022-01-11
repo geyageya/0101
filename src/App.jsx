@@ -94,7 +94,7 @@ const effectSounds = [
         case "Asia":
           {
             const filtered= basicLists.filter(list => list.area==="Asia");
-            const shuffled=shuffle(filtered).slice(0,12)
+            const shuffled=shuffle(filtered).slice(0,4)
             const result = shuffle([...shuffled]);
             setBasicLists(result)
             const result2 = shuffle([...shuffled]);
@@ -684,14 +684,14 @@ let backgroundImage="";
         <>
         {isScored ?
           <Popup 
-            popupMsg="取りました"
+            popupMsg="正解です！"
             basicLists={basicLists} 
             currentTurn={currentTurn} 
             onClick={()=>pressPopupBtn()} 
           />
           : 
           <Popup 
-            popupMsg="残念、取られました！"
+            popupMsg="相手が取りました"
             basicLists={basicLists} 
             currentTurn={currentTurn}
             onClick={()=>pressPopupBtn()} 

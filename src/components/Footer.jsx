@@ -1,14 +1,11 @@
 
 
 export const Footer = (props) => {
-    // const footer ={
-    //   textAlign: "center"
-    // }
+   
   return(
   
     <p 
       className ="text-center"
-      // style={footer}
       >
       ©
       <a href="https://ondoku3.com/">
