@@ -24,7 +24,6 @@ export const ListCards =(props) =>{
           playEffect={props.playEffect}
           placeHand={props.placeHand}
           pcPlayer={props.pcPlayer}
-          // onClick={() =>props.handleClick()} 
         />
       </ul>
     )
