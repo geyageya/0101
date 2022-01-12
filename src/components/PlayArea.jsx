@@ -13,7 +13,7 @@ export const PlayArea =(props) => {
     }
     return(
       <main 
-        className ={`h-[454px] md:h-[650px] lg:h-[520px] bg-sky-100 mx-auto relative flex justify-center bg-cover bg-no-repeat ${props.backgroundImage} `}
+        className ={`h-[454px] md:h-[630px] lg:h-[520px] bg-sky-100 mx-auto relative flex justify-center bg-cover bg-no-repeat ${props.backgroundImage} `}
         style={playArea}>
         <ListCards
           //const CardGrid用
