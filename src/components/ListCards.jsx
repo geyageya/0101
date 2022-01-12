@@ -5,7 +5,7 @@ export const ListCards =(props) =>{
    
     return(
       <ul 
-        className  ="absolute top-[60px] grid grid-cols-4 grid-rows-3 justify-center gap-1 mt-5 px-1 md:top-[95px] lg:top-[90px] lg:grid-cols-6 lg:grid-rows-2 "
+        className  ="absolute top-[88px] grid grid-cols-4 grid-rows-3 justify-center gap-1 px-1 md:top-[95px] lg:top-[90px] lg:grid-cols-6 lg:grid-rows-2 "
         >
         <CardGrid
           //const CardGrid用

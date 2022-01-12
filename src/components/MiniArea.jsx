@@ -5,7 +5,7 @@ export const MiniArea =(props) => {
    
     return(
       <ul 
-        className ={`absolute mx-auto left-0 right-0 w-[350px] px-1 flex flex-wrap justify-center gap-1 ${props.tailwind} md:w-[750px] lg:w-[1000px]`}
+        className ={`absolute mx-auto left-0 right-0 w-[374px] px-1 flex flex-wrap justify-start gap-1 ${props.tailwind} md:w-[750px] lg:w-[1000px]`}
       >
         {props.miniArray.map(picture =>{
         return(

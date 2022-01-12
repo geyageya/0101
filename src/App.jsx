@@ -625,7 +625,7 @@ let backgroundImage="";
               // background="red" 
               // cursor="pointer" 
               onClick={()=> handleStart()}
-              tailwind="bg-red-600 text-white cursor-pointer transform hover:scale-110 transition-transform"
+              tailwind="bg-red-600 text-white cursor-pointer transform hover:scale-105 transition-transform"
             >
               ゲーム開始
             </Button>

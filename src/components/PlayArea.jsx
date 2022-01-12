@@ -13,7 +13,7 @@ export const PlayArea =(props) => {
     }
     return(
       <main 
-        className ={`h-[430px] bg-sky-100 mx-auto relative flex  justify-center bg-cover bg-no-repeat ${props.backgroundImage} md:h-[650px] lg:h-[520px]`}
+        className ={`h-[454px] md:h-[650px] lg:h-[520px] bg-sky-100 mx-auto relative flex justify-center bg-cover bg-no-repeat ${props.backgroundImage} `}
         style={playArea}>
         <ListCards
           //const CardGrid用
@@ -44,7 +44,7 @@ export const PlayArea =(props) => {
         {/* PC用 */}
         <MiniArea
           miniArray = {props.miniCardPc} 
-          tailwind="top-[15px] left-0 items-start"
+          tailwind="top-0 left-0 items-start"
         />
         {/* items-start, items-end 札を上下線にそって配列。外側が直線、内側が凸凹*/}
         </main>
