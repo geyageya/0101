@@ -8,8 +8,12 @@ import {Popup} from "./components/Popup";
 import {Result} from "./components/Result";
 import {RadioScreen} from "./components/RadioScreen";
 
-import {useCustomeHooks} from "./hooks/useCustomeHooks"
-
+// import {useSetup } from "./hooks/useSetup";
+// import {useGame} from "./hooks/useGame";
+import {useKouka} from "./hooks/useKouka";
+// import {useLevel} from "./hooks/useLevel";
+// import {useLang} from "./hooks/useLang"
+import {useData} from "./hooks/useData"
 
 {/* <Header /> */}
 
@@ -29,14 +33,26 @@ import {useCustomeHooks} from "./hooks/useCustomeHooks"
 //   )
 // };
 
-
-
-
 const Main=(props) => {
 
+  // const {readClue} = useLang();
+
+  // const {basicLists, setBasicLists, karutaLists, setKarutaLists, getApiLists, 
+  //   area, setArea, shuffle, chooseArea, chooseAsia, chooseEurope, chooseAfrica, chooseAmericas, 
+  //   chooseOceania, chooseWorld,screen, setScreen}= useSetup();
+
+  // const {currentTurn, setCurrentTurn, isAnswered, setIsAnswered, isPopup, setIsPopup,placeHandPc, placeHandPc2}=useGame();
+
+  const {playKouka} = useKouka();
+  const {dataLists} = useData();
+  
+  // const {level, setLevel, timerRef, startTimer, stopTimer, startTimer2, pcPlayer, pcPlayer2, 
+  //   playLevelOne,playLevelTwo, playLevelThree} = useLevel();
+  
+
   //■■■■■useState■■■■■
-  //  const [basicLists,setBasicLists] = useState(dataLists);    　non-API
-   const [basicLists,setBasicLists] = useState([]);  //API利用時
+    const [basicLists,setBasicLists] = useState(dataLists);    //non-API
+  //  const [basicLists,setBasicLists] = useState([]);  //API利用時
    const [karutaLists,setKarutaLists] = useState(basicLists);  //絵札用データ配列
    const [miniCard, setMiniCard] = useState([]);      //ミニ絵札データ配列
    const [miniCardPc, setMiniCardPc] = useState([]);  //ミニ絵札データ配列（PC)
@@ -45,7 +61,7 @@ const Main=(props) => {
    const [score, setScore] = useState(0);                     //スコア・カウント
    const [isScored, setIsScored] = useState(false);           //player得点の有無
   
-  //  const [isPlaced, setIsPlaced] = useState(false)            //「札を並べる」ボタンの反応制御
+   const [isPlaced, setIsPlaced] = useState(false)            //「札を並べる」ボタンの反応制御
    const [isStarted, setIsStarted] = useState(false)           //「ゲーム開始」ボタンの反応制御
    const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
   
@@ -62,30 +78,30 @@ const Main=(props) => {
    const [area, setArea]= useState("default")
    const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
   
-// Sounds------------------------------------------------------------------
-const effectSounds = [
-  "sounds/effects/siin.mp3",
-  "sounds/effects/pan.mp3", 
-  "sounds/effects/bubu.mp3", 
-  "sounds/effects/chan.mp3",
-  "sounds/effects/clap.mp3",
-  "sounds/effects/chiin.mp3", 
-]
+// // Sounds------------------------------------------------------------------
+// const effectSounds = [
+//   "sounds/effects/siin.mp3",
+//   "sounds/effects/pan.mp3", 
+//   "sounds/effects/bubu.mp3", 
+//   "sounds/effects/chan.mp3",
+//   "sounds/effects/clap.mp3",
+//   "sounds/effects/chiin.mp3", 
+// ]
   //札の準備ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  //■■■■■useEffect (API)■■■■■ 
+  // //■■■■■useEffect (API)■■■■■ 
     //APIデータ取得
-    useEffect (() => {
-      getApiLists();
-      //下のコメント（不要なwarningを出さないようにするため）
-      // eslint-disable-next-line 
-    },[]);
+    // useEffect (() => {
+    //   getApiLists();
+    //   //下のコメント（不要なwarningを出さないようにするため）
+    //   // eslint-disable-next-line 
+    // },[]);
   
   //  APIデータを取得
-    const getApiLists = useCallback(async () => {
-      const res =await fetch("https://server-karuta2020.herokuapp.com/api/v1/karuta");
-      const json = await res.json();
-      setBasicLists(json);
-    },[]);
+    // const getApiLists = useCallback(async () => {
+    //   const res =await fetch("https://server-karuta2020.herokuapp.com/api/v1/karuta");
+    //   const json = await res.json();
+    //   setBasicLists(json);
+    // },[]);
 
   
   // //エリア別札選出）
@@ -184,7 +200,7 @@ const effectSounds = [
       chooseArea();
       // setIsKaruta(true);  //絵札一覧を表示
       // setIsPlaced(true);  //「札を並べる」ボタンの反応停止
-      playEffect(0);       //効果音 
+      playKouka(0);       //効果音 
       setScreen(false)
     };//handleSet
 
@@ -262,16 +278,16 @@ const effectSounds = [
     clueSounds.loop = false;
   }
 
-  //効果音
-  let effect=new Audio();
+  // // //効果音
+  // let kouka=new Audio();
 
-  const playEffect= (effectNum)=> {
-    effect.preload = "auto";
-    effect.src = effectSounds[effectNum];
-    effect.load();
-    effect.loop = false;
-    effect.play();
-  }
+  // const playKouka= (effectNum)=> {
+  //   kouka.preload = "auto";
+  //   kouka.src = effectSounds[effectNum];
+  //   kouka.load();
+  //   kouka.loop = false;
+  //   kouka.play();
+  // }
   
   //PcPlayer--------------------------------------
   const startTimer = () => {
@@ -354,7 +370,7 @@ const effectSounds = [
    const pcPlayer = () =>{
     placeHandPc();
     setIsPopup(true);
-    playEffect(2);
+    playKouka(2);
     setIsAnswered(true);
   }
   //PCplayer2の動き　(引数 newCurrentTurn)
@@ -362,7 +378,7 @@ const effectSounds = [
     placeHandPc2(newCurrentTurn);
     setIsPopup(true);
     setIsAnswered(true);
-    playEffect(3);
+    playKouka(3);
   }
 
   //ポップアップボタンを押した場合-----------------------------
@@ -439,7 +455,7 @@ const effectSounds = [
     }
   }
 
-  // //正解の絵札の上に手を表示
+  // // //正解の絵札の上に手を表示
   const placeHand = () => {
     const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, hand:"/images/hand.png"} : list)
     setKarutaLists(result);  
@@ -502,10 +518,10 @@ const effectSounds = [
    //結果画面表示時の効果音
    const soundResult =() => {
     if (score>=basicLists.length * 0.5) {
-      playEffect(4);
+      playKouka(4);
     }else
     {
-      playEffect(5);
+      playKouka(5);
     }
   }
 
@@ -632,7 +648,7 @@ let backgroundImage="";
           }
         </>
       
-      {/* 　//札を並べていない場合
+      {/* //札を並べていない場合
         <Button 
           background="Blue" 
           cursor="pointer" 
@@ -674,7 +690,7 @@ let backgroundImage="";
           setIsScored={setIsScored}
           //handleClick用(関数実行)
           stopTimer={stopTimer}
-          playEffect={playEffect}
+          playKouka={playKouka}
           placeHand={placeHand}
           pcPlayer={pcPlayer}
           onClick={()=>handleSet()} 

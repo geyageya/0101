@@ -30,7 +30,7 @@ export const PlayArea =(props) => {
           setIsScored={props.setIsScored}
           //handleClick用(関数実行)
           stopTimer={props.stopTimer}
-          playEffect={props.playEffect}
+          playKouka={props.playKouka}
           placeHand={props.placeHand}
           pcPlayer={props.pcPlayer}
           // onClick={() =>props.handleClick()} 

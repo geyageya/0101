@@ -8,7 +8,7 @@ export const Card =(props) =>{
 
       //正解の場合
       if (selectedId ===props.basicLists[props.currentTurn].id) {//配列のIDを比較
-        props.playEffect(1);
+        props.playKouka(1);
         props.setIsPopup(true);       
         props.placeHand();
         //player独自の操作
