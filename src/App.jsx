@@ -8,12 +8,12 @@ import {Popup} from "./components/Popup";
 import {Result} from "./components/Result";
 import {RadioScreen} from "./components/RadioScreen";
 
-// import {useSetup } from "./hooks/useSetup";
+import {useSetup } from "./hooks/useSetup";
 // import {useGame} from "./hooks/useGame";
 import {useKouka} from "./hooks/useKouka";
 // import {useLevel} from "./hooks/useLevel";
 // import {useLang} from "./hooks/useLang"
-import {useData} from "./hooks/useData"
+// import {useData} from "./hooks/useData"
 
 {/* <Header /> */}
 
@@ -37,23 +37,23 @@ const Main=(props) => {
 
   // const {readClue} = useLang();
 
-  // const {basicLists, setBasicLists, karutaLists, setKarutaLists, getApiLists, 
-  //   area, setArea, shuffle, chooseArea, chooseAsia, chooseEurope, chooseAfrica, chooseAmericas, 
-  //   chooseOceania, chooseWorld,screen, setScreen}= useSetup();
+  const {basicLists, setBasicLists, karutaLists, setKarutaLists, getApiLists, 
+    area, setArea, shuffle, chooseArea, chooseAsia, chooseEurope, chooseAfrica, chooseAmericas, 
+    chooseOceania, chooseWorld,screen, setScreen}= useSetup();
 
   // const {currentTurn, setCurrentTurn, isAnswered, setIsAnswered, isPopup, setIsPopup,placeHandPc, placeHandPc2}=useGame();
 
   const {playKouka} = useKouka();
-  const {dataLists} = useData();
+  // const {dataLists} = useData();  //API使わない場合
   
   // const {level, setLevel, timerRef, startTimer, stopTimer, startTimer2, pcPlayer, pcPlayer2, 
   //   playLevelOne,playLevelTwo, playLevelThree} = useLevel();
   
 
   //■■■■■useState■■■■■
-    const [basicLists,setBasicLists] = useState(dataLists);    //non-API
+    // const [basicLists,setBasicLists] = useState(dataLists);    //non-API
   //  const [basicLists,setBasicLists] = useState([]);  //API利用時
-   const [karutaLists,setKarutaLists] = useState(basicLists);  //絵札用データ配列
+  //  const [karutaLists,setKarutaLists] = useState(basicLists);  //絵札用データ配列
    const [miniCard, setMiniCard] = useState([]);      //ミニ絵札データ配列
    const [miniCardPc, setMiniCardPc] = useState([]);  //ミニ絵札データ配列（PC)
   
@@ -75,8 +75,8 @@ const Main=(props) => {
 
    const [language, setLanguage]= useState("default")
    const [level, setLevel]= useState("default")
-   const [area, setArea]= useState("default")
-   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
+  //  const [area, setArea]= useState("default")
+  //  const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
   
 // // Sounds------------------------------------------------------------------
 // const effectSounds = [
@@ -88,15 +88,15 @@ const Main=(props) => {
 //   "sounds/effects/chiin.mp3", 
 // ]
   //札の準備ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  // //■■■■■useEffect (API)■■■■■ 
+  //■■■■■useEffect (API)■■■■■ 
     //APIデータ取得
-    // useEffect (() => {
-    //   getApiLists();
-    //   //下のコメント（不要なwarningを出さないようにするため）
-    //   // eslint-disable-next-line 
-    // },[]);
+    useEffect (() => {
+      getApiLists();
+      //下のコメント（不要なwarningを出さないようにするため）
+      // eslint-disable-next-line 
+    },[]);
   
-  //  APIデータを取得
+   //APIデータを取得
     // const getApiLists = useCallback(async () => {
     //   const res =await fetch("https://server-karuta2020.herokuapp.com/api/v1/karuta");
     //   const json = await res.json();
@@ -105,94 +105,94 @@ const Main=(props) => {
 
   
   // //エリア別札選出）
-    const chooseArea = () => {
-      switch (area){
-        case "Asia":
-          {
-            const filtered= basicLists.filter(list => list.area==="Asia");
-            const shuffled=shuffle(filtered).slice(0,4)
-            const result = shuffle([...shuffled]);
-            setBasicLists(result)
-            const result2 = shuffle([...shuffled]);
-            setKarutaLists(result2)
-            setArea("default")
-          break
-          }
-        case "Europe":
-          {
-            const filtered= basicLists.filter(list => list.area==="Europe");
-            const shuffled=shuffle(filtered).slice(0,12)
-            const result = shuffle([...shuffled]);
-            setBasicLists(result)
-            const result2 = shuffle([...shuffled]);
-            setKarutaLists(result2)
-            setArea("default")
-          break
-          }
-        case "Africa":
-          {
-            const filtered= basicLists.filter(list => list.area==="Africa");
-            const shuffled=shuffle(filtered).slice(0,12)
-            const result = shuffle([...shuffled]);
-            setBasicLists(result)
-            const result2 = shuffle([...shuffled]);
-            setKarutaLists(result2)
-            setArea("default")
-          break
-          }
-        case "Americas":
-          {
-            const filtered= basicLists.filter(list => list.area==="Americas");
-            const shuffled=shuffle(filtered).slice(0,12)
-            const result = shuffle([...shuffled]);
-            setBasicLists(result)
-            const result2 = shuffle([...shuffled]);
-            setKarutaLists(result2)
-            setArea("default")
-          break
-          }
-        case "Oceania":
-         {
-            const filtered= basicLists.filter(list => list.area==="Oceania");
-            const shuffled=shuffle(filtered).slice(0,12)
-            const result = shuffle([...shuffled]);
-            setBasicLists(result)
-            const result2 = shuffle([...shuffled]);
-            setKarutaLists(result2)
-            setArea("default")
-          break
-         }
+  //   const chooseArea = () => {
+  //     switch (area){
+  //       case "Asia":
+  //         {
+  //           const filtered= basicLists.filter(list => list.area==="Asia");
+  //           const shuffled=shuffle(filtered).slice(0,4)
+  //           const result = shuffle([...shuffled]);
+  //           setBasicLists(result)
+  //           const result2 = shuffle([...shuffled]);
+  //           setKarutaLists(result2)
+  //           setArea("default")
+  //         break
+  //         }
+  //       case "Europe":
+  //         {
+  //           const filtered= basicLists.filter(list => list.area==="Europe");
+  //           const shuffled=shuffle(filtered).slice(0,12)
+  //           const result = shuffle([...shuffled]);
+  //           setBasicLists(result)
+  //           const result2 = shuffle([...shuffled]);
+  //           setKarutaLists(result2)
+  //           setArea("default")
+  //         break
+  //         }
+  //       case "Africa":
+  //         {
+  //           const filtered= basicLists.filter(list => list.area==="Africa");
+  //           const shuffled=shuffle(filtered).slice(0,12)
+  //           const result = shuffle([...shuffled]);
+  //           setBasicLists(result)
+  //           const result2 = shuffle([...shuffled]);
+  //           setKarutaLists(result2)
+  //           setArea("default")
+  //         break
+  //         }
+  //       case "Americas":
+  //         {
+  //           const filtered= basicLists.filter(list => list.area==="Americas");
+  //           const shuffled=shuffle(filtered).slice(0,12)
+  //           const result = shuffle([...shuffled]);
+  //           setBasicLists(result)
+  //           const result2 = shuffle([...shuffled]);
+  //           setKarutaLists(result2)
+  //           setArea("default")
+  //         break
+  //         }
+  //       case "Oceania":
+  //        {
+  //           const filtered= basicLists.filter(list => list.area==="Oceania");
+  //           const shuffled=shuffle(filtered).slice(0,12)
+  //           const result = shuffle([...shuffled]);
+  //           setBasicLists(result)
+  //           const result2 = shuffle([...shuffled]);
+  //           setKarutaLists(result2)
+  //           setArea("default")
+  //         break
+  //        }
 
-         case "World":
-          {
-            const shuffled=shuffle(basicLists).slice(0,12)
-            const result = shuffle([...shuffled]);
-            setBasicLists(result)
-            const result2 = shuffle([...shuffled]);
-            setKarutaLists(result2)
-            setArea("default")
-          break
-         }
-        default: //World
-          {
-            const shuffled=shuffle(basicLists).slice(0,12)
-            const result = shuffle([...shuffled]);
-            setBasicLists(result)
-            const result2 = shuffle([...shuffled]);
-            setKarutaLists(result2)
-            setArea("default")
-          }
-      }//switch
-    }//chooseArea
+  //        case "World":
+  //         {
+  //           const shuffled=shuffle(basicLists).slice(0,12)
+  //           const result = shuffle([...shuffled]);
+  //           setBasicLists(result)
+  //           const result2 = shuffle([...shuffled]);
+  //           setKarutaLists(result2)
+  //           setArea("default")
+  //         break
+  //        }
+  //       default: //World
+  //         {
+  //           const shuffled=shuffle(basicLists).slice(0,12)
+  //           const result = shuffle([...shuffled]);
+  //           setBasicLists(result)
+  //           const result2 = shuffle([...shuffled]);
+  //           setKarutaLists(result2)
+  //           setArea("default")
+  //         }
+  //     }//switch
+  //   }//chooseArea
 
-   //シャッフル関数
-   const shuffle=(arr) => { 
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[j], arr[i]] = [arr[i], arr[j]];
-    }
-    return arr;
-    }
+  //  //シャッフル関数
+  //  const shuffle=(arr) => { 
+  //   for (let i = arr.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [arr[j], arr[i]] = [arr[i], arr[j]];
+  //   }
+  //   return arr;
+  //   }
     
         //「札を並べる」ボタンを押すーーーーーーーーーーー
         
@@ -550,26 +550,26 @@ const playLevelThree=(e) => {
   setLevel("levelThree")
 }
 
-const chooseAsia=(e) => {
-  setArea("Asia")
-}
+// const chooseAsia=(e) => {
+//   setArea("Asia")
+// }
 
-const chooseEurope=(e) => {
-  setArea("Europe")
-}
-const chooseAfrica=(e) => {
-  setArea("Africa")
-}
-const chooseAmericas=(e) => {
-  setArea("Americas")
-}
-const chooseOceania=(e) => {
-  setArea("Oceania")
-}
+// const chooseEurope=(e) => {
+//   setArea("Europe")
+// }
+// const chooseAfrica=(e) => {
+//   setArea("Africa")
+// }
+// const chooseAmericas=(e) => {
+//   setArea("Americas")
+// }
+// const chooseOceania=(e) => {
+//   setArea("Oceania")
+// }
 
-const chooseWorld=(e) => {
-  setArea("World")
-}
+// const chooseWorld=(e) => {
+//   setArea("World")
+// }
 
 let backgroundImage="";
 
