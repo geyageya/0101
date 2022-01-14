@@ -2,6 +2,7 @@ import { Button } from "./Button"
 import { RadioBtn } from "./RadioBtn"
 
 export const RadioScreen = (props)=>{
+  console.log("RadioScreenレンダリング");
   return(
     <div 
       className ="w-full p-10 bg-lime-100"

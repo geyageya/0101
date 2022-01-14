@@ -1,4 +1,5 @@
 export const RadioBtn =(props) => {
+  console.log("RadioBtn レンダリング");
   return(
     <div
      className ="">
