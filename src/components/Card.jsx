@@ -1,5 +1,16 @@
+// import {useSetup } from "../hooks/useSetup";
+// import {useGame} from "../hooks/useGame";
+// import {useKouka} from "../hooks/useKouka";
+// import {useLevel} from "../hooks/useLevel";
+
+
 
 export const Card =(props) =>{
+    // const {setIsAnswered,setIsPopup, placeHand, setScore, setIsScored} = useGame();
+    // const {playKouka} = useKouka();
+    // const {stopTimer, pcPlayer} = useLevel();
+
+
     console.log("Child4 Cardレンダリング");
   
     const handleClick = (selectedId)=> { 
@@ -45,7 +56,7 @@ export const Card =(props) =>{
             // style = {card}
             alt ="" 
             src={props.src}  
-            id ={props.id}
+            // id ={props.id}
             //表示画像のリンク切れの場合、非表示にする
             onError={e => e.target.style.display = 'none'}
             onClick={()=>handleClick(props.id)} //handleClick関数をここに移動した場合

@@ -7,7 +7,7 @@ export const useSetup =() => {
   const [karutaLists,setKarutaLists] = useState(basicLists);  //絵札用データ配列
 
   //トップ画面
-  // const [language, setLanguage]= useState("default")
+  const [language, setLanguage]= useState("default")
   // const [level, setLevel]= useState("default")
   const [area, setArea]= useState("default")
   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
@@ -108,6 +108,7 @@ export const useSetup =() => {
     }//switch
   }//chooseArea
 
+//ラジオボタン
 
 const chooseAsia=(e) => {
   setArea("Asia")
@@ -130,7 +131,9 @@ const chooseWorld=(e) => {
   setArea("World")
 }
 
+
+
   return {basicLists, setBasicLists, karutaLists, setKarutaLists, getApiLists,
     area, setArea, shuffle, chooseArea, chooseAsia, chooseEurope, chooseAfrica, 
-    chooseAmericas, chooseOceania, chooseWorld, screen, setScreen};
+    chooseAmericas, chooseOceania, chooseWorld, language, setLanguage, screen, setScreen};
 }

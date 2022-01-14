@@ -36,7 +36,7 @@ export const CardGrid =(props) => {
                 playKouka={props.playKouka}
                 placeHand={props.placeHand}
                 pcPlayer={props.pcPlayer}
-                // onClick={() =>props.handleClick()} 
+                // onClick={() =>props.handleClick()}
               />
                {/* )}  */}
               <Hand

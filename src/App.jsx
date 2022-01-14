@@ -1,4 +1,4 @@
-import {useState, useEffect,useRef, useCallback} from "react";
+import {useState, useEffect,useRef} from "react";
 import { Header } from './components/Header';
 import {Footer} from './components/Footer';
 import { Button } from "./components/Button";
@@ -9,44 +9,39 @@ import {Result} from "./components/Result";
 import {RadioScreen} from "./components/RadioScreen";
 
 import {useSetup } from "./hooks/useSetup";
-// import {useGame} from "./hooks/useGame";
 import {useKouka} from "./hooks/useKouka";
+
+
 // import {useLevel} from "./hooks/useLevel";
-// import {useLang} from "./hooks/useLang"
-// import {useData} from "./hooks/useData"
+// import {useGame} from "./hooks/useGame";
 
-{/* <Header /> */}
+// import {useClue} from "./hooks/useClue";
+// import {useReadClue} from "./hooks/useReadClue";
 
-// const Furigana =(props) => {
-//   const furigana ={
-//     fontSize : "13px",
-//   }
-
-//   return(
-//     <>
-//   <p 
-//     style={furigana}
-//   >
-//     {props.children}
-//   </p>
-//   </>
-//   )
-// };
+import {useData} from "./hooks/useData"
 
 const Main=(props) => {
+  console.log("Main レンダリング")
 
   // const {readClue} = useLang();
 
-  const {basicLists, setBasicLists, karutaLists, setKarutaLists, getApiLists, 
-    area, setArea, shuffle, chooseArea, chooseAsia, chooseEurope, chooseAfrica, chooseAmericas, 
-    chooseOceania, chooseWorld,screen, setScreen}= useSetup();
+  const {basicLists, karutaLists, setKarutaLists, getApiLists, 
+    area, chooseArea, chooseAsia, chooseEurope, chooseAfrica, chooseAmericas, 
+    chooseOceania, chooseWorld,language, setLanguage, screen, setScreen}= useSetup();
 
-  // const {currentTurn, setCurrentTurn, isAnswered, setIsAnswered, isPopup, setIsPopup,placeHandPc, placeHandPc2}=useGame();
+  // const {index, text, setText, currentText, setCurrentText} = ClueBox();
+
+  // const {currentTurn, setCurrentTurn, score, setScore, isScored, setIsScored, isStarted, setIsStarted, isAnswered, setIsAnswered, placeHand,
+  //    isPopup, setIsPopup, isResult, setIsResult, newGame, soundResult}=useGame();
+
 
   const {playKouka} = useKouka();
+
+  // const {countLetter, placeholder, setPlaceholder}=useClue();
+  // const {readClue} =useReadClue();
   // const {dataLists} = useData();  //API使わない場合
   
-  // const {level, setLevel, timerRef, startTimer, stopTimer, startTimer2, pcPlayer, pcPlayer2, 
+  // const { startTimer, stopTimer, startTimer2, pcPlayer, 
   //   playLevelOne,playLevelTwo, playLevelThree} = useLevel();
   
 
@@ -69,11 +64,10 @@ const Main=(props) => {
    const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
    const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
 
-   const [placeholder, setPlaceholder] = useState('');        //読み句一文字づつ表示
-   const countLetter = useRef(0);                              //読み句文字数カウント 
+   
    const timerRef = useRef(null);                              //タイマー設定用  
 
-   const [language, setLanguage]= useState("default")
+  //  const [language, setLanguage]= useState("default")
    const [level, setLevel]= useState("default")
   //  const [area, setArea]= useState("default")
   //  const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
@@ -210,47 +204,47 @@ const Main=(props) => {
       setIsAnswered(false);   //絵札のクリック可能にする
       setIsStarted(true)　    //「ゲーム開始」ボタンの反応停止
       readClue(currentTurn);  //読み句の読みあげ
+      // setText(basicLists[currentTurn].yomiku);
+      
     }//handleStart 
-
-      // //読み句一文字づつ表示
-      const isFirstRender = useRef(false)
-  
-      useEffect(() => { // このeffectは初回レンダー時のみ呼ばれるeffect
-        isFirstRender.current = true
-      }, [])
-
-         //switch
-      useEffect(() => {// 『count』 が更新された場合『と』初回レンダー時に動くeffect
-        if(isFirstRender.current) { // 初回レンダー判定
-          isFirstRender.current = false // もう初回レンダーじゃないよ代入
-        } else 
-        {
-          let clueWords ="";
-          switch (language){
-            case "japanese":
-              clueWords = basicLists[currentTurn].yomiku //日本語
-              break
-            case "english":
-              clueWords = basicLists[currentTurn].clue //英語
-              break
-            default:
-              clueWords = basicLists[currentTurn].clue //英語
-          }
-          
-          const showClue =()=> {
-            if(currentTurn < basicLists.length-1){
-              setPlaceholder(prev => prev + clueWords[countLetter.current]);
-              countLetter.current++;
+    
+  //------------------------------------
+  const [text, setText] =useState(""); //表示文字の原稿  
+  const [currentText, setCurrentText] = useState('');        
+   const index = useRef(0);
+ 
+      //indexは文字列の何文字目かを示す値
+      //前の表示文字を消す  困ったことあれば、[]にtextを入れてみる
+      useEffect(() => {
+        index.current = 0;
+        setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
+      },[]);
+     
+      useEffect(() => {
+           if(currentTurn < basicLists.length-1){
+            let text ="";
+            switch (language){
+              case "japanese":
+                text = basicLists[currentTurn].yomiku //日本語
+                break
+              case "english":
+                text = basicLists[currentTurn].clue //英語
+                break
+              default:
+                text= basicLists[currentTurn].clue //英語
             }
-          }
-          if (countLetter.current <clueWords.length) {
-            let addChar = setTimeout(()=>{showClue(currentTurn)} , 100);
-            return () => clearTimeout(addChar);
-          }
-        } // eslint-disable-next-line
-      }, [placeholder, isStarted]);  
-
-
+            const timeoutId = setTimeout(()=>{
+              setCurrentText ((prev) => prev + text.charAt(index.current));
+              index.current +=1;
+              } , 100);
+              //アンマウント時の処理
+            return () => {
+              clearTimeout(timeoutId);
+          };
+        }
+      }, [currentText, isStarted]);  
+        //isStartedを記入しないと、最初の句が表示されない
+  
       //読みあげ （引数あり）
   let clueSounds=new Audio();
  
@@ -288,6 +282,28 @@ const Main=(props) => {
   //   kouka.loop = false;
   //   kouka.play();
   // }
+
+  const handleClick = (selectedId)=> { 
+    props.setIsAnswered(true);      //絵札のクリックを不可にする
+    props.stopTimer();              //タイマー解除（PCplayer)
+
+    //正解の場合
+    if (selectedId ===props.basicLists[props.currentTurn].id) {//配列のIDを比較
+      props.playKouka(1);
+      props.setIsPopup(true);       
+      props.placeHand();
+      //player独自の操作
+      props.setScore(props.score + 1);    //スコア加点
+      props.setIsScored(true)       //ミニ絵札表示（手前）の有無を決める基準
+      //最後の１枚を撮った場合に加点
+      if (props.currentTurn===props.basicLists.length -2)
+      props.setScore(props.score + 2);   
+    }
+    //不正解の場合
+    else{
+      setTimeout(()=>{props.pcPlayer()}, 300);
+    }
+  }//handleClick
   
   //PcPlayer--------------------------------------
   const startTimer = () => {
@@ -366,7 +382,7 @@ const Main=(props) => {
     }//switch
   };
 
-  //PCplayerの動き　引数なし
+  // //PCplayerの動き　引数なし
    const pcPlayer = () =>{
     placeHandPc();
     setIsPopup(true);
@@ -416,7 +432,8 @@ const Main=(props) => {
      setTimeout(()=>{readClue(newCurrentTurn)}, 500);
      setIsAnswered(false);   //絵札のクリックを可にする
      setIsScored(false);    
-     countLetter.current=0;  //表示する読み句の文字数をゼロに戻す
+     index.current=0;  //表示する読み句の文字数をゼロに戻す
+     setText(basicLists[newCurrentTurn].yomiku) //これを削除すると、次の読み句が表示されない。理由不明
     }
 
    //タイマー設定（最後手前の札まで
@@ -436,8 +453,8 @@ const Main=(props) => {
 //消す（ポップアップボタン押した後）
   const hide =() => {
 
-    //読み句を消す？？
-    setPlaceholder("");
+    //読み句を消す (clue関数とhide関数の両方で設定した方がいいみたい）
+    setCurrentText("");
 
     //絵札と手を消す
     if(isScored){
@@ -517,14 +534,18 @@ const Main=(props) => {
 
    //結果画面表示時の効果音
    const soundResult =() => {
-    if (score>=basicLists.length * 0.5) {
+    if (score>basicLists.length * 0.5) {
       playKouka(4);
-    }else
-    {
+    }
+    else if (score===basicLists.length * 0.5) {
       playKouka(5);
     }
+    else
+    {
+      playKouka(6);
+    }
   }
-
+  
 //次のゲーム
 const newGame =() => {
   window.location.reload();
@@ -663,13 +684,24 @@ let backgroundImage="";
         </Furigana> */}
 
         <ClueBox
-          placeholder={placeholder}  
+          // placeholder={placeholder}  
+          text = {text}
+          currentText={currentText}
           // karutaLists={karutaLists} 
           // basicLists={basicLists}
           // currentTurn={currentTurn}
           // language ={language}
           // isStarted={isStarted}
         />
+
+        {/* <button 
+        // onClick ={() => {setClue();
+        //   // setText1("By the river, a brown tower stands alone.");
+        // }}
+        >
+          タイプライター
+        </button>
+        <Typewriter text1={text1} /> */}
 
         <PlayArea 
           //const PlayArea用
@@ -694,6 +726,7 @@ let backgroundImage="";
           placeHand={placeHand}
           pcPlayer={pcPlayer}
           onClick={()=>handleSet()} 
+          // onClick={()=>handleClick()} 
         />
 
       {isPopup ? 
@@ -726,7 +759,7 @@ let backgroundImage="";
           onClick={()=>newGame()} 
         />
       } 
-     
+    
     </div>        
     ) //return
 
@@ -736,10 +769,12 @@ let backgroundImage="";
 
 const App=()=> {
   console.log("Appレンダリング");
+
   // const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
   return(
     <div>
-  
+
+    
       <Header />
       <Main />
       <Footer />

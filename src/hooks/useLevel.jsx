@@ -1,14 +1,9 @@
-import {useState, useRef} from "react";
-import {useSetup} from "./useSetup";
+import {useState,useRef} from "react";
 import {useGame} from "./useGame";
 import { useKouka } from "./useKouka";
 
 
 export const useLevel =() => {
-
-  const {basicLists, setBasicLists, karutaLists, setKarutaLists, getApiLists,
-    area, setArea, shuffle, chooseArea, chooseAsia, chooseEurope, chooseAfrica, 
-    chooseAmericas, chooseOceania, chooseWorld, screen, setScreen}= useSetup();
 
   const {playKouka} = useKouka();
 
@@ -120,6 +115,7 @@ const playLevelTwo =(e) => {
 const playLevelThree=(e) => {
   setLevel("levelThree")
 }
-return {level, setLevel, timerRef, startTimer, stopTimer, startTimer2, pcPlayer, pcPlayer2, playLevelOne,playLevelTwo, playLevelThree};
+return {level, setLevel, timerRef, startTimer, stopTimer, startTimer2, pcPlayer, pcPlayer2, 
+  playLevelOne,playLevelTwo, playLevelThree};
 
 }

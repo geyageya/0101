@@ -19,6 +19,7 @@ export const ListCards =(props) =>{
           setIsPopup={props.setIsPopup}
           setScore={props.setScore}
           setIsScored={props.setIsScored}
+          // onClick={() =>props.handleClick()} 
           //handleClick用(関数実行)
           stopTimer={props.stopTimer}
           playKouka={props.playKouka}

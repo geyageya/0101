@@ -33,7 +33,7 @@ export const PlayArea =(props) => {
           playKouka={props.playKouka}
           placeHand={props.placeHand}
           pcPlayer={props.pcPlayer}
-          // onClick={() =>props.handleClick()} 
+          onClick={() =>props.handleClick()} 
         />
         {/* player用 */}
         <MiniArea
