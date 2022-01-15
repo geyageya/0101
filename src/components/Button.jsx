@@ -5,7 +5,7 @@ export const Button =memo((props) =>{
     
     return(
       <button 
-        className  = {`w-100 p-3 block mx-auto text-lg rounded-full shadow-lg ${props.tailwind}`}
+        className  = {`w-100 m-1 p-2 block mx-auto text-lg rounded-full shadow-lg ${props.tailwind}`}
         onClick={props.onClick}
       >
         {props.children}

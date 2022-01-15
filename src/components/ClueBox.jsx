@@ -47,9 +47,9 @@ export const ClueBox =(props) => {
       <div 
       >
         <div
-          className="w-[350px] mx-auto p-2 border rounded-md border-sky-500 md:w-[500px] lg:w-[800px]  "
+          className="w-[370px] h-[50px] mx-auto pl-1 mb-1 border rounded-md border-sky-500 md:w-[500px] lg:w-[800px]  "
         >
-         読句： {props.currentText}
+          {props.currentText}
           {/* 読句：{props.text} */}
         </div>
         
