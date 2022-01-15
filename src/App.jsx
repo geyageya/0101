@@ -359,33 +359,95 @@ const Main=(props) => {
   const startTimer2 = (newCurrentTurn) => {
     switch (level){
       case "default":
-        timerRef.current = setTimeout(() => {
-          pcPlayer2(newCurrentTurn);
-        }, 8000);
-        setLevel("default")
-        break
+        if (newCurrentTurn < basicLists.length-3) { //0,1,2,3,4,5]
+          timerRef.current = setTimeout(() => {
+            pcPlayer2(newCurrentTurn);
+            }, 8000);
+          }
+          else if (newCurrentTurn = basicLists.length-3) { //0,1,2,3,4,5]
+            timerRef.current = setTimeout(() => {
+              pcPlayer2(newCurrentTurn);
+              }, 6000);
+            }
+          else {
+            timerRef.current = setTimeout(() => {
+              pcPlayer2(newCurrentTurn);
+              }, 4000);
+          }
+          setLevel("default")
+          break
   
       case "levelOne":
+        if (newCurrentTurn < basicLists.length-3) { //最後から4枚目以上
         timerRef.current = setTimeout(() => {
           pcPlayer2(newCurrentTurn);
           }, 12000);
+        }
+        else if (newCurrentTurn = basicLists.length-3) { //最後から3枚目
+          timerRef.current = setTimeout(() => {
+            pcPlayer2(newCurrentTurn);
+            }, 6000);
+          }
+        else {  //最後から2枚目（最終回）
+          timerRef.current = setTimeout(() => {
+            pcPlayer2(newCurrentTurn);
+            }, 4000);
+        }
         break
   
       case "levelTwo":
+        if (newCurrentTurn < basicLists.length-3) { 
         timerRef.current = setTimeout(() => {
           pcPlayer2(newCurrentTurn);
           }, 8000);
+        }
+        else if (newCurrentTurn = basicLists.length-3) { 
+          timerRef.current = setTimeout(() => {
+            pcPlayer2(newCurrentTurn);
+            }, 6000);
+          }
+        else {
+          timerRef.current = setTimeout(() => {
+            pcPlayer2(newCurrentTurn);
+            }, 3000);
+        }
         break
       case "levelThree":
+        if (newCurrentTurn < basicLists.length-3) { 
         timerRef.current = setTimeout(() => {
           pcPlayer2(newCurrentTurn);
           }, 5000);
+        }
+        else if (newCurrentTurn === basicLists.length-3) { 
+          timerRef.current = setTimeout(() => {
+            pcPlayer2(newCurrentTurn);
+            }, 4000);
+          }
+        else {
+          timerRef.current = setTimeout(() => {
+            pcPlayer2(newCurrentTurn);
+            }, 2000);
+        }
         break
     
       default:
-        timerRef.current = setTimeout(() => {
-          pcPlayer();
-          }, 8000);
+        if (newCurrentTurn < basicLists.length-3) { //0,1,2,3,4,5]
+          timerRef.current = setTimeout(() => {
+            pcPlayer2(newCurrentTurn);
+            }, 8000);
+          }
+          else if (newCurrentTurn = basicLists.length-3) { //0,1,2,3,4,5]
+            timerRef.current = setTimeout(() => {
+              pcPlayer2(newCurrentTurn);
+              }, 6000);
+            }
+          else {
+            timerRef.current = setTimeout(() => {
+              pcPlayer2(newCurrentTurn);
+              }, 3000);
+          }
+          
+          break
     
     }//switch
   };
