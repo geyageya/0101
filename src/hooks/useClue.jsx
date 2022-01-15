@@ -25,11 +25,15 @@ useEffect(() => {// 『count』 が更新された場合『と』初回レンダ
   {
     let clueWords ="";
     switch (language){
-      case "japanese":
-        clueWords = basicLists[currentTurn].yomiku //日本語
-        break
+      
       case "english":
         clueWords = basicLists[currentTurn].clue //英語
+        break
+        case "japanese":
+        clueWords = basicLists[currentTurn].yomiku //日本語
+        break
+        case "hiragana":
+        clueWords = basicLists[currentTurn].furigana //日本語
         break
       default:
         clueWords = basicLists[currentTurn].clue //英語

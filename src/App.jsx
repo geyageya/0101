@@ -37,7 +37,6 @@ const Main=(props) => {
 
   const {playKouka} = useKouka();
 
-  // const {countLetter, placeholder, setPlaceholder}=useClue();
   // const {readClue} =useReadClue();
   // const {dataLists} = useData();  //API使わない場合
   
@@ -209,41 +208,47 @@ const Main=(props) => {
     }//handleStart 
     
   //------------------------------------
-  const [text, setText] =useState(""); //表示文字の原稿  
+  // const [text, setText] =useState(""); //表示文字の原稿  
   const [currentText, setCurrentText] = useState('');        
    const index = useRef(0);
  
-      //indexは文字列の何文字目かを示す値
-      //前の表示文字を消す  困ったことあれば、[]にtextを入れてみる
-      useEffect(() => {
-        index.current = 0;
-        setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
-      },[]);
+      //popup関数での設定の方がうまく作動する
+      // useEffect(() => {
+      //   index.current = 0;
+      //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
+      // },[]);
      
       useEffect(() => {
            if(currentTurn < basicLists.length-1){
+            //表示する読み句を設定（ラジオぼたん）
             let text ="";
             switch (language){
+              case "english":
+                text = basicLists[currentTurn].clue //英語
+                break
               case "japanese":
                 text = basicLists[currentTurn].yomiku //日本語
                 break
-              case "english":
-                text = basicLists[currentTurn].clue //英語
+              case "hiragana":
+                text = basicLists[currentTurn].furigana //英語
                 break
               default:
                 text= basicLists[currentTurn].clue //英語
             }
             const timeoutId = setTimeout(()=>{
+              //一文字づつ増える文字列で、逐次currentTextを更新
               setCurrentText ((prev) => prev + text.charAt(index.current));
-              index.current +=1;
-              } , 100);
-              //アンマウント時の処理
+              //表示文字の位置を一つづつずらす（これがないと最初の文字だけが繰り返し表示される）
+              index.current +=1; 
+              //文字を表示する間隔を指定（SetTImeoutがないと全ての文字が同時に表示される。）
+              } , 100); 
+              //アンマウント時の処理（使用事例不明）
             return () => {
               clearTimeout(timeoutId);
           };
         }
       }, [currentText, isStarted]);  
-        //isStartedを記入しないと、最初の句が表示されない
+        //currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
   
       //読みあげ （引数あり）
   let clueSounds=new Audio();
@@ -257,12 +262,15 @@ const Main=(props) => {
         clueSounds.src = basicLists[currentNum].read; //英語
         setLanguage("default")
         break
-      case "japanese":
-        clueSounds.src = basicLists[currentNum].yomu; //日本語
-        break
       case "english":
         clueSounds.src = basicLists[currentNum].read; //英語
         break
+      case "japanese":
+        clueSounds.src = basicLists[currentNum].yomu; //日本語
+        break
+      case "hiragana":
+          clueSounds.src = basicLists[currentNum].yomu; //日本語
+          break
       default:
         clueSounds.src = basicLists[currentNum].read; //英語
     }
@@ -433,7 +441,6 @@ const Main=(props) => {
      setIsAnswered(false);   //絵札のクリックを可にする
      setIsScored(false);    
      index.current=0;  //表示する読み句の文字数をゼロに戻す
-     setText(basicLists[newCurrentTurn].yomiku) //これを削除すると、次の読み句が表示されない。理由不明
     }
 
    //タイマー設定（最後手前の札まで
@@ -551,14 +558,17 @@ const newGame =() => {
   window.location.reload();
 }
 
-//switch
+const checkEnglish =(e) => {
+  setLanguage("english")
+}
 const checkJapanese =(e) => {
   setLanguage("japanese")
 }
 
-const checkEnglish =(e) => {
-  setLanguage("english")
+const checkHiragana =(e) => {
+  setLanguage("hiragana")
 }
+
 
 const playLevelOne =(e) => {
   setLevel("levelOne")
@@ -631,6 +641,7 @@ let backgroundImage="";
       <RadioScreen
         checkEnglish ={checkEnglish}
         checkJapanese = {checkJapanese}
+        checkHiragana = {checkHiragana}
         chooseAsia= {chooseAsia}
         chooseEurope = {chooseEurope}
         chooseAfrica = {chooseAfrica}
@@ -649,7 +660,7 @@ let backgroundImage="";
       {/* {isPlaced ?          */}
         <>
           {/* ゲーム開始ボタンを押した後 */}
-          {isStarted ?　　
+          {isStarted ?
             <Button 
               // background="grey" 
               tailwind ="bg-gray-500 text-black"
@@ -685,7 +696,7 @@ let backgroundImage="";
 
         <ClueBox
           // placeholder={placeholder}  
-          text = {text}
+          // text = {text}
           currentText={currentText}
           // karutaLists={karutaLists} 
           // basicLists={basicLists}

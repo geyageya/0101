@@ -19,11 +19,14 @@ export const useReadClue =()=> {
          clueSounds.src = basicLists[currentNum].read; //英語
          setLanguage("default")
          break
-       case "japanese":
-         clueSounds.src = basicLists[currentNum].yomu; //日本語
-         break
        case "english":
          clueSounds.src = basicLists[currentNum].read; //英語
+         break
+      case "japanese":
+         clueSounds.src = basicLists[currentNum].yomu; //日本語
+         break
+      case "hiragana":
+         clueSounds.src = basicLists[currentNum].yomu; //日本語
          break
        default:
          clueSounds.src = basicLists[currentNum].read; //英語
