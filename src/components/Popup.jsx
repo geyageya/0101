@@ -1,9 +1,9 @@
-import {memo} from "react";
+import {useState,memo} from "react";
 import { WindowBtn } from "./WindowBtn";
 
-export const Popup = memo((props) => {
+export const Popup = (props) => {
     console.log("Child2 Popup レンダリング");
-    
+
     return(
       <div 
       className = "absolute top-[200px] w-[220px] left-0 right-0 mx-auto p-5 border-2 rounded-md text-center bg-gray-100 shadow-md"
@@ -54,5 +54,5 @@ export const Popup = memo((props) => {
       } 
       </div>
     )
-  }); //<Popup/>---------------------------------------------------------
+  }; //<Popup/>---------------------------------------------------------
   

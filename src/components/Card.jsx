@@ -1,25 +1,20 @@
-// import {useSetup } from "../hooks/useSetup";
-// import {useGame} from "../hooks/useGame";
-// import {useKouka} from "../hooks/useKouka";
-// import {useLevel} from "../hooks/useLevel";
+import {memo} from "react";
+import {useKouka} from "../hooks/useKouka";
 
+export const Card =memo((props) =>{
 
-
-export const Card =(props) =>{
-    // const {setIsAnswered,setIsPopup, placeHand, setScore, setIsScored} = useGame();
-    // const {playKouka} = useKouka();
-    // const {stopTimer, pcPlayer} = useLevel();
-
+    const {playKouka} = useKouka();
 
     console.log("Child4 Cardレンダリング");
-  
+    
+    //useCallbackをhandleClikcに設定すると、最初しか正解にならなかった。つまりこの関数が停止しているからだ。
     const handleClick = (selectedId)=> { 
       props.setIsAnswered(true);      //絵札のクリックを不可にする
       props.stopTimer();              //タイマー解除（PCplayer)
 
       //正解の場合
       if (selectedId ===props.basicLists[props.currentTurn].id) {//配列のIDを比較
-        props.playKouka(1);
+        playKouka(1);
         props.setIsPopup(true);       
         props.placeHand();
         //player独自の操作
@@ -65,4 +60,4 @@ export const Card =(props) =>{
         {/* }  */}
       </>
     )
-  };
+  });
