@@ -1,8 +1,10 @@
+import {memo} from "react";
+
 import { Button } from "./Button"
 import { RadioBtn } from "./RadioBtn"
 
-export const RadioScreen = (props)=>{
-  console.log("RadioScreenレンダリング");
+export const RadioScreen = memo((props)=>{
+  console.log("Child 1 RadioScreenレンダリング");
   return(
     <div 
       className ="w-full container mx-auto p-5 bg-lime-100 md:p-10"
@@ -143,4 +145,4 @@ export const RadioScreen = (props)=>{
       </Button>
     </div>
   )
-}
+});

@@ -1,7 +1,8 @@
+import {memo} from "react";
 import { Card } from "./Card";
 import {Hand } from "./Hand";
 
-export const CardGrid =(props) => {
+export const CardGrid =memo((props) => {
     console.log("Child3 CardGrid レンダリング");
   
      return(
@@ -51,4 +52,4 @@ export const CardGrid =(props) => {
       })}
       </>
      )
-  };
+  });

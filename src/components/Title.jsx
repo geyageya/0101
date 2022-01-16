@@ -1,5 +1,6 @@
+import {memo} from "react";
 
-export const Title=(props)=>{
+export const Title=memo((props)=>{
     console.log("Child 2 Titleレンダリング");
     
     return(
@@ -9,6 +10,6 @@ export const Title=(props)=>{
         {props.children}
       </h1>
     )
-  };
+  });
 
  

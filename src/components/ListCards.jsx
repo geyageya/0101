@@ -1,6 +1,8 @@
+import {memo} from "react";
+
 import {CardGrid} from "./CardGrid";
 
-export const ListCards =(props) =>{
+export const ListCards =memo((props) =>{
     console.log("Child2 listCards レンダリング");
    
     return(
@@ -28,4 +30,4 @@ export const ListCards =(props) =>{
         />
       </ul>
     )
-  };
+  });

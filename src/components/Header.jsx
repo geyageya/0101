@@ -1,7 +1,9 @@
+import {memo} from "react";
+
 import { Title } from "./Title";
 
-export const Header=(props)=>{
-    console.log("Child1 Headerレンダリング");
+export const Header=memo((props)=>{
+    console.log("Headerレンダリング");
   
     return(
         <header className = " mx-auto border bg-orange-300 md:container md:mx-auto md:bg-amber-300 lg:container lg:bg-lime-300 xl:container xl:bg-sky-500"    >
@@ -10,4 +12,4 @@ export const Header=(props)=>{
           </Title>
         </header>
     )
-  };
+  });

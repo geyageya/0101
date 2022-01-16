@@ -1,6 +1,8 @@
+import {memo} from "react";
+
 import { MiniCard } from "./MiniCard";
 
-export const MiniArea =(props) => {
+export const MiniArea =memo((props) => {
     console.log("Child2 MiniArea レンダリング");
    
     return(
@@ -16,4 +18,4 @@ export const MiniArea =(props) => {
         })}
       </ul>
     )
-  };
+  });

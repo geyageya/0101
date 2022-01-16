@@ -1,8 +1,8 @@
-// import {memo} from "react";
+import {memo} from "react";
 import { MiniArea } from "./MiniArea";
 import { ListCards } from "./ListCards";
 
-export const PlayArea =(props) => {
+export const PlayArea =memo((props) => {
     console.log("Child1 PlayAreaレンダリング");
     const playArea = {
    
@@ -49,4 +49,4 @@ export const PlayArea =(props) => {
         {/* items-start, items-end 札を上下線にそって配列。外側が直線、内側が凸凹*/}
         </main>
       )
-  };
+  });

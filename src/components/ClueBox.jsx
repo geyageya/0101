@@ -1,7 +1,9 @@
+import {memo} from "react";
+
 // import {useState, useEffect,useRef} from "react";
 // import { useSetup } from "../hooks/useSetup";
 
-export const ClueBox =(props) => {
+export const ClueBox =memo((props) => {
 
   // const {currentTurn, basicLists, language, isStarted} = useSetup();
 
@@ -55,4 +57,4 @@ export const ClueBox =(props) => {
         
       </div>
     )
-  };
+  });

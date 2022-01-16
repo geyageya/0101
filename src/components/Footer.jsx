@@ -1,6 +1,7 @@
+import {memo} from "react";
 
-
-export const Footer = (props) => {
+export const Footer = memo((props) => {
+  console.log("Footer レンダリング");
    
   return(
   
@@ -17,6 +18,6 @@ export const Footer = (props) => {
       </a>
     </p>
   )
-  }
+  });
 
   

@@ -1,5 +1,7 @@
-export const RadioBtn =(props) => {
-  console.log("RadioBtn レンダリング");
+import {memo} from "react";
+
+export const RadioBtn =memo((props) => {
+  console.log("Child 2 RadioBtn レンダリング");
   return(
     <div
      className ="">
@@ -19,4 +21,4 @@ export const RadioBtn =(props) => {
       </label>
     </div>
   )
-}
+});
