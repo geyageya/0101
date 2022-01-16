@@ -7,7 +7,8 @@ export const Hand =memo((props) =>{
       <>
         {/* マジックコード */}
         {props.src === "" ? 
-        null : 
+        null 
+        : 
         <img 
           className ="absolute w-[110px] h-[110px]"
           alt =""

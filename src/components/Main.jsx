@@ -8,31 +8,17 @@ import {RadioScreen} from "./RadioScreen";
 
 import {useSetup } from "../hooks/useSetup";
 import {useKouka} from "../hooks/useKouka";
+import { Title } from "./Title";
 
 export const Main = memo((props) => {
-
   console.log("Main レンダリング")
 
-  // const {readClue} = useLang();
-
   const {basicLists, karutaLists, setKarutaLists, getApiLists, 
-    area, chooseArea, chooseAsia, chooseEurope, chooseAfrica, chooseAmericas, 
-    chooseOceania, chooseWorld,language, setLanguage, screen, setScreen}= useSetup();
+    area, chooseArea, 
+    chooseAsia, chooseEurope, chooseAfrica, chooseAmericas, chooseOceania, chooseWorld,
+    language, setLanguage, screen, setScreen}= useSetup();
 
-  // const {index, text, setText, currentText, setCurrentText} = ClueBox();
-
-  // const {currentTurn, setCurrentTurn, score, setScore, isScored, setIsScored, isStarted, setIsStarted, isAnswered, setIsAnswered, placeHand,
-  //    isPopup, setIsPopup, isResult, setIsResult, newGame, soundResult}=useGame();
-
-  // const {isPopup, setIsPopup} =Popup();
   const {playKouka} = useKouka();
-
-  // const {readClue} =useReadClue();
-  // const {dataLists} = useData();  //API使わない場合
-  
-  // const { startTimer, stopTimer, startTimer2, pcPlayer, 
-  //   playLevelOne,playLevelTwo, playLevelThree} = useLevel();
-  
 
   //■■■■■useState■■■■■
     // const [basicLists,setBasicLists] = useState(dataLists);    //non-API
@@ -45,14 +31,11 @@ export const Main = memo((props) => {
    const [score, setScore] = useState(0);                     //スコア・カウント
    const [isScored, setIsScored] = useState(false);           //player得点の有無
   
-  //  const [isPlaced, setIsPlaced] = useState(false)            //「札を並べる」ボタンの反応制御
    const [isStarted, setIsStarted] = useState(false)           //「ゲーム開始」ボタンの反応制御
    const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
   
-  //  const [isKaruta, setIsKaruta] = useState(false);           //絵札一覧の表示・非表示
    const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
    const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
-
    
    const timerRef = useRef(null);                              //タイマー設定用  
 
@@ -682,6 +665,7 @@ let backgroundImage="";
 
 //ボタンのtext
 const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始";
+
 const scoredStatus = isScored ? "正解" : "相手が取りました";
 
   //------JSX------------------------------------------------------------------------------
@@ -704,37 +688,46 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
         onClick={()=>handleSet()}
       />
        :
-      null
-     }
       
         <>
+       <Title />
+
           {/* ゲーム開始ボタンを押した後 */}
           {isStarted ?
-            <Button 
-              tailwind ="bg-gray-500 text-black"
-            >
-              {gameStatus}
-            </Button>
+            <>
+              {isResult ?
+                <Button 
+                  tailwind ="bg-gray-500 text-black"
+                >
+                  ゲーム終了
+                </Button>
+              :
+                <Button 
+                  tailwind ="bg-gray-200 text-black"
+                >
+                  {gameStatus}
+                </Button>
+              }
+            </>
             :             
-            // ゲーム開始ボタンを押す前
-            <Button 
-              onClick={()=> handleStart()}
-              tailwind="bg-red-600 text-white cursor-pointer transform hover:scale-105 transition-transform"
-            >
-              {gameStatus}
-            </Button>
+              // ゲーム開始ボタンを押す前
+              <Button 
+                onClick={()=> handleStart()}
+                tailwind="bg-red-600 text-white cursor-pointer transform hover:scale-105 transition-transform"
+              >
+                {gameStatus}
+              </Button>
           }
-        </>
   
         <ClueBox
           // placeholder={placeholder}  
           // text = {text}
           currentText={currentText}
-          // karutaLists={karutaLists} 
           // basicLists={basicLists}
           // currentTurn={currentTurn}
           // language ={language}
           // isStarted={isStarted}
+          // karutaLists={karutaLists} 
         />
 
         {/* <button 
@@ -803,7 +796,8 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
         />
         : null
       } 
-    
+    </>
+    }
     </div>        
     ) //return
 
