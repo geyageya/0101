@@ -1,4 +1,4 @@
-import {useState, useEffect,useRef} from "react";
+import {useState, useEffect,useRef,memo, useCallback} from "react";
 import { Header } from './components/Header';
 import {Footer} from './components/Footer';
 import { Button } from "./components/Button";
@@ -18,9 +18,9 @@ import {useKouka} from "./hooks/useKouka";
 // import {useClue} from "./hooks/useClue";
 // import {useReadClue} from "./hooks/useReadClue";
 
-import {useData} from "./hooks/useData"
+// import {useData} from "./hooks/useData"
 
-const Main=(props) => {
+const Main= memo((props) => {
   console.log("Main レンダリング")
 
   // const {readClue} = useLang();
@@ -34,7 +34,7 @@ const Main=(props) => {
   // const {currentTurn, setCurrentTurn, score, setScore, isScored, setIsScored, isStarted, setIsStarted, isAnswered, setIsAnswered, placeHand,
   //    isPopup, setIsPopup, isResult, setIsResult, newGame, soundResult}=useGame();
 
-
+  // const {isPopup, setIsPopup} =Popup();
   const {playKouka} = useKouka();
 
   // const {readClue} =useReadClue();
@@ -55,7 +55,7 @@ const Main=(props) => {
    const [score, setScore] = useState(0);                     //スコア・カウント
    const [isScored, setIsScored] = useState(false);           //player得点の有無
   
-   const [isPlaced, setIsPlaced] = useState(false)            //「札を並べる」ボタンの反応制御
+  //  const [isPlaced, setIsPlaced] = useState(false)            //「札を並べる」ボタンの反応制御
    const [isStarted, setIsStarted] = useState(false)           //「ゲーム開始」ボタンの反応制御
    const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
   
@@ -188,7 +188,7 @@ const Main=(props) => {
   //   }
     
         //「札を並べる」ボタンを押すーーーーーーーーーーー
-        
+    //useCallbackを設定すると絵札が表示されない
     const handleSet = () => {
       chooseArea();
       // setIsKaruta(true);  //絵札一覧を表示
@@ -198,6 +198,7 @@ const Main=(props) => {
     };//handleSet
 
     //「ゲーム開始」ボタンを押すーーーーーーーーー
+    //useCallbackを設定すると読み句の音声が出ない
     const handleStart =() => {
       startTimer();           //タイマー設定（１枚目のみ）
       setIsAnswered(false);   //絵札のクリック可能にする
@@ -205,18 +206,17 @@ const Main=(props) => {
       readClue(currentTurn);  //読み句の読みあげ
       // setText(basicLists[currentTurn].yomiku);
       
-    }//handleStart 
+    };//handleStart 
     
   //------------------------------------
-  // const [text, setText] =useState(""); //表示文字の原稿  
   const [currentText, setCurrentText] = useState('');        
    const index = useRef(0);
  
       //popup関数での設定の方がうまく作動する
-      // useEffect(() => {
-      //   index.current = 0;
-      //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
-      // },[]);
+      useEffect(() => {
+        index.current = 0;
+        setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
+      },[]);
      
       useEffect(() => {
            if(currentTurn < basicLists.length-1){
@@ -247,7 +247,9 @@ const Main=(props) => {
               clearTimeout(timeoutId);
           };
         }
-      }, [currentText, isStarted]);  
+        //下のコメントは、eslintのwarniing消すため
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [currentText, isStarted]); 
         //currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
   
       //読みあげ （引数あり）
@@ -291,27 +293,27 @@ const Main=(props) => {
   //   kouka.play();
   // }
 
-  const handleClick = (selectedId)=> { 
-    props.setIsAnswered(true);      //絵札のクリックを不可にする
-    props.stopTimer();              //タイマー解除（PCplayer)
+  // const handleClick = (selectedId)=> { 
+  //   props.setIsAnswered(true);      //絵札のクリックを不可にする
+  //   props.stopTimer();              //タイマー解除（PCplayer)
 
-    //正解の場合
-    if (selectedId ===props.basicLists[props.currentTurn].id) {//配列のIDを比較
-      props.playKouka(1);
-      props.setIsPopup(true);       
-      props.placeHand();
-      //player独自の操作
-      props.setScore(props.score + 1);    //スコア加点
-      props.setIsScored(true)       //ミニ絵札表示（手前）の有無を決める基準
-      //最後の１枚を撮った場合に加点
-      if (props.currentTurn===props.basicLists.length -2)
-      props.setScore(props.score + 2);   
-    }
-    //不正解の場合
-    else{
-      setTimeout(()=>{props.pcPlayer()}, 300);
-    }
-  }//handleClick
+  //   //正解の場合
+  //   if (selectedId ===props.basicLists[props.currentTurn].id) {//配列のIDを比較
+  //     props.playKouka(1);
+  //     props.setIsPopup(true);       
+  //     props.placeHand();
+  //     //player独自の操作
+  //     props.setScore(props.score + 1);    //スコア加点
+  //     props.setIsScored(true)       //ミニ絵札表示（手前）の有無を決める基準
+  //     //最後の１枚を撮った場合に加点
+  //     if (props.currentTurn===props.basicLists.length -2)
+  //     props.setScore(props.score + 2);   
+  //   }
+  //   //不正解の場合
+  //   else{
+  //     setTimeout(()=>{props.pcPlayer()}, 300);
+  //   }
+  // }//handleClick
   
   //PcPlayer--------------------------------------
   const startTimer = () => {
@@ -347,7 +349,6 @@ const Main=(props) => {
     
     }//switch
   }; //startTiemr
- 
 
   const stopTimer = () => {
     clearTimeout(timerRef.current);
@@ -364,7 +365,7 @@ const Main=(props) => {
             pcPlayer2(newCurrentTurn);
             }, 8000);
           }
-          else if (newCurrentTurn = basicLists.length-3) { //0,1,2,3,4,5]
+          else if (newCurrentTurn === basicLists.length-3) { //0,1,2,3,4,5]
             timerRef.current = setTimeout(() => {
               pcPlayer2(newCurrentTurn);
               }, 6000);
@@ -383,7 +384,7 @@ const Main=(props) => {
           pcPlayer2(newCurrentTurn);
           }, 12000);
         }
-        else if (newCurrentTurn = basicLists.length-3) { //最後から3枚目
+        else if (newCurrentTurn === basicLists.length-3) { //最後から3枚目
           timerRef.current = setTimeout(() => {
             pcPlayer2(newCurrentTurn);
             }, 6000);
@@ -401,7 +402,7 @@ const Main=(props) => {
           pcPlayer2(newCurrentTurn);
           }, 8000);
         }
-        else if (newCurrentTurn = basicLists.length-3) { 
+        else if (newCurrentTurn === basicLists.length-3) { 
           timerRef.current = setTimeout(() => {
             pcPlayer2(newCurrentTurn);
             }, 6000);
@@ -436,7 +437,7 @@ const Main=(props) => {
             pcPlayer2(newCurrentTurn);
             }, 8000);
           }
-          else if (newCurrentTurn = basicLists.length-3) { //0,1,2,3,4,5]
+          else if (newCurrentTurn === basicLists.length-3) { //0,1,2,3,4,5]
             timerRef.current = setTimeout(() => {
               pcPlayer2(newCurrentTurn);
               }, 6000);
@@ -446,9 +447,6 @@ const Main=(props) => {
               pcPlayer2(newCurrentTurn);
               }, 3000);
           }
-          
-          break
-    
     }//switch
   };
 
@@ -631,7 +629,6 @@ const checkHiragana =(e) => {
   setLanguage("hiragana")
 }
 
-
 const playLevelOne =(e) => {
   setLevel("levelOne")
 }
@@ -668,33 +665,34 @@ let backgroundImage="";
 
 {switch(area){
   case "Asia":
-    backgroundImage="url(../images/worldmap.png)" 
+    backgroundImage="url(../images/worldmap.png)";
     break
   case "Europe":
-    backgroundImage="url(../images/tatami-1.png)" 
+    backgroundImage="url(../images/tatami-1.png)" ;
   break
   case "Africa":
-    backgroundImage="url(../images/tatami-1.png)" 
+    backgroundImage="url(../images/tatami-1.png)" ;
   break
   case "Americas":
-    backgroundImage="url(../images/tatami-1.png)" 
+    backgroundImage="url(../images/tatami-1.png)" ;
   break
   case "Oceania":
-    backgroundImage="url(../images/tatami-1.png)" 
+    backgroundImage="url(../images/tatami-1.png)" ;
   break
 
   case "World":
-    backgroundImage="url(../images/worldmap2.png)" 
+    backgroundImage="url(../images/worldmap2.png)"; 
   break
 
   default: //Worldに同じ
-    backgroundImage="url(../images/worldmap2.png)" 
+    backgroundImage="url(../images/worldmap2.png)";
 
   }
-}
+}//switch
 
-
-
+//ボタンのtext
+const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始";
+const scoredStatus = isScored ? "正解" : "相手が取りました";
 
   //------JSX------------------------------------------------------------------------------
   return (
@@ -718,44 +716,26 @@ let backgroundImage="";
        :
       null
      }
-      {/* 札を並べた後 */}
-      {/* {isPlaced ?          */}
+      
         <>
           {/* ゲーム開始ボタンを押した後 */}
           {isStarted ?
             <Button 
-              // background="grey" 
               tailwind ="bg-gray-500 text-black"
             >
-              ゲーム中
+              {gameStatus}
             </Button>
             :             
             // ゲーム開始ボタンを押す前
             <Button 
-              // background="red" 
-              // cursor="pointer" 
               onClick={()=> handleStart()}
               tailwind="bg-red-600 text-white cursor-pointer transform hover:scale-105 transition-transform"
             >
-              ゲーム開始
+              {gameStatus}
             </Button>
           }
         </>
-      
-      {/* //札を並べていない場合
-        <Button 
-          background="Blue" 
-          cursor="pointer" 
-          onClick={()=>handleSet()}
-        >
-          札を並べる
-        </Button> */}
-      {/* } */}
-
-        {/* <Furigana>
-        {basicLists[currentTurn].furigana}
-        </Furigana> */}
-
+  
         <ClueBox
           // placeholder={placeholder}  
           // text = {text}
@@ -806,14 +786,14 @@ let backgroundImage="";
         <>
         {isScored ?
           <Popup 
-            popupMsg="正解です！"
+            popupMsg={scoredStatus}
             basicLists={basicLists} 
             currentTurn={currentTurn} 
             onClick={()=>pressPopupBtn()} 
           />
           : 
           <Popup 
-            popupMsg="相手が取りました"
+            popupMsg={scoredStatus}
             basicLists={basicLists} 
             currentTurn={currentTurn}
             onClick={()=>pressPopupBtn()} 
@@ -823,7 +803,7 @@ let backgroundImage="";
         : null
       } 
   
-      {isResult&&
+      {isResult ?
         <Result  
           // isResult={isResult} 
           basicLists={basicLists} 
@@ -831,31 +811,25 @@ let backgroundImage="";
           score ={score}
           onClick={()=>newGame()} 
         />
+        : null
       } 
     
     </div>        
     ) //return
 
-}//Main
-
-// <Footer />
+})//Main
 
 const App=()=> {
   console.log("Appレンダリング");
 
-  // const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
   return(
     <div>
-
-    
       <Header />
       <Main />
       <Footer />
-    
     </div>
   )
 } //App
 
 export default App;
-
 
