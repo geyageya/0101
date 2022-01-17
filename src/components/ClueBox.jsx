@@ -1,49 +1,13 @@
 import {memo} from "react";
 
-// import {useState, useEffect,useRef} from "react";
-// import { useSetup } from "../hooks/useSetup";
+import {useState, useEffect,useRef} from "react";
+import { useSetup } from "../hooks/useSetup";
 
+//memo化の効果あり。memo化しないと札を取る度に、数回不要なレンダリングされる
 export const ClueBox =memo((props) => {
+    console.log("ClueBox - Child1");
 
-  // const {currentTurn, basicLists, language, isStarted} = useSetup();
-
-    console.log("Child1 CluBoxレンダリング");
-
-  //   const [text, setText] =useState(""); //表示文字の原稿  
-  // const [currentText, setCurrentText] = useState('');        
-  //  const index = useRef(0);
- 
-  //     //indexは文字列の何文字目かを示す値
-  //     //前の表示文字を消す  困ったことあれば、[]にtextを入れてみる
-  //     useEffect(() => {
-  //       index.current = 0;
-  //       setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
-  //     },[]);
-     
-  //     useEffect(() => {
-  //          if(currentTurn < basicLists.length-1){
-  //           let text ="";
-  //           switch (language){
-  //             case "japanese":
-  //               text = basicLists[currentTurn].yomiku //日本語
-  //               break
-  //             case "english":
-  //               text = basicLists[currentTurn].clue //英語
-  //               break
-  //             default:
-  //               text= basicLists[currentTurn].clue //英語
-  //           }
-  //           const timeoutId = setTimeout(()=>{
-  //             setCurrentText ((prev) => prev + text.charAt(index.current));
-  //             index.current +=1;
-  //             } , 100);
-  //             //アンマウント時の処理
-  //           return () => {
-  //             clearTimeout(timeoutId);
-  //         };
-  //       }
-  //     }, [currentText, isStarted]);  
-  //       //isStartedを記入しないと、最初の句が表示されない
+    const {basicLists, language}= useSetup();
     
     return(
       <div 

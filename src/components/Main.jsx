@@ -10,8 +10,8 @@ import {useSetup } from "../hooks/useSetup";
 import {useKouka} from "../hooks/useKouka";
 import { Title } from "./Title";
 
-export const Main = memo((props) => {
-  console.log("Main レンダリング")
+export const Main = (props) => {
+  console.log("Main - Parent")
 
   const {basicLists, karutaLists, setKarutaLists, getApiLists, 
     area, chooseArea, 
@@ -171,7 +171,7 @@ export const Main = memo((props) => {
     };//handleSet
 
     //「ゲーム開始」ボタンを押すーーーーーーーーー
-    //useCallbackを設定すると読み句の音声が出ない
+    //useCallbackを設定すると読み句の音声や表示が狂う
     const handleStart =() => {
       startTimer();           //タイマー設定（１枚目のみ）
       setIsAnswered(false);   //絵札のクリック可能にする
@@ -181,18 +181,60 @@ export const Main = memo((props) => {
       
     };//handleStart 
     
-  //------------------------------------
-  const [currentText, setCurrentText] = useState('');        
-   const index = useRef(0);
+  //----一文字づつ表示する場合--------------------------------
+  // const [currentText, setCurrentText] = useState('');        
+  //  const index = useRef(0);
  
-      //popup関数での設定の方がうまく作動する
+  //     //popup関数での設定の方がうまく作動する
+      // useEffect(() => {
+        // index.current = 0;
+      //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
+      // },[]);
+     
+      // useEffect(() => {
+      //      if(currentTurn < basicLists.length-1){
+      //       //表示する読み句を設定（ラジオぼたん）
+      //       let text ="";
+      //       switch (language){
+      //         case "english":
+      //           text = basicLists[currentTurn].clue //英語
+      //           break
+      //         case "japanese":
+      //           text = basicLists[currentTurn].yomiku //日本語
+      //           break
+      //         case "hiragana":
+      //           text = basicLists[currentTurn].furigana //英語
+      //           break
+      //         default:
+      //           text= basicLists[currentTurn].clue //英語
+      //       }
+            // const timeoutId = setTimeout(()=>{
+            //   //一文字づつ増える文字列で、逐次currentTextを更新
+            //   setCurrentText ((prev) => prev + text.charAt(index.current));
+            //   //表示文字の位置を一つづつずらす（これがないと最初の文字だけが繰り返し表示される）
+            //   index.current +=1; 
+            //   //文字を表示する間隔を指定（SetTImeoutがないと全ての文字が同時に表示される。）
+            //   } , 100); 
+            //   //アンマウント時の処理（使用事例不明）
+            // return () => {
+            //   clearTimeout(timeoutId);
+          // };
+        
+        // //下のコメントは、eslintのwarniing消すため
+        // //eslint-disable-next-line react-hooks/exhaustive-deps
+      // }, [currentText, isStarted]); 
+        //currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
+  
+  //----読み句全文を一度に表示する場合--------------------------------
+  const [currentText, setCurrentText] = useState('');        
+ 
+  //     //popup関数での設定の方がうまく作動する
       useEffect(() => {
-        index.current = 0;
         setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
       },[]);
      
       useEffect(() => {
-           if(currentTurn < basicLists.length-1){
+          if(currentTurn < basicLists.length-1){
             //表示する読み句を設定（ラジオぼたん）
             let text ="";
             switch (language){
@@ -208,26 +250,21 @@ export const Main = memo((props) => {
               default:
                 text= basicLists[currentTurn].clue //英語
             }
-            const timeoutId = setTimeout(()=>{
-              //一文字づつ増える文字列で、逐次currentTextを更新
-              setCurrentText ((prev) => prev + text.charAt(index.current));
-              //表示文字の位置を一つづつずらす（これがないと最初の文字だけが繰り返し表示される）
-              index.current +=1; 
-              //文字を表示する間隔を指定（SetTImeoutがないと全ての文字が同時に表示される。）
-              } , 100); 
-              //アンマウント時の処理（使用事例不明）
-            return () => {
-              clearTimeout(timeoutId);
+            setCurrentText(text)
+            
           };
-        }
+        
         //下のコメントは、eslintのwarniing消すため
         //eslint-disable-next-line react-hooks/exhaustive-deps
+      // }, [isStarted]); 
       }, [currentText, isStarted]); 
         //currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
   
+//----読みあげ--------------------------------
       //読みあげ （引数あり）
   let clueSounds=new Audio();
  
+  //useCallbackを設定すると読み句の音声が出ない
   const readClue = (currentNum)=> {
 
     if (currentNum < basicLists.length -1){
@@ -253,7 +290,7 @@ export const Main = memo((props) => {
     clueSounds.play();}
     clueSounds.preload = "auto";
     clueSounds.loop = false;
-  }
+  };
 
   // // //効果音
   // let kouka=new Audio();
@@ -439,6 +476,7 @@ export const Main = memo((props) => {
   }
 
   //ポップアップボタンを押した場合-----------------------------
+  //useCallback使ったらエラー出た
   const pressPopupBtn = () => {
 
     //setCurrentTurn変更がすぐ反映されないため手動で１を加える（or最初の句が２回読まれる）
@@ -462,7 +500,7 @@ export const Main = memo((props) => {
      if (currentTurn === basicLists.length -2 ){
        addMiniPc(currentTurn + 1);
      }
-   }
+   };
    
    //次の準備ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
@@ -473,7 +511,7 @@ export const Main = memo((props) => {
      setTimeout(()=>{readClue(newCurrentTurn)}, 500);
      setIsAnswered(false);   //絵札のクリックを可にする
      setIsScored(false);    
-     index.current=0;  //表示する読み句の文字数をゼロに戻す
+    //  index.current=0;  //表示する読み句の文字数をゼロに戻す
     }
 
    //タイマー設定（最後手前の札まで
@@ -493,7 +531,7 @@ export const Main = memo((props) => {
 //消す（ポップアップボタン押した後）
   const hide =() => {
 
-    //読み句を消す (clue関数とhide関数の両方で設定した方がいいみたい）
+    //読み句を消す (clue関数で設定しても機能しない）
     setCurrentText("");
 
     //絵札と手を消す
@@ -801,7 +839,7 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
     </div>        
     ) //return
 
-})//Main
+}//Main
 
 
 
