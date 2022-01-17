@@ -1,8 +1,8 @@
 import {memo} from "react";
 import { WindowBtn } from "./WindowBtn";
 
-export const Result = memo((props)=>{
-    console.log("Child2 resultレンダリング");
+export const Result = (props)=>{
+    console.log("Result - Child2");
     /* 画面枠（試合結果） */
   
     return(
@@ -54,6 +54,6 @@ export const Result = memo((props)=>{
         </div>
   </div> 
     )
-  });//<Result/>----------------------------------------------------------------
+  };//<Result/>----------------------------------------------------------------
   
   

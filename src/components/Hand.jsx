@@ -1,7 +1,8 @@
 import {memo} from "react";
 
+//memo化の効果大。memo化しないと札を取る度に絵札の数x2回レンダリングされる
 export const Hand =memo((props) =>{
-    console.log("Child4 Handレンダリング");
+    console.log("Hand - Child4");
     
     return(
       <>

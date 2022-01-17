@@ -3,13 +3,13 @@ import {memo} from "react";
 import { Button } from "./Button"
 import { RadioBtn } from "./RadioBtn"
 
-export const RadioScreen = memo((props)=>{
-  console.log("Child 1 RadioScreenレンダリング");
+export const RadioScreen = (props)=>{
+  console.log("RadioScreen - Child1");
   return(
     <div 
       className ="w-full container mx-auto p-5 bg-lime-100 md:p-10"
       >
-      <h1 className ="text-2xl  text-center md:m-10 ">世界200ケ国かるた</h1>
+      <h1 className ="text-2xl mb-4 text-center md:m-7 ">世界200ケ国かるた</h1>
       <div
         className ="bg-gray-300 mb-8" 
         >
@@ -145,4 +145,4 @@ export const RadioScreen = memo((props)=>{
       </Button>
     </div>
   )
-});
+};

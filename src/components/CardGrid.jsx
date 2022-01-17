@@ -2,8 +2,8 @@ import {memo} from "react";
 import { Card } from "./Card";
 import {Hand } from "./Hand";
 
-export const CardGrid =memo((props) => {
-    console.log("Child3 CardGrid レンダリング");
+export const CardGrid =(props) => {
+    console.log("CardGrid - Child3");
   
      return(
       <>
@@ -11,7 +11,6 @@ export const CardGrid =memo((props) => {
         return(
           <li 
             className ="relative flex justify-center items-center aspect-square"
-            // style={cardGrid} 
             key={list.id} >
             {/* {props.isAnswered ? (
               <Card
@@ -52,4 +51,4 @@ export const CardGrid =memo((props) => {
       })}
       </>
      )
-  });
+  };

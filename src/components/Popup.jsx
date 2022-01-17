@@ -2,7 +2,7 @@ import {useState,memo} from "react";
 import { WindowBtn } from "./WindowBtn";
 
 export const Popup = (props) => {
-    console.log("Child2 Popup レンダリング");
+    console.log("Popup - Child2");
 
     return(
       <div 

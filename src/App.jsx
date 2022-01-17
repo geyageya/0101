@@ -2,7 +2,7 @@ import { Main } from "./components/Main";
 import {Footer} from './components/Footer';
 
 const App=()=> {
-  console.log("Appレンダリング");
+  console.log("App ");
 
   return(
     <div>

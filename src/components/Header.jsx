@@ -2,7 +2,7 @@ import {memo} from "react";
 
 import { Title } from "./Title";
 
-export const Header=memo((props)=>{
+export const Header=(props)=>{
     console.log("Headerレンダリング");
   
     return(
@@ -12,4 +12,4 @@ export const Header=memo((props)=>{
           </Title>
         </header>
     )
-  });
+  };

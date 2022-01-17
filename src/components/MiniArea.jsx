@@ -2,8 +2,9 @@ import {memo} from "react";
 
 import { MiniCard } from "./MiniCard";
 
+//memo化の効果あり。memo化しないと札を取る度に、数回不要なレンダリングされる
 export const MiniArea =memo((props) => {
-    console.log("Child2 MiniArea レンダリング");
+    console.log("MiniArea - Child2");
    
     return(
       <ul 

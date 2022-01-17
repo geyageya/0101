@@ -1,7 +1,8 @@
 import {memo} from "react";
 
+//memo化の効果あり。memo化しないと札を取る度に、数回不要なレンダリングされる
 export const Button =memo((props) =>{
-    console.log("Child1 Buttonレンダリング");
+    console.log("Button - Child1");
     
     return(
       <button 

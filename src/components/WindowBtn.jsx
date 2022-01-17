@@ -1,7 +1,7 @@
 import {memo} from "react";
 
-export const WindowBtn =memo((props) =>{
-    console.log("Child3 WindowBtn レンダリング");
+export const WindowBtn =(props) =>{
+    console.log("WindowBtn - Child3");
     
     return(
       <div>
@@ -13,4 +13,4 @@ export const WindowBtn =memo((props) =>{
         </button>
       </div>
     )
-  });
+  };

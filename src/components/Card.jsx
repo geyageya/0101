@@ -1,11 +1,11 @@
 import {memo} from "react";
 import {useKouka} from "../hooks/useKouka";
 
-export const Card =memo((props) =>{
+export const Card =(props) =>{
 
     const {playKouka} = useKouka();
 
-    console.log("Child4 Cardレンダリング");
+    console.log("Card - Child4");
     
     //useCallbackをhandleClikcに設定すると、最初しか正解にならなかった。つまりこの関数が停止しているからだ。
     const handleClick = (selectedId)=> { 
@@ -60,4 +60,4 @@ export const Card =memo((props) =>{
         {/* }  */}
       </>
     )
-  });
+  };

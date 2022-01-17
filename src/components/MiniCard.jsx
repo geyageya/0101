@@ -1,8 +1,8 @@
 import {memo} from "react";
 
 /* ミニ絵札*/
-export const MiniCard =memo((props) => {
-    console.log("Child3 MiniCardレンダリング");
+export const MiniCard =(props) => {
+    console.log("MiniCard - Child3");
     
     return(
       <img 
@@ -11,4 +11,4 @@ export const MiniCard =memo((props) => {
         src={props.src} 
       />
     )
-  });
+  };

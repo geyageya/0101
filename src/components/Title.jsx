@@ -1,7 +1,8 @@
 import {memo} from "react";
 
+//memo化の効果あり。一度しかレンダリングされていない
 export const Title=memo((props)=>{
-    console.log("Child 2 Titleレンダリング");
+    console.log("Title - Child2");
     
     return(
       <h1 
