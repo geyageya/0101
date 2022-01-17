@@ -1,3 +1,5 @@
+import { useCallback } from "react/cjs/react.development";
+
 export const useKouka =() => {
 
   // Sounds------------------------------------------------------------------
@@ -20,6 +22,6 @@ const playKouka= (effectNum)=> {
   kouka.load();
   kouka.loop = false;
   kouka.play();
-}
+};
   return {effectSounds, playKouka}
-}
+};

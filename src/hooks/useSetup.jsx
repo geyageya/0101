@@ -1,4 +1,4 @@
-import {useState,useCallback} from "react";
+import {useState,useCallback, memo} from "react";
 
 export const useSetup =() => {
 
@@ -19,13 +19,13 @@ export const useSetup =() => {
     setBasicLists(json);
   },[]);
 
-  const shuffle=(arr) => { 
+  const shuffle=useCallback((arr) => { 
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[j], arr[i]] = [arr[i], arr[j]];
     }
     return arr;
-    }
+    },[]);
 
   // //エリア別札選出）
   const chooseArea = () => {
