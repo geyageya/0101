@@ -1,5 +1,3 @@
-import { useCallback } from "react/cjs/react.development";
-
 export const useKouka =() => {
 
   // Sounds------------------------------------------------------------------
@@ -11,6 +9,9 @@ const effectSounds = [
   "sounds/effects/rappa.mp3",   //playKouka(4)
   "sounds/effects/clap.mp3",    //playKouka(5)
   "sounds/effects/chiin.mp3",   //playKouka(6)
+  "sounds/effects/button1.mp3",   //playKouka(7)
+  "sounds/effects/button2.mp3",   //playKouka(8)
+  "sounds/effects/suiteki.mp3",   //playKouka(9)
 ]
 
 // //効果音
