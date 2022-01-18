@@ -1,4 +1,4 @@
-import {useState,memo} from "react";
+// import {useState,memo} from "react";
 import { WindowBtn } from "./WindowBtn";
 
 export const Popup = (props) => {

@@ -1,4 +1,4 @@
-import {useState, useEffect,useRef,memo, useCallback} from "react";
+import {useState, useEffect,useRef} from "react";
 import { Button } from "./Button";
 import {ClueBox} from "./ClueBox";
 import {PlayArea} from "./PlayArea";
@@ -39,7 +39,7 @@ export const Main = (props) => {
    
    const timerRef = useRef(null);                              //タイマー設定用  
 
-  //  const [language, setLanguage]= useState("default")
+   //  const [language, setLanguage]= useState("default")
    const [level, setLevel]= useState("default")
   //  const [area, setArea]= useState("default")
   //  const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
@@ -164,8 +164,6 @@ export const Main = (props) => {
     //useCallbackを設定すると絵札が表示されない
     const handleSet = () => {
       chooseArea();
-      // setIsKaruta(true);  //絵札一覧を表示
-      // setIsPlaced(true);  //「札を並べる」ボタンの反応停止
       playKouka(0);       //効果音 
       setScreen(false)
     };//handleSet
@@ -175,13 +173,12 @@ export const Main = (props) => {
     const handleStart =() => {
       startTimer();           //タイマー設定（１枚目のみ）
       setIsAnswered(false);   //絵札のクリック可能にする
-      setIsStarted(true)　    //「ゲーム開始」ボタンの反応停止
+      setIsStarted(true)   //「ゲーム開始」ボタンの反応停止
       readClue(currentTurn);  //読み句の読みあげ
-      // setText(basicLists[currentTurn].yomiku);
-      
+      showClue(currentTurn);
     };//handleStart 
-    
-  //----一文字づつ表示する場合--------------------------------
+
+  //----一文字づつ表示する場合---------useEffect-----------------------
   // const [currentText, setCurrentText] = useState('');        
   //  const index = useRef(0);
  
@@ -225,41 +222,37 @@ export const Main = (props) => {
       // }, [currentText, isStarted]); 
         //currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
   
-  //----読み句全文を一度に表示する場合--------------------------------
+  //----読み句全文を一度に表示する場合(イベント操作）--------------------------------
   const [currentText, setCurrentText] = useState('');        
  
   //     //popup関数での設定の方がうまく作動する
-      useEffect(() => {
-        setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
-      },[]);
+      // useEffect(() => {
+      //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
+      // },[]);
      
-      useEffect(() => {
-          if(currentTurn < basicLists.length-1){
+         const showClue=(currentNum) =>  {
+          if(currentNum < basicLists.length-1){
             //表示する読み句を設定（ラジオぼたん）
             let text ="";
             switch (language){
               case "english":
-                text = basicLists[currentTurn].clue //英語
+                text = basicLists[currentNum].clue //英語
                 break
               case "japanese":
-                text = basicLists[currentTurn].yomiku //日本語
+                text = basicLists[currentNum].yomiku //日本語
                 break
               case "hiragana":
-                text = basicLists[currentTurn].furigana //英語
+                text = basicLists[currentNum].furigana //英語
                 break
               default:
-                text= basicLists[currentTurn].clue //英語
+                text= basicLists[currentNum].clue //英語
             }
+            //一括表示専用関数
             setCurrentText(text)
             
           };
-        
-        //下のコメントは、eslintのwarniing消すため
-        //eslint-disable-next-line react-hooks/exhaustive-deps
-      // }, [isStarted]); 
-      }, [currentText, isStarted]); 
-        //currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
-  
+        }
+
 //----読みあげ--------------------------------
       //読みあげ （引数あり）
   let clueSounds=new Audio();
@@ -482,7 +475,7 @@ export const Main = (props) => {
     //setCurrentTurn変更がすぐ反映されないため手動で１を加える（or最初の句が２回読まれる）
     const newCurrentTurn = currentTurn + 1;
     setCurrentTurn(newCurrentTurn);
-   
+
    //いろいろ消す
    hide();
    
@@ -503,15 +496,16 @@ export const Main = (props) => {
    };
    
    //次の準備ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-
+   
    // 「次」ボタンを押した時
     if (currentTurn < basicLists.length-1) { //0,1,2,3,4,5]
+     setTimeout(()=>{readClue(newCurrentTurn)}, 1200);
+     setTimeout(()=>{showClue(newCurrentTurn)}, 1200);
 
-     //readClueの引数に手動で１を加えた数値を入れる
-     setTimeout(()=>{readClue(newCurrentTurn)}, 500);
      setIsAnswered(false);   //絵札のクリックを可にする
-     setIsScored(false);    
-    //  index.current=0;  //表示する読み句の文字数をゼロに戻す
+     setIsScored(false); 
+     //表示する読み句の文字数をゼロに戻す（読み句を一次ずつ表示する場合）  
+    //  index.current=0;  //
     }
 
    //タイマー設定（最後手前の札まで
@@ -631,24 +625,30 @@ const newGame =() => {
 
 const checkEnglish =(e) => {
   setLanguage("english")
+  playKouka(7)
 }
 const checkJapanese =(e) => {
   setLanguage("japanese")
+  playKouka(7)
 }
 
 const checkHiragana =(e) => {
   setLanguage("hiragana")
+  playKouka(7)
 }
 
 const playLevelOne =(e) => {
   setLevel("levelOne")
+  playKouka(7)
 }
 
 const playLevelTwo =(e) => {
   setLevel("levelTwo")
+  playKouka(7)
 }
 const playLevelThree=(e) => {
   setLevel("levelThree")
+  playKouka(7)
 }
 
 // const chooseAsia=(e) => {
@@ -696,7 +696,7 @@ let backgroundImage="";
   break
 
   default: //Worldに同じ
-    backgroundImage="url(../images/worldmap2.png)";
+    backgroundImage="url(../images/tatami-1.png)";
 
   }
 }//switch
@@ -709,24 +709,23 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
   //------JSX------------------------------------------------------------------------------
   return (
     <div>
-     {screen ?
-      <RadioScreen
-        checkEnglish ={checkEnglish}
-        checkJapanese = {checkJapanese}
-        checkHiragana = {checkHiragana}
-        chooseAsia= {chooseAsia}
-        chooseEurope = {chooseEurope}
-        chooseAfrica = {chooseAfrica}
-        chooseAmericas = {chooseAmericas}
-        chooseOceania = {chooseOceania}
-        chooseWorld = {chooseWorld}
-        playLevelOne = {playLevelOne}
-        playLevelTwo = {playLevelTwo}
-        playLevelThree = {playLevelThree}
-        onClick={()=>handleSet()}
-      />
+      {screen ?
+        <RadioScreen
+          checkEnglish ={checkEnglish}
+          checkJapanese = {checkJapanese}
+          checkHiragana = {checkHiragana}
+          chooseAsia= {chooseAsia}
+          chooseEurope = {chooseEurope}
+          chooseAfrica = {chooseAfrica}
+          chooseAmericas = {chooseAmericas}
+          chooseOceania = {chooseOceania}
+          chooseWorld = {chooseWorld}
+          playLevelOne = {playLevelOne}
+          playLevelTwo = {playLevelTwo}
+          playLevelThree = {playLevelThree}
+          onClick={()=>handleSet()}
+        />
        :
-      
         <>
        <Title />
 
@@ -783,9 +782,11 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
           //const CardGrid用
           karutaLists={karutaLists} 
           isAnswered = {isAnswered}
+          
           //const MiniArea用
           miniCard={miniCard}
           miniCardPc={miniCardPc}
+          isScored={isScored}
           //handleClick用(useState)
           basicLists={basicLists}
           currentTurn={currentTurn}
@@ -800,7 +801,8 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
           placeHand={placeHand}
           pcPlayer={pcPlayer}
           onClick={()=>handleSet()} 
-          // onClick={()=>handleClick()} 
+         
+          //追加
         />
 
       {isPopup ? 

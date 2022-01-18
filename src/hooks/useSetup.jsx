@@ -1,6 +1,8 @@
-import {useState,useCallback, memo} from "react";
+import {useState,useCallback} from "react";
+import { useKouka } from "./useKouka";
 
 export const useSetup =() => {
+  const {playKouka} = useKouka();
 
   //かるたデータ
   const [basicLists,setBasicLists] = useState([]);  //API利用時
@@ -38,7 +40,7 @@ export const useSetup =() => {
           setBasicLists(result)
           const result2 = shuffle([...shuffled]);
           setKarutaLists(result2)
-          setArea("default")
+          // setArea("default")
         break
         }
       case "Europe":
@@ -49,7 +51,7 @@ export const useSetup =() => {
           setBasicLists(result)
           const result2 = shuffle([...shuffled]);
           setKarutaLists(result2)
-          setArea("default")
+          // setArea("default")
         break
         }
       case "Africa":
@@ -60,7 +62,7 @@ export const useSetup =() => {
           setBasicLists(result)
           const result2 = shuffle([...shuffled]);
           setKarutaLists(result2)
-          setArea("default")
+          // setArea("default")
         break
         }
       case "Americas":
@@ -71,7 +73,7 @@ export const useSetup =() => {
           setBasicLists(result)
           const result2 = shuffle([...shuffled]);
           setKarutaLists(result2)
-          setArea("default")
+          // setArea("default")
         break
         }
       case "Oceania":
@@ -82,7 +84,7 @@ export const useSetup =() => {
           setBasicLists(result)
           const result2 = shuffle([...shuffled]);
           setKarutaLists(result2)
-          setArea("default")
+          // setArea("default")
         break
        }
 
@@ -93,7 +95,7 @@ export const useSetup =() => {
           setBasicLists(result)
           const result2 = shuffle([...shuffled]);
           setKarutaLists(result2)
-          setArea("default")
+          // setArea("default")
         break
        }
       default: //World
@@ -108,30 +110,67 @@ export const useSetup =() => {
     }//switch
   }//chooseArea
 
+//   let backgroundImage="";
+
+// {switch(area){
+//   case "Asia":
+//     backgroundImage="url(../images/worldmap.png)";
+//     break
+//   case "Europe":
+//     backgroundImage="url(../images/tatami-1.png)" ;
+//   break
+//   case "Africa":
+//     backgroundImage="url(../images/tatami-1.png)" ;
+//   break
+//   case "Americas":
+//     backgroundImage="url(../images/tatami-1.png)" ;
+//   break
+//   case "Oceania":
+//     backgroundImage="url(../images/tatami-1.png)" ;
+//   break
+
+//   case "World":
+//     backgroundImage="url(../images/worldmap2.png)"; 
+//   break
+
+//   default: //Worldに同じ
+//     backgroundImage="url(../images/worldmap.png)";
+
+//   }
+// }//switch
+
 //ラジオボタン
 
 const chooseAsia=(e) => {
   setArea("Asia")
+  playKouka(7)
 }
 
 const chooseEurope=(e) => {
   setArea("Europe")
+  playKouka(7)
 }
 const chooseAfrica=(e) => {
   setArea("Africa")
+  playKouka(7)
+
 }
 const chooseAmericas=(e) => {
   setArea("Americas")
+  playKouka(7)
+
 }
 const chooseOceania=(e) => {
   setArea("Oceania")
+  playKouka(7)
+
 }
 
 const chooseWorld=(e) => {
   setArea("World")
+  playKouka(7)
+
 }
-
-
 
   return {basicLists, setBasicLists, karutaLists, setKarutaLists, getApiLists,
     area, setArea, shuffle, chooseArea, chooseAsia, chooseEurope, chooseAfrica, 

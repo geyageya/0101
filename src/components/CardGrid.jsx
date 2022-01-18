@@ -1,4 +1,3 @@
-import {memo} from "react";
 import { Card } from "./Card";
 import {Hand } from "./Hand";
 
@@ -36,6 +35,7 @@ export const CardGrid =(props) => {
                 playKouka={props.playKouka}
                 placeHand={props.placeHand}
                 pcPlayer={props.pcPlayer}
+               
                 // onClick={() =>props.handleClick()}
               />
                {/* )}  */}

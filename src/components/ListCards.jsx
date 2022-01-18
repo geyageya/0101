@@ -1,5 +1,3 @@
-import {memo} from "react";
-
 import {CardGrid} from "./CardGrid";
 
 export const ListCards =(props) =>{
@@ -27,6 +25,7 @@ export const ListCards =(props) =>{
           playKouka={props.playKouka}
           placeHand={props.placeHand}
           pcPlayer={props.pcPlayer}
+         
         />
       </ul>
     )

@@ -1,4 +1,4 @@
-import {memo} from "react";
+// import {memo} from "react";
 
 /* ミニ絵札*/
 export const MiniCard =(props) => {

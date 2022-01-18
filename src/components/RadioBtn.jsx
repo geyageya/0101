@@ -1,7 +1,7 @@
 import {memo} from "react";
 
-export const RadioBtn =(props) => {
-  console.log("RadioBtn - Child2");
+export const RadioBtn =memo((props) => {
+    console.log("RadioBtn - Child2");
   return(
     <div
      className ="">
@@ -20,5 +20,5 @@ export const RadioBtn =(props) => {
         {props.text}
       </label>
     </div>
-  )
-};
+  ) //return
+});

@@ -1,4 +1,4 @@
-import {memo} from "react";
+// import {memo} from "react";
 import {useKouka} from "../hooks/useKouka";
 
 export const Card =(props) =>{

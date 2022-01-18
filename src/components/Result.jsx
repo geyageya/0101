@@ -1,4 +1,4 @@
-import {memo} from "react";
+// import {memo} from "react";
 import { WindowBtn } from "./WindowBtn";
 
 export const Result = (props)=>{
