@@ -175,83 +175,83 @@ export const Main = (props) => {
       setIsAnswered(false);   //絵札のクリック可能にする
       setIsStarted(true)   //「ゲーム開始」ボタンの反応停止
       readClue(currentTurn);  //読み句の読みあげ
-      showClue(currentTurn);
+      // showClue(currentTurn); //読み句一括表示の場合のに
     };//handleStart 
 
   //----一文字づつ表示する場合---------useEffect-----------------------
-  // const [currentText, setCurrentText] = useState('');        
-  //  const index = useRef(0);
- 
-  //     //popup関数での設定の方がうまく作動する
-      // useEffect(() => {
-        // index.current = 0;
-      //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
-      // },[]);
-     
-      // useEffect(() => {
-      //      if(currentTurn < basicLists.length-1){
-      //       //表示する読み句を設定（ラジオぼたん）
-      //       let text ="";
-      //       switch (language){
-      //         case "english":
-      //           text = basicLists[currentTurn].clue //英語
-      //           break
-      //         case "japanese":
-      //           text = basicLists[currentTurn].yomiku //日本語
-      //           break
-      //         case "hiragana":
-      //           text = basicLists[currentTurn].furigana //英語
-      //           break
-      //         default:
-      //           text= basicLists[currentTurn].clue //英語
-      //       }
-            // const timeoutId = setTimeout(()=>{
-            //   //一文字づつ増える文字列で、逐次currentTextを更新
-            //   setCurrentText ((prev) => prev + text.charAt(index.current));
-            //   //表示文字の位置を一つづつずらす（これがないと最初の文字だけが繰り返し表示される）
-            //   index.current +=1; 
-            //   //文字を表示する間隔を指定（SetTImeoutがないと全ての文字が同時に表示される。）
-            //   } , 100); 
-            //   //アンマウント時の処理（使用事例不明）
-            // return () => {
-            //   clearTimeout(timeoutId);
-          // };
-        
-        // //下のコメントは、eslintのwarniing消すため
-        // //eslint-disable-next-line react-hooks/exhaustive-deps
-      // }, [currentText, isStarted]); 
-        //currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
-  
-  //----読み句全文を一度に表示する場合(イベント操作）--------------------------------
   const [currentText, setCurrentText] = useState('');        
+   const index = useRef(0);
  
-  //     //popup関数での設定の方がうまく作動する
-      // useEffect(() => {
-      //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
-      // },[]);
+      //popup関数での設定の方がうまく作動する
+      useEffect(() => {
+        index.current = 0;
+        setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
+      },[]);
      
-         const showClue=(currentNum) =>  {
-          if(currentNum < basicLists.length-1){
+      useEffect(() => {
+           if(currentTurn < basicLists.length-1){
             //表示する読み句を設定（ラジオぼたん）
             let text ="";
             switch (language){
               case "english":
-                text = basicLists[currentNum].clue //英語
+                text = basicLists[currentTurn].clue //英語
                 break
               case "japanese":
-                text = basicLists[currentNum].yomiku //日本語
+                text = basicLists[currentTurn].yomiku //日本語
                 break
               case "hiragana":
-                text = basicLists[currentNum].furigana //英語
+                text = basicLists[currentTurn].furigana //英語
                 break
               default:
-                text= basicLists[currentNum].clue //英語
+                text= basicLists[currentTurn].clue //英語
             }
-            //一括表示専用関数
-            setCurrentText(text)
-            
+            const timeoutId = setTimeout(()=>{
+              //一文字づつ増える文字列で、逐次currentTextを更新
+              setCurrentText ((prev) => prev + text.charAt(index.current));
+              //表示文字の位置を一つづつずらす（これがないと最初の文字だけが繰り返し表示される）
+              index.current +=1; 
+              //文字を表示する間隔を指定（SetTImeoutがないと全ての文字が同時に表示される。）
+              } , 100); 
+              //アンマウント時の処理（使用事例不明）
+            return () => {
+              clearTimeout(timeoutId);
           };
-        }
+           }//if
+        //下のコメントは、eslintのwarniing消すため
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+      },[currentText, isStarted]); 
+        // currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
+  
+  //----読み句全文を一度に表示する場合(イベント操作）--------------------------------
+  // const [currentText, setCurrentText] = useState('');        
+ 
+  // //     //popup関数での設定の方がうまく作動する
+  //     // useEffect(() => {
+  //     //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
+  //     // },[]);
+     
+  //        const showClue=(currentNum) =>  {
+  //         if(currentNum < basicLists.length-1){
+  //           //表示する読み句を設定（ラジオぼたん）
+  //           let text ="";
+  //           switch (language){
+  //             case "english":
+  //               text = basicLists[currentNum].clue //英語
+  //               break
+  //             case "japanese":
+  //               text = basicLists[currentNum].yomiku //日本語
+  //               break
+  //             case "hiragana":
+  //               text = basicLists[currentNum].furigana //英語
+  //               break
+  //             default:
+  //               text= basicLists[currentNum].clue //英語
+  //           }
+  //           //一括表示専用関数
+  //           setCurrentText(text)
+            
+  //         };
+  //       }
 
 //----読みあげ--------------------------------
       //読みあげ （引数あり）
@@ -500,12 +500,12 @@ export const Main = (props) => {
    // 「次」ボタンを押した時
     if (currentTurn < basicLists.length-1) { //0,1,2,3,4,5]
      setTimeout(()=>{readClue(newCurrentTurn)}, 1200);
-     setTimeout(()=>{showClue(newCurrentTurn)}, 1200);
+    //  setTimeout(()=>{showClue(newCurrentTurn)}, 1200); //読み句一括表示の場合のみ
 
      setIsAnswered(false);   //絵札のクリックを可にする
      setIsScored(false); 
      //表示する読み句の文字数をゼロに戻す（読み句を一次ずつ表示する場合）  
-    //  index.current=0;  //
+     index.current=0;  //
     }
 
    //タイマー設定（最後手前の札まで
