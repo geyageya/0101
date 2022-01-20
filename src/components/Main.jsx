@@ -43,113 +43,6 @@ export const Main = (props) => {
    const [level, setLevel]= useState("default")
   //  const [area, setArea]= useState("default")
   //  const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
-  
-  // //札の準備ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  // //■■■■■useEffect (API)■■■■■ 
-  //   //APIデータ取得
-  //   useEffect (() => {
-  //     getApiLists();
-  //     //下のコメント（不要なwarningを出さないようにするため）
-  //     // eslint-disable-next-line 
-  //   },[]);
-  
-   //APIデータを取得
-    // const getApiLists = useCallback(async () => {
-    //   const res =await fetch("https://server-karuta2020.herokuapp.com/api/v1/karuta");
-    //   const json = await res.json();
-    //   setBasicLists(json);
-    // },[]);
-
-  
-  // //エリア別札選出）
-  //   const chooseArea = () => {
-  //     switch (area){
-  //       case "Asia":
-  //         {
-  //           const filtered= basicLists.filter(list => list.area==="Asia");
-  //           const shuffled=shuffle(filtered).slice(0,4)
-  //           const result = shuffle([...shuffled]);
-  //           setBasicLists(result)
-  //           const result2 = shuffle([...shuffled]);
-  //           setKarutaLists(result2)
-  //           setArea("default")
-  //         break
-  //         }
-  //       case "Europe":
-  //         {
-  //           const filtered= basicLists.filter(list => list.area==="Europe");
-  //           const shuffled=shuffle(filtered).slice(0,12)
-  //           const result = shuffle([...shuffled]);
-  //           setBasicLists(result)
-  //           const result2 = shuffle([...shuffled]);
-  //           setKarutaLists(result2)
-  //           setArea("default")
-  //         break
-  //         }
-  //       case "Africa":
-  //         {
-  //           const filtered= basicLists.filter(list => list.area==="Africa");
-  //           const shuffled=shuffle(filtered).slice(0,12)
-  //           const result = shuffle([...shuffled]);
-  //           setBasicLists(result)
-  //           const result2 = shuffle([...shuffled]);
-  //           setKarutaLists(result2)
-  //           setArea("default")
-  //         break
-  //         }
-  //       case "Americas":
-  //         {
-  //           const filtered= basicLists.filter(list => list.area==="Americas");
-  //           const shuffled=shuffle(filtered).slice(0,12)
-  //           const result = shuffle([...shuffled]);
-  //           setBasicLists(result)
-  //           const result2 = shuffle([...shuffled]);
-  //           setKarutaLists(result2)
-  //           setArea("default")
-  //         break
-  //         }
-  //       case "Oceania":
-  //        {
-  //           const filtered= basicLists.filter(list => list.area==="Oceania");
-  //           const shuffled=shuffle(filtered).slice(0,12)
-  //           const result = shuffle([...shuffled]);
-  //           setBasicLists(result)
-  //           const result2 = shuffle([...shuffled]);
-  //           setKarutaLists(result2)
-  //           setArea("default")
-  //         break
-  //        }
-
-  //        case "World":
-  //         {
-  //           const shuffled=shuffle(basicLists).slice(0,12)
-  //           const result = shuffle([...shuffled]);
-  //           setBasicLists(result)
-  //           const result2 = shuffle([...shuffled]);
-  //           setKarutaLists(result2)
-  //           setArea("default")
-  //         break
-  //        }
-  //       default: //World
-  //         {
-  //           const shuffled=shuffle(basicLists).slice(0,12)
-  //           const result = shuffle([...shuffled]);
-  //           setBasicLists(result)
-  //           const result2 = shuffle([...shuffled]);
-  //           setKarutaLists(result2)
-  //           setArea("default")
-  //         }
-  //     }//switch
-  //   }//chooseArea
-
-  //  //シャッフル関数
-  //  const shuffle=(arr) => { 
-  //   for (let i = arr.length - 1; i > 0; i--) {
-  //     const j = Math.floor(Math.random() * (i + 1));
-  //     [arr[j], arr[i]] = [arr[i], arr[j]];
-  //   }
-  //   return arr;
-  //   }
     
         //「札を並べる」ボタンを押すーーーーーーーーーーー
     //useCallbackを設定すると絵札が表示されない
@@ -275,39 +168,6 @@ export const Main = (props) => {
     clueSounds.preload = "auto";
     clueSounds.loop = false;
   };
-
-  // // //効果音
-  // let kouka=new Audio();
-
-  // const playKouka= (effectNum)=> {
-  //   kouka.preload = "auto";
-  //   kouka.src = effectSounds[effectNum];
-  //   kouka.load();
-  //   kouka.loop = false;
-  //   kouka.play();
-  // }
-
-  // const handleClick = (selectedId)=> { 
-  //   props.setIsAnswered(true);      //絵札のクリックを不可にする
-  //   props.stopTimer();              //タイマー解除（PCplayer)
-
-  //   //正解の場合
-  //   if (selectedId ===props.basicLists[props.currentTurn].id) {//配列のIDを比較
-  //     props.playKouka(1);
-  //     props.setIsPopup(true);       
-  //     props.placeHand();
-  //     //player独自の操作
-  //     props.setScore(props.score + 1);    //スコア加点
-  //     props.setIsScored(true)       //ミニ絵札表示（手前）の有無を決める基準
-  //     //最後の１枚を撮った場合に加点
-  //     if (props.currentTurn===props.basicLists.length -2)
-  //     props.setScore(props.score + 2);   
-  //   }
-  //   //不正解の場合
-  //   else{
-  //     setTimeout(()=>{props.pcPlayer()}, 300);
-  //   }
-  // }//handleClick
   
   //PcPlayer--------------------------------------
   const startTimer = () => {
@@ -641,27 +501,6 @@ const playLevelThree=(e) => {
   setLevel("levelThree")
   playKouka(7)
 }
-
-// const chooseAsia=(e) => {
-//   setArea("Asia")
-// }
-
-// const chooseEurope=(e) => {
-//   setArea("Europe")
-// }
-// const chooseAfrica=(e) => {
-//   setArea("Africa")
-// }
-// const chooseAmericas=(e) => {
-//   setArea("Americas")
-// }
-// const chooseOceania=(e) => {
-//   setArea("Oceania")
-// }
-
-// const chooseWorld=(e) => {
-//   setArea("World")
-// }
 
 let backgroundImage="";
 
