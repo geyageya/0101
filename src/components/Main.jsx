@@ -13,10 +13,8 @@ import { Title } from "./Title";
 export const Main = (props) => {
   console.log("Main - Parent")
 
-  const {basicLists, karutaLists, setKarutaLists, getApiLists, 
-    area, chooseArea, 
-    chooseAsia, chooseEurope, chooseAfrica, chooseAmericas, chooseOceania, chooseWorld,
-    language, setLanguage, screen, setScreen}= useSetup();
+  const {basicLists, karutaLists, setKarutaLists, getApiLists, chooseArea, setArea
+  }= useSetup();
 
   const {playKouka} = useKouka();
 
@@ -24,6 +22,7 @@ export const Main = (props) => {
     // const [basicLists,setBasicLists] = useState(dataLists);    //non-API
   //  const [basicLists,setBasicLists] = useState([]);  //API利用時
   //  const [karutaLists,setKarutaLists] = useState(basicLists);  //絵札用データ配列
+
    const [miniCard, setMiniCard] = useState([]);      //ミニ絵札データ配列
    const [miniCardPc, setMiniCardPc] = useState([]);  //ミニ絵札データ配列（PC)
   
@@ -39,10 +38,10 @@ export const Main = (props) => {
    
    const timerRef = useRef(null);                              //タイマー設定用  
 
-   //  const [language, setLanguage]= useState("default")
+    const [language, setLanguage]= useState("default")
    const [level, setLevel]= useState("default")
   //  const [area, setArea]= useState("default")
-  //  const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
+   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
     
         //「札を並べる」ボタンを押すーーーーーーーーーーー
     //useCallbackを設定すると絵札が表示されない
@@ -106,36 +105,36 @@ export const Main = (props) => {
       },[currentText, isStarted]); 
         // currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
   
-  //----読み句全文を一度に表示する場合(イベント操作）--------------------------------
+  // ----読み句全文を一度に表示する場合(イベント操作）--------------------------------
   // const [currentText, setCurrentText] = useState('');        
  
-  // //     //popup関数での設定の方がうまく作動する
-  //     // useEffect(() => {
-  //     //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
-  //     // },[]);
+  //     //popup関数での設定の方がうまく作動する
+      // useEffect(() => {
+      //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
+      // },[]);
      
-  //        const showClue=(currentNum) =>  {
-  //         if(currentNum < basicLists.length-1){
-  //           //表示する読み句を設定（ラジオぼたん）
-  //           let text ="";
-  //           switch (language){
-  //             case "english":
-  //               text = basicLists[currentNum].clue //英語
-  //               break
-  //             case "japanese":
-  //               text = basicLists[currentNum].yomiku //日本語
-  //               break
-  //             case "hiragana":
-  //               text = basicLists[currentNum].furigana //英語
-  //               break
-  //             default:
-  //               text= basicLists[currentNum].clue //英語
-  //           }
-  //           //一括表示専用関数
-  //           setCurrentText(text)
+        //  const showClue=(currentNum) =>  {
+        //   if(currentNum < basicLists.length-1){
+        //     //表示する読み句を設定（ラジオぼたん）
+        //     let text ="";
+        //     switch (language){
+        //       case "english":
+        //         text = basicLists[currentNum].clue //英語
+        //         break
+        //       case "japanese":
+        //         text = basicLists[currentNum].yomiku //日本語
+        //         break
+        //       case "hiragana":
+        //         text = basicLists[currentNum].furigana //英語
+        //         break
+        //       default:
+        //         text= basicLists[currentNum].clue //英語
+        //     }
+        //     //一括表示専用関数
+        //     setCurrentText(text)
             
-  //         };
-  //       }
+        //   };
+        // }
 
 //----読みあげ--------------------------------
       //読みあげ （引数あり）
@@ -474,52 +473,6 @@ const newGame =() => {
   window.location.reload();
 }
 
-const checkEnglish =(e) => {
-  setLanguage("english")
-  playKouka(7)
-}
-const checkJapanese =(e) => {
-  setLanguage("japanese")
-  playKouka(7)
-}
-
-const checkHiragana =(e) => {
-  setLanguage("hiragana")
-  playKouka(7)
-}
-
-const playLevelOne =(e) => {
-  setLevel("levelOne")
-  playKouka(7)
-}
-
-const playLevelTwo =(e) => {
-  setLevel("levelTwo")
-  playKouka(7)
-}
-const playLevelThree=(e) => {
-  setLevel("levelThree")
-  playKouka(7)
-}
-
-let backgroundImage="";
-
-{switch(language){
-  case "japanese":
-    backgroundImage="url(../images/tatami-1.png)";
-    break
-  case "hiragana":
-    backgroundImage="url(../images/tatami-1.png)" ;
-  break
-  case "english":
-    backgroundImage="url(../images/worldmap.png)" ;
-
-  default: //Englishに同じ
-    backgroundImage="url(../images/worldmap.png)";
-
-  }
-}//switch
-
 //ボタンのtext
 const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始";
 
@@ -530,19 +483,14 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
     <div>
       {screen ?
         <RadioScreen
-          checkEnglish ={checkEnglish}
-          checkJapanese = {checkJapanese}
-          checkHiragana = {checkHiragana}
-          chooseAsia= {chooseAsia}
-          chooseEurope = {chooseEurope}
-          chooseAfrica = {chooseAfrica}
-          chooseAmericas = {chooseAmericas}
-          chooseOceania = {chooseOceania}
-          chooseWorld = {chooseWorld}
-          playLevelOne = {playLevelOne}
-          playLevelTwo = {playLevelTwo}
-          playLevelThree = {playLevelThree}
+          //RadioScreen用
           onClick={()=>handleSet()}
+          //RadioLang用
+          setLanguage = {setLanguage}
+          //RadioArea用
+          setArea = {setArea}
+          //RadioSpeed用
+          setLevel = {setLevel}
         />
        :
         <>
@@ -576,14 +524,11 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
           }
   
         <ClueBox
-          // placeholder={placeholder}  
-          // text = {text}
           currentText={currentText}
-          // basicLists={basicLists}
-          // currentTurn={currentTurn}
-          // language ={language}
-          // isStarted={isStarted}
-          // karutaLists={karutaLists} 
+          basicLists={basicLists}
+          language ={language}
+          currentText = {currentText}
+          setCurrentText = {setCurrentText}
         />
 
         {/* <button 
@@ -597,7 +542,8 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
 
         <PlayArea 
           //const PlayArea用
-          backgroundImage={backgroundImage}
+          // backgroundImage={backgroundImage}
+          language = {language}
           //const CardGrid用
           karutaLists={karutaLists} 
           isAnswered = {isAnswered}
@@ -647,7 +593,6 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
   
       {isResult ?
         <Result  
-          // isResult={isResult} 
           basicLists={basicLists} 
           currentTurn={currentTurn}
           score ={score}

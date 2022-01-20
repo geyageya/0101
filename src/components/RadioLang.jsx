@@ -1,28 +1,27 @@
-import {useState, memo} from "react";
+import {memo, useCallback} from "react";
 import { useKouka } from "../hooks/useKouka";
 import { RadioBtn } from "./RadioBtn"
+import { useSetup } from "../hooks/useSetup";
 
 export const RadioLang = memo((props)=>{
     console.log("RadioLang - Child2");
 
     const {playKouka} = useKouka();
-    const [language, setLanguage]= useState("default")
 
-    const checkEnglish =(e) => {
-      setLanguage("english")
+    const checkEnglish =useCallback((e) => {
+      props.setLanguage("english")
       playKouka(7)
-    }
-
-    const checkJapanese =(e) => {
-      setLanguage("japanese")
+    },[]);
+    const checkJapanese =useCallback((e) => {
+      props.setLanguage("japanese")
       playKouka(7)
-    }
+    },[]);
     
-    const checkHiragana =(e) => {
-      setLanguage("hiragana")
+    const checkHiragana =useCallback((e) => {
+      props.setLanguage("hiragana")
       playKouka(7)
-    }
-
+    },[]);
+   
   return(
     <div>
       <div

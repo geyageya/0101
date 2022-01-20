@@ -6,40 +6,32 @@ import { useSetup } from "../hooks/useSetup";
 export const RadioArea = memo((props)=>{
     console.log("RadioArea- Child1");
 
-    // const [area, setArea]= useState("default")
-
     const {setArea} =useSetup();
     const {playKouka} = useKouka();
 
     const chooseAsia=(e) => {
-      setArea("Asia")
+      props.setArea("Asia")
       playKouka(7)
     }
-    
     const chooseEurope=(e) => {
-      setArea("Europe")
+      props.setArea("Europe")
       playKouka(7)
     }
     const chooseAfrica=(e) => {
-      setArea("Africa")
+      props.setArea("Africa")
       playKouka(7)
-    
     }
     const chooseAmericas=(e) => {
-      setArea("Americas")
+      props.setArea("Americas")
       playKouka(7)
-    
     }
     const chooseOceania=(e) => {
-      setArea("Oceania")
+      props.setArea("Oceania")
       playKouka(7)
-    
     }
-    
     const chooseWorld=(e) => {
-      setArea("World")
+      props.setArea("World")
       playKouka(7)
-    
     }
   return(
    <div>
@@ -100,8 +92,6 @@ export const RadioArea = memo((props)=>{
           text=" オセアニア"
         />
       </div>
-     
-      
     </div> //最初のdiv
   ) //return
-}); //RadioScreen
+}); //RadioArea

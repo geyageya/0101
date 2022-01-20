@@ -1,11 +1,13 @@
 import { Card } from "./Card";
 import {Hand } from "./Hand";
+import {useSetup } from "../hooks/useSetup";
 
 export const CardGrid =(props) => {
     console.log("CardGrid - Child3");
-  
+
      return(
       <>
+      {/* {karutaLists.map((list) =>{ */}
       {props.karutaLists.map((list) =>{
         return(
           <li 
@@ -33,6 +35,7 @@ export const CardGrid =(props) => {
                 //handleClick用(関数実行)
                 stopTimer={props.stopTimer}
                 playKouka={props.playKouka}
+                placeHand={props.placeHand}
                 placeHand={props.placeHand}
                 pcPlayer={props.pcPlayer}
                

@@ -1,53 +1,37 @@
 // import {memo} from "react";
 import { MiniArea } from "./MiniArea";
 import { ListCards } from "./ListCards";
-import { useSetup } from "../hooks/useSetup";
 
 export const PlayArea =(props) => {
     console.log("PlayArea - Child1");
 
-
-    const {area} =useSetup
-
     let backgroundImage="";
 
-{switch(area){
-  case "Asia":
-    backgroundImage="url(../images/worldmap.png)";
-    break
-  case "Europe":
-    backgroundImage="url(../images/tatami-1.png)" ;
-  break
-  case "Africa":
-    backgroundImage="url(../images/tatami-1.png)" ;
-  break
-  case "Americas":
-    backgroundImage="url(../images/tatami-1.png)" ;
-  break
-  case "Oceania":
-    backgroundImage="url(../images/tatami-1.png)" ;
-  break
+      {switch(props.language){
+        case "japanese":
+          backgroundImage="url(../images/tatami-1.png)";
+          break
+        case "hiragana":
+          backgroundImage="url(../images/tatami-1.png)" ;
+        break
+        case "english":
+          backgroundImage="url(../images/worldmap.png)" ;
 
-  case "World":
-    backgroundImage="url(../images/worldmap2.png)"; 
-  break
+        default: //Englishに同じ
+          backgroundImage="url(../images/worldmap.png)";
+        }
+      }//switch
 
-  default: //Worldに同じ
-    backgroundImage="url(../images/tatami-1.png)";
-
-  }
-}//switch
     const playArea = {
-   
       //差し込み用(props)
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundImage: props.backgroundImage, 
+      backgroundImage: backgroundImage, 
+      // backgroundImage: props.backgroundImage, 
     }
     return(
       <main 
         // className ="h-[454px] md:h-[630px] lg:h-[520px] bg-sky-100 mx-auto relative flex justify-center bg-contain bg-no-repeat bg-[url('https://karuta2020.tokyo/wp-content/uploads/gallery/2106krt_001_c.jpg')]"
-        className ={`h-[454px] md:h-[630px] lg:h-[520px] bg-sky-100 mx-auto relative flex justify-center bg-cover bg-no-repeat ${backgroundImage} `}
+        className ="h-[454px] bg-cover  bg-center bg-no-repeat md:h-[630px] lg:h-[520px] mx-auto relative flex justify-center  lg:bg-contain"
+        // className ={`h-[454px] bg-cover  bg-center bg-no-repeat md:h-[630px] lg:h-[520px] mx-auto relative flex justify-center  lg:bg-contain ${props.backgroundImage} `}
         style={playArea}
         >
         <ListCards
