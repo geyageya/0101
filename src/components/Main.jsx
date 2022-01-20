@@ -44,23 +44,14 @@ export const Main = (props) => {
   //  const [area, setArea]= useState("default")
   //  const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
   
-// // Sounds------------------------------------------------------------------
-// const effectSounds = [
-//   "sounds/effects/siin.mp3",
-//   "sounds/effects/pan.mp3", 
-//   "sounds/effects/bubu.mp3", 
-//   "sounds/effects/chan.mp3",
-//   "sounds/effects/clap.mp3",
-//   "sounds/effects/chiin.mp3", 
-// ]
-  //札の準備ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  //■■■■■useEffect (API)■■■■■ 
-    //APIデータ取得
-    useEffect (() => {
-      getApiLists();
-      //下のコメント（不要なwarningを出さないようにするため）
-      // eslint-disable-next-line 
-    },[]);
+  // //札の準備ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  // //■■■■■useEffect (API)■■■■■ 
+  //   //APIデータ取得
+  //   useEffect (() => {
+  //     getApiLists();
+  //     //下のコメント（不要なwarningを出さないようにするため）
+  //     // eslint-disable-next-line 
+  //   },[]);
   
    //APIデータを取得
     // const getApiLists = useCallback(async () => {
@@ -674,29 +665,18 @@ const playLevelThree=(e) => {
 
 let backgroundImage="";
 
-{switch(area){
-  case "Asia":
-    backgroundImage="url(../images/worldmap.png)";
-    break
-  case "Europe":
-    backgroundImage="url(../images/tatami-1.png)" ;
-  break
-  case "Africa":
-    backgroundImage="url(../images/tatami-1.png)" ;
-  break
-  case "Americas":
-    backgroundImage="url(../images/tatami-1.png)" ;
-  break
-  case "Oceania":
-    backgroundImage="url(../images/tatami-1.png)" ;
-  break
-
-  case "World":
-    backgroundImage="url(../images/worldmap2.png)"; 
-  break
-
-  default: //Worldに同じ
+{switch(language){
+  case "japanese":
     backgroundImage="url(../images/tatami-1.png)";
+    break
+  case "hiragana":
+    backgroundImage="url(../images/tatami-1.png)" ;
+  break
+  case "english":
+    backgroundImage="url(../images/worldmap.png)" ;
+
+  default: //Englishに同じ
+    backgroundImage="url(../images/worldmap.png)";
 
   }
 }//switch
@@ -842,7 +822,6 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
     ) //return
 
 }//Main
-
 
 
 

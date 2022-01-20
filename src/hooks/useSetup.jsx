@@ -1,4 +1,4 @@
-import {useState,useCallback} from "react";
+import {useState,useCallback, useEffect} from "react";
 import { useKouka } from "./useKouka";
 
 export const useSetup =() => {
@@ -13,6 +13,15 @@ export const useSetup =() => {
   // const [level, setLevel]= useState("default")
   const [area, setArea]= useState("default")
   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
+
+  //札の準備ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  //■■■■■useEffect (API)■■■■■ 
+    //APIデータ取得
+    useEffect (() => {
+      getApiLists();
+      //下のコメント（不要なwarningを出さないようにするため）
+      // eslint-disable-next-line 
+    },[]);
 
    //  APIデータを取得
   const getApiLists = useCallback(async () => {
@@ -110,34 +119,7 @@ export const useSetup =() => {
     }//switch
   }//chooseArea
 
-//   let backgroundImage="";
-
-// {switch(area){
-//   case "Asia":
-//     backgroundImage="url(../images/worldmap.png)";
-//     break
-//   case "Europe":
-//     backgroundImage="url(../images/tatami-1.png)" ;
-//   break
-//   case "Africa":
-//     backgroundImage="url(../images/tatami-1.png)" ;
-//   break
-//   case "Americas":
-//     backgroundImage="url(../images/tatami-1.png)" ;
-//   break
-//   case "Oceania":
-//     backgroundImage="url(../images/tatami-1.png)" ;
-//   break
-
-//   case "World":
-//     backgroundImage="url(../images/worldmap2.png)"; 
-//   break
-
-//   default: //Worldに同じ
-//     backgroundImage="url(../images/worldmap.png)";
-
-//   }
-// }//switch
+ 
 
 //ラジオボタン
 
