@@ -470,32 +470,31 @@ export const Main = (props) => {
         <Typewriter text={text} />
 
         <PlayArea 
-          //const PlayArea用
-          // backgroundImage={backgroundImage}
+          //PlayArea用(backgroundImgの表示分け)
           language = {language}
-          //const CardGrid用
+          //CardGrid(map関数)
           karutaLists={karutaLists} 
-          
-          // Card用
+          //Card用（絵札の反応制御）--Mainから
           isAnswered = {isAnswered}
-          //const MiniArea用
-          miniCard={miniCard}
-          miniCardPc={miniCardPc}
-          isScored={isScored}
-          //handleClick用(useState)
+          //Card-handleClick用(useState) --Mainから
           basicLists={basicLists}
           currentTurn={currentTurn}
-          score={score}
           setIsAnswered={setIsAnswered}
           setIsPopup={setIsPopup}
-          setScore={setScore}
           setIsScored={setIsScored}
-          //handleClick用(関数実行)
+          score={score}
+          setScore={setScore}
+          //Card-handleClick用(関数実行) --Mainから
           stopTimer={stopTimer}
-          playKouka={playKouka}
-          placeHand={placeHand}
           pcPlayer={pcPlayer}
-          onClick={()=>handleSet()} 
+          placeHand={placeHand}
+          playKouka={playKouka}
+          // onClick={()=>handleSet()} 
+
+          //MiniArea用 ??どこで使用しているか不明
+          miniCard={miniCard}
+          miniCardPc={miniCardPc}
+          // isScored={isScored}
          
           //追加
         />

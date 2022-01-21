@@ -1,6 +1,6 @@
 // import {memo} from "react";
 import { MiniArea } from "./MiniArea";
-import { ListCards } from "./ListCards";
+import { CardList } from "./CardList";
 
 export const PlayArea =(props) => {
   console.log("PlayArea - Child1");
@@ -9,10 +9,10 @@ export const PlayArea =(props) => {
 
     switch(props.language){
       case "japanese":
-        backgroundImage="url(../images/tatami-1.png)";
+        backgroundImage="url(../images/tatami.png)";
         break
       case "hiragana":
-        backgroundImage="url(../images/tatami-1.png)" ;
+        backgroundImage="url(../images/tatami.png)" ;
        break
       case "english":
         backgroundImage="url(../images/worldmap.png)" ;
@@ -33,25 +33,24 @@ export const PlayArea =(props) => {
       // className ={`h-[454px] bg-cover  bg-center bg-no-repeat md:h-[630px] lg:h-[520px] mx-auto relative flex justify-center  lg:bg-contain ${props.backgroundImage} `}
       style={playArea}
       >
-      <ListCards
-        //const CardGrid用
+      <CardList
+        //CardGrid用 --Mainから
         karutaLists={props.karutaLists}
-        // Card用
-        isAnswered = {isAnswered}
-        //handleClick用(useState)
+       //Card用（絵札の反応制御）--Mainから
+        isAnswered = {props.isAnswered}
+        //Card-handleClick用(useState)  --Mainから
         basicLists={props.basicLists}
         currentTurn={props.currentTurn}
-        score={props.score}
         setIsAnswered={props.setIsAnswered}
         setIsPopup={props.setIsPopup}
-        setScore={props.setScore}
         setIsScored={props.setIsScored}
-        //handleClick用(関数実行)
-        stopTimer={props.stopTimer}
-        playKouka={props.playKouka}
-        placeHand={props.placeHand}
+        score={props.score}
+        setScore={props.setScore}
+        //Card-handleClick用(関数実行)  --Mainから
         pcPlayer={props.pcPlayer}
-        onClick={() =>props.handleClick()} 
+        placeHand={props.placeHand}
+        playKouka={props.playKouka}
+        stopTimer={props.stopTimer}
       />
       {/* player用 */}
       <MiniArea
