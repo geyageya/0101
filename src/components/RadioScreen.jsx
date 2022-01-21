@@ -17,15 +17,12 @@ export const RadioScreen = memo((props)=>{
       <RadioLang 
         setLanguage = {props.setLanguage}
         />
-     
       <RadioArea 
         setArea ={props.setArea}
       />
-      
       <RadioSpeed
         setLevel = {props.setLevel}
       />
-      
       <Button 
         tailwind="bg-red-600 mt-10 text-white cursor-pointer transform hover:scale-110 transition-transform"
         onClick={props.onClick} 

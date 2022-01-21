@@ -12,7 +12,9 @@ export const MiniArea =memo((props) => {
         {props.miniArray.map(picture =>{
         return(
           <li key={picture}>
-            <MiniCard src={picture} />
+            <MiniCard 
+             //MiniCard用 MiniCardから
+             src={picture} />
           </li>
         )
         })}

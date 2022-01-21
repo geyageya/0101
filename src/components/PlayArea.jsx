@@ -56,15 +56,12 @@ export const PlayArea =(props) => {
       <MiniArea
         miniArray = {props.miniCard} 
         tailwind="bottom-0 left-0 items-end"
-        // isScored={isScored}
         currentTurn={props.currentTurn}
-        
       />
       {/* PC用 */}
       <MiniArea
         miniArray = {props.miniCardPc} 
         tailwind="top-0 left-0 items-start"
-        // isScored = {isScored}
         currentTurn={props.currentTurn}
       />
       {/* items-start, items-end 札を上下線にそって配列。外側が直線、内側が凸凹*/}

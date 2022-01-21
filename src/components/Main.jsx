@@ -41,7 +41,7 @@ export const Main = (props) => {
   const [level, setLevel]= useState("default")
   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
     
-  //「札を並べる」ボタンを押す(useCallbackを設定すると絵札が表示されない)
+  // //「札を並べる」ボタンを押す(useCallbackを設定すると絵札が表示されない)
   const handleSet = () => {
     chooseArea();
     playKouka(0);       //効果音 
@@ -411,10 +411,10 @@ export const Main = (props) => {
     }
   }
   
-  //次のゲーム
-  const newGame =() => {
-    window.location.reload();
-  }
+  // //次のゲーム
+  // const newGame =() => {
+  //   window.location.reload();
+  // }
 
   //ボタンのtext
   const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始";
@@ -435,7 +435,6 @@ export const Main = (props) => {
           //RadioSpeed用
           setLevel = {setLevel}
         />
-        
        :
         <>
        <Title />
@@ -478,7 +477,6 @@ export const Main = (props) => {
           isAnswered = {isAnswered}
           //Card-handleClick用(useState) --Mainから
           basicLists={basicLists}
-          currentTurn={currentTurn}
           setIsAnswered={setIsAnswered}
           setIsPopup={setIsPopup}
           setIsScored={setIsScored}
@@ -489,14 +487,12 @@ export const Main = (props) => {
           pcPlayer={pcPlayer}
           placeHand={placeHand}
           playKouka={playKouka}
-          // onClick={()=>handleSet()} 
-
+          //Card-handleClick用(useState) + MiniArea用
+          currentTurn={currentTurn}
           //MiniArea用 ??どこで使用しているか不明
+          //上にあるcurrentTurnを、MiniAreacでも使用
           miniCard={miniCard}
           miniCardPc={miniCardPc}
-          // isScored={isScored}
-         
-          //追加
         />
 
       {isPopup ? 
@@ -504,16 +500,16 @@ export const Main = (props) => {
         {/* scoredStatus = isScored ? "正解" : "相手が取りました"; */}
         {isScored ?
           <Popup 
-            popupMsg={scoredStatus}
             basicLists={basicLists} 
             currentTurn={currentTurn} 
+            popupMsg={scoredStatus}
             onClick={()=>pressPopupBtn()} 
           />
           : 
           <Popup 
-            popupMsg={scoredStatus}
             basicLists={basicLists} 
             currentTurn={currentTurn}
+            popupMsg={scoredStatus}
             onClick={()=>pressPopupBtn()} 
           />
         }
@@ -524,9 +520,7 @@ export const Main = (props) => {
       {isResult ?
         <Result  
           basicLists={basicLists} 
-          currentTurn={currentTurn}
           score ={score}
-          onClick={()=>newGame()} 
         />
         : null
       } 

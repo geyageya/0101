@@ -5,7 +5,7 @@ export const Card =(props) =>{
   console.log("Card - Child4");  
   
   const {playKouka} = useKouka();
-    
+
     //useCallbackをhandleClikcに設定すると、最初しか正解にならなかった。つまりこの関数が停止しているからだ。
     const handleClick = (selectedId)=> { 
       props.setIsAnswered(true);      //絵札のクリックを不可にする
@@ -31,7 +31,6 @@ export const Card =(props) =>{
       }
     }//handleClick
 
-  
   return(
     <div>
     {props.isAnswered ? 
