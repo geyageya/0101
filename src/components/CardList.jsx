@@ -1,6 +1,6 @@
 import {CardGrid} from "./CardGrid";
 
-export const ListCards =(props) =>{
+export const CardList =(props) =>{
     console.log("listCards - Child2");
    
     return(
@@ -8,24 +8,23 @@ export const ListCards =(props) =>{
         className  ="absolute top-[88px] grid grid-cols-4 grid-rows-3 justify-center gap-1 px-1 md:top-[116px] lg:top-[108px] lg:grid-cols-6 lg:grid-rows-2 "
         >
         <CardGrid
-          //const CardGrid用
-          karutaLists={props.karutaLists}
-          //handleClick用(useState)
+          //CardGrid(map関数) --Mainから
+          karutaLists={props.karutaLists} 
+          //Card（絵札の反応制御） --Mainから
+          isAnswered = {props.isAnswered}
+          //Card-handleClick用(useState)--Mainから
           basicLists={props.basicLists}
           currentTurn={props.currentTurn}
-          score={props.score}
-          isAnswered = {props.isAnswered}
           setIsAnswered={props.setIsAnswered}
           setIsPopup={props.setIsPopup}
-          setScore={props.setScore}
           setIsScored={props.setIsScored}
-          // onClick={() =>props.handleClick()} 
-          //handleClick用(関数実行)
-          stopTimer={props.stopTimer}
-          playKouka={props.playKouka}
-          placeHand={props.placeHand}
+          score={props.score}
+          setScore={props.setScore}
+          //Card-handleClick用(関数実行)--Mainから
           pcPlayer={props.pcPlayer}
-         
+          placeHand={props.placeHand}
+          playKouka={props.playKouka}
+          stopTimer={props.stopTimer}
         />
       </ul>
     )
