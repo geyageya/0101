@@ -10,159 +10,102 @@ import {useSetup } from "../hooks/useSetup";
 import {useKouka} from "../hooks/useKouka";
 import { Title } from "./Title";
 
+import { Typewriter } from "./Typewriter";
+
 export const Main = (props) => {
   console.log("Main - Parent")
 
-  const {basicLists, karutaLists, setKarutaLists, getApiLists, chooseArea, setArea
-  }= useSetup();
+  const {basicLists, karutaLists, setKarutaLists, chooseArea, setArea}= useSetup();
 
   const {playKouka} = useKouka();
 
   //■■■■■useState■■■■■
-    // const [basicLists,setBasicLists] = useState(dataLists);    //non-API
-  //  const [basicLists,setBasicLists] = useState([]);  //API利用時
-  //  const [karutaLists,setKarutaLists] = useState(basicLists);  //絵札用データ配列
 
-   const [miniCard, setMiniCard] = useState([]);      //ミニ絵札データ配列
-   const [miniCardPc, setMiniCardPc] = useState([]);  //ミニ絵札データ配列（PC)
   
-   const [currentTurn, setCurrentTurn] = useState(0);         //turnカウント
-   const [score, setScore] = useState(0);                     //スコア・カウント
-   const [isScored, setIsScored] = useState(false);           //player得点の有無
   
-   const [isStarted, setIsStarted] = useState(false)           //「ゲーム開始」ボタンの反応制御
-   const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
-  
-   const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
-   const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
-   
-   const timerRef = useRef(null);                              //タイマー設定用  
+  const [currentTurn, setCurrentTurn] = useState(0);         //turnカウント
+  const [score, setScore] = useState(0);                     //スコア・カウント
+  const [isScored, setIsScored] = useState(false);           //player得点の有無
+  const timerRef = useRef(null);                              //タイマー設定用  
 
-    const [language, setLanguage]= useState("default")
-   const [level, setLevel]= useState("default")
-  //  const [area, setArea]= useState("default")
-   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
+  const [isStarted, setIsStarted] = useState(false)           //「ゲーム開始」ボタンの反応制御
+  const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
+
+  const [text, setText] = useState("")             //読み句表示用
+  const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
+  const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
+
+  const [miniCard, setMiniCard] = useState([]);      //ミニ絵札データ配列
+  const [miniCardPc, setMiniCardPc] = useState([]);  //ミニ絵札データ配列（PC)
+  
+  const [language, setLanguage]= useState("default")
+  const [level, setLevel]= useState("default")
+  const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
     
-        //「札を並べる」ボタンを押すーーーーーーーーーーー
-    //useCallbackを設定すると絵札が表示されない
-    const handleSet = () => {
-      chooseArea();
-      playKouka(0);       //効果音 
-      setScreen(false)
-    };//handleSet
+  //「札を並べる」ボタンを押す(useCallbackを設定すると絵札が表示されない)
+  const handleSet = () => {
+    chooseArea();
+    playKouka(0);       //効果音 
+    setScreen(false)
+  };//handleSet
 
-    //「ゲーム開始」ボタンを押すーーーーーーーーー
-    //useCallbackを設定すると読み句の音声や表示が狂う
-    const handleStart =() => {
-      startTimer();           //タイマー設定（１枚目のみ）
-      setIsAnswered(false);   //絵札のクリック可能にする
-      setIsStarted(true)   //「ゲーム開始」ボタンの反応停止
-      readClue(currentTurn);  //読み句の読みあげ
-      // showClue(currentTurn); //読み句一括表示の場合のに
-    };//handleStart 
+    //「ゲーム開始」ボタンを押す(useCallbackを設定すると読み句の音声や表示が狂う)
+  const handleStart =() => {
+    startTimer();           //タイマー設定（１枚目のみ）
+    setIsAnswered(false);   //絵札のクリック可能にする
+    setIsStarted(true)   //「ゲーム開始」ボタンの反応停止
+    readClue(currentTurn);  //読み句の読みあげ
+    showClue(currentTurn);
+  };//handleStart 
 
-  //----一文字づつ表示する場合---------useEffect-----------------------
-  const [currentText, setCurrentText] = useState('');        
-   const index = useRef(0);
- 
-      //popup関数での設定の方がうまく作動する
-      useEffect(() => {
-        index.current = 0;
-        setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
-      },[]);
-     
-      useEffect(() => {
-           if(currentTurn < basicLists.length-1){
-            //表示する読み句を設定（ラジオぼたん）
-            let text ="";
-            switch (language){
-              case "english":
-                text = basicLists[currentTurn].clue //英語
-                break
-              case "japanese":
-                text = basicLists[currentTurn].yomiku //日本語
-                break
-              case "hiragana":
-                text = basicLists[currentTurn].furigana //英語
-                break
-              default:
-                text= basicLists[currentTurn].clue //英語
-            }
-            const timeoutId = setTimeout(()=>{
-              //一文字づつ増える文字列で、逐次currentTextを更新
-              setCurrentText ((prev) => prev + text.charAt(index.current));
-              //表示文字の位置を一つづつずらす（これがないと最初の文字だけが繰り返し表示される）
-              index.current +=1; 
-              //文字を表示する間隔を指定（SetTImeoutがないと全ての文字が同時に表示される。）
-              } , 100); 
-              //アンマウント時の処理（使用事例不明）
-            return () => {
-              clearTimeout(timeoutId);
-          };
-           }//if
-        //下のコメントは、eslintのwarniing消すため
-        //eslint-disable-next-line react-hooks/exhaustive-deps
-      },[currentText, isStarted]); 
-        // currentTextがないと、一文字しか表示されない。isStartedを記入しないと、句が表示されない
-  
-  // ----読み句全文を一度に表示する場合(イベント操作）--------------------------------
-  // const [currentText, setCurrentText] = useState('');        
- 
-  //     //popup関数での設定の方がうまく作動する
-      // useEffect(() => {
-      //   setCurrentText(""); //(clue関数とhide関数の両方で設定した方がいいみたい）
-      // },[]);
-     
-        //  const showClue=(currentNum) =>  {
-        //   if(currentNum < basicLists.length-1){
-        //     //表示する読み句を設定（ラジオぼたん）
-        //     let text ="";
-        //     switch (language){
-        //       case "english":
-        //         text = basicLists[currentNum].clue //英語
-        //         break
-        //       case "japanese":
-        //         text = basicLists[currentNum].yomiku //日本語
-        //         break
-        //       case "hiragana":
-        //         text = basicLists[currentNum].furigana //英語
-        //         break
-        //       default:
-        //         text= basicLists[currentNum].clue //英語
-        //     }
-        //     //一括表示専用関数
-        //     setCurrentText(text)
-            
-        //   };
-        // }
+  //読み句の表示（使用言語の設定（逐次・一括表示の切り替えは、Typewriterコンボーネントだけで行う）
+  const showClue =(currentTurn) =>{
+    //最後の一枚の読み句を表示しないようにする
+    if(currentTurn < basicLists.length-1){
+      let text;
+      switch (language){
+        case "english":
+          text = basicLists[currentTurn].clue //英語
+          break
+        case "japanese":
+          text= basicLists[currentTurn].yomiku //日本語
+          break
+        case "hiragana":
+          text = basicLists[currentTurn].furigana //英語
+          break
+        default:
+          text= basicLists[currentTurn].clue //英語
+      }
+      setText(text);
+    } //if
+  } //showClue
 
-//----読みあげ--------------------------------
-      //読みあげ （引数あり）
+
+  //読みあげ （引数あり）以前 currentTurnをcurrentNumとしていたが、理由覚えていない
   let clueSounds=new Audio();
  
   //useCallbackを設定すると読み句の音声が出ない
-  const readClue = (currentNum)=> {
+  const readClue = (currentTurn)=> {
 
-    if (currentNum < basicLists.length -1){
+    if (currentTurn < basicLists.length -1){
       //switch
     switch (language){
       case "default":
-        clueSounds.src = basicLists[currentNum].read; //英語
+        clueSounds.src = basicLists[currentTurn].read; //英語
         setLanguage("default")
         break
       case "english":
-        clueSounds.src = basicLists[currentNum].read; //英語
+        clueSounds.src = basicLists[currentTurn].read; //英語
         break
       case "japanese":
-        clueSounds.src = basicLists[currentNum].yomu; //日本語
+        clueSounds.src = basicLists[currentTurn].yomu; //日本語
         break
       case "hiragana":
-          clueSounds.src = basicLists[currentNum].yomu; //日本語
+          clueSounds.src = basicLists[currentTurn].yomu; //日本語
           break
       default:
-        clueSounds.src = basicLists[currentNum].read; //英語
+        clueSounds.src = basicLists[currentTurn].read; //英語
     }
-
     clueSounds.play();}
     clueSounds.preload = "auto";
     clueSounds.loop = false;
@@ -350,12 +293,13 @@ export const Main = (props) => {
    // 「次」ボタンを押した時
     if (currentTurn < basicLists.length-1) { //0,1,2,3,4,5]
      setTimeout(()=>{readClue(newCurrentTurn)}, 1200);
+     setTimeout(()=>{showClue(newCurrentTurn)}, 1000);
     //  setTimeout(()=>{showClue(newCurrentTurn)}, 1200); //読み句一括表示の場合のみ
 
      setIsAnswered(false);   //絵札のクリックを可にする
      setIsScored(false); 
      //表示する読み句の文字数をゼロに戻す（読み句を一次ずつ表示する場合）  
-     index.current=0;  //
+    //  index.current=0;  //
     }
 
    //タイマー設定（最後手前の札まで
@@ -376,7 +320,7 @@ export const Main = (props) => {
   const hide =() => {
 
     //読み句を消す (clue関数で設定しても機能しない）
-    setCurrentText("");
+    // setCurrentText("");
 
     //絵札と手を消す
     if(isScored){
@@ -468,15 +412,15 @@ export const Main = (props) => {
     }
   }
   
-//次のゲーム
-const newGame =() => {
-  window.location.reload();
-}
+  //次のゲーム
+  const newGame =() => {
+    window.location.reload();
+  }
 
-//ボタンのtext
-const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始";
+  //ボタンのtext
+  const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始";
 
-const scoredStatus = isScored ? "正解" : "相手が取りました";
+  const scoredStatus = isScored ? "正解" : "相手が取りました";
 
   //------JSX------------------------------------------------------------------------------
   return (
@@ -492,6 +436,7 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
           //RadioSpeed用
           setLevel = {setLevel}
         />
+        
        :
         <>
        <Title />
@@ -523,22 +468,27 @@ const scoredStatus = isScored ? "正解" : "相手が取りました";
               </Button>
           }
   
-        <ClueBox
-          currentText={currentText}
+        {/* <ClueBox
+          // currentText={currentText}
           basicLists={basicLists}
           language ={language}
-          currentText = {currentText}
-          setCurrentText = {setCurrentText}
-        />
+          // setCurrentText = {setCurrentText}
+        /> */}
 
-        {/* <button 
-        // onClick ={() => {setClue();
-        //   // setText1("By the river, a brown tower stands alone.");
-        // }}
-        >
-          タイプライター
-        </button>
-        <Typewriter text1={text1} /> */}
+        {/* <button
+          onClick ={() => clickButton()}
+        >Test
+        </button> */}
+        {/* <button
+          onClick ={() =>{
+            setText1("I am new text");
+          }
+          }
+        >Test
+        </button> */}
+
+        <Typewriter text={text} />
+
 
         <PlayArea 
           //const PlayArea用

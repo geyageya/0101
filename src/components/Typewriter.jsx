@@ -1,31 +1,46 @@
 import {useState, useEffect, useRef} from 'react'
 
-export const Typewriter = (props) => {
-  // const [text1, setText1] = useState("Hello World")
+export const Typewriter = ({text}) => {
 
   console.log("Child1 Typewriterレンダリング");
-//   const index1 = useRef(0);
+  const index = useRef(0);
 
-//   const [currentText1, setCurrentText1] =useState("");
+  const [currentText, setCurrentText] =useState("");
 
-//  useEffect(() => {
-//    index1.current = 0;
-//    setCurrentText1("");
-//  },[text1]);
+  //表示した読み句の初期化（消す）
+  useEffect(() => {
+    index.current = 0;
+    setCurrentText("");
+  },[text]);
 
-//   useEffect (() => {
-//     const timeoutId = setTimeout(() => {
-//       setCurrentText1((value) => value + text1.charAt(index1.current));
-//       index1.current += 1;
-//     },100);
-//     //アンマウント時の処理
-//     return () => {
-//       clearTimeout(timeoutId)
-//     };
+  useEffect (() => {
+    const timeoutId = setTimeout(() => {
+      //一文字づつ増える文字列で、逐次currentTextを更新
+      setCurrentText((value) => value + text.charAt(index.current));
+      //表示文字の位置を一つづつずらす（これがないと最初の文字だけが繰り返し表示される）
+      index.current += 1;
+      //文字を表示する間隔を指定（SetTImeoutがないと全ての文字が同時に表示される。）
+    },100);
     
-//   },[currentText1, text1]);
+    //アンマウント時の処理（タイマーストップ）
+    return () => {
+      clearTimeout(timeoutId)
+    };
+      
+  },[currentText, text]);
 
-  return <p>{props.currentText1}</p>
-  
-
+  return(
+    <div 
+    >
+      <div
+        className="w-[370px] h-[50px] mx-auto pl-1 mb-1 border rounded-md border-sky-500 md:w-[500px] md:text-lg lg:w-[800px] lg:text-2xl  "
+      >
+        {/* タイプライター用 */}
+        {currentText}
+        {/* 一括表示用。上の関数は全て使用しない */}
+        {/* {text}  */}
+      </div>
+      
+    </div>
+  )
 };
