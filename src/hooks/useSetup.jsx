@@ -1,8 +1,6 @@
 import {useState,useCallback, useEffect} from "react";
-import { useKouka } from "./useKouka";
 
 export const useSetup =() => {
-  const {playKouka} = useKouka();
   //かるたデータ
   const [basicLists,setBasicLists] = useState([]);  //API利用時
   const [karutaLists,setKarutaLists] = useState(basicLists);  //絵札用データ配列

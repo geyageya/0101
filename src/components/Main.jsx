@@ -1,6 +1,5 @@
-import {useState, useEffect,useRef} from "react";
+import {useState,useRef} from "react";
 import { Button } from "./Button";
-import {ClueBox} from "./ClueBox";
 import {PlayArea} from "./PlayArea";
 import {Popup} from "./Popup";
 import {Result} from "./Result";
@@ -21,7 +20,7 @@ export const Main = (props) => {
 
   //■■■■■useState■■■■■
 
-  
+  const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
   
   const [currentTurn, setCurrentTurn] = useState(0);         //turnカウント
   const [score, setScore] = useState(0);                     //スコア・カウント
@@ -29,7 +28,7 @@ export const Main = (props) => {
   const timerRef = useRef(null);                              //タイマー設定用  
 
   const [isStarted, setIsStarted] = useState(false)           //「ゲーム開始」ボタンの反応制御
-  const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
+  
 
   const [text, setText] = useState("")             //読み句表示用
   const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
@@ -440,7 +439,7 @@ export const Main = (props) => {
        :
         <>
        <Title />
-
+       {/* const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始"; */}
           {/* ゲーム開始ボタンを押した後 */}
           {isStarted ?
             <>
@@ -468,27 +467,7 @@ export const Main = (props) => {
               </Button>
           }
   
-        {/* <ClueBox
-          // currentText={currentText}
-          basicLists={basicLists}
-          language ={language}
-          // setCurrentText = {setCurrentText}
-        /> */}
-
-        {/* <button
-          onClick ={() => clickButton()}
-        >Test
-        </button> */}
-        {/* <button
-          onClick ={() =>{
-            setText1("I am new text");
-          }
-          }
-        >Test
-        </button> */}
-
         <Typewriter text={text} />
-
 
         <PlayArea 
           //const PlayArea用
@@ -496,8 +475,9 @@ export const Main = (props) => {
           language = {language}
           //const CardGrid用
           karutaLists={karutaLists} 
-          isAnswered = {isAnswered}
           
+          // Card用
+          isAnswered = {isAnswered}
           //const MiniArea用
           miniCard={miniCard}
           miniCardPc={miniCardPc}
@@ -522,6 +502,7 @@ export const Main = (props) => {
 
       {isPopup ? 
         <>
+        {/* scoredStatus = isScored ? "正解" : "相手が取りました"; */}
         {isScored ?
           <Popup 
             popupMsg={scoredStatus}

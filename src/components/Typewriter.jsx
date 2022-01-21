@@ -2,7 +2,7 @@ import {useState, useEffect, useRef} from 'react'
 
 export const Typewriter = ({text}) => {
 
-  console.log("Child1 Typewriterレンダリング");
+  console.log("Typewriter");
   const index = useRef(0);
 
   const [currentText, setCurrentText] =useState("");

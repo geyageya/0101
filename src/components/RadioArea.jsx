@@ -1,12 +1,10 @@
-import {memo, useState} from "react";
+import {memo} from "react";
 import { RadioBtn } from "./RadioBtn"
 import { useKouka } from "../hooks/useKouka";
-import { useSetup } from "../hooks/useSetup";
 
 export const RadioArea = memo((props)=>{
     console.log("RadioArea- Child1");
 
-    const {setArea} =useSetup();
     const {playKouka} = useKouka();
 
     const chooseAsia=(e) => {
