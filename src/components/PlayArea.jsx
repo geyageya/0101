@@ -54,13 +54,13 @@ export const PlayArea =(props) => {
       />
       {/* player用 */}
       <MiniArea
-        miniArray = {props.miniCard} 
+        miniList = {props.miniList} 
         tailwind="bottom-0 left-0 items-end"
         currentTurn={props.currentTurn}
       />
       {/* PC用 */}
       <MiniArea
-        miniArray = {props.miniCardPc} 
+        miniList = {props.miniListPc} 
         tailwind="top-0 left-0 items-start"
         currentTurn={props.currentTurn}
       />

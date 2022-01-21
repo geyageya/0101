@@ -34,8 +34,8 @@ export const Main = (props) => {
   const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
   const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
 
-  const [miniCard, setMiniCard] = useState([]);      //ミニ絵札データ配列
-  const [miniCardPc, setMiniCardPc] = useState([]);  //ミニ絵札データ配列（PC)
+  const [miniList, setMiniList] = useState([]);      //ミニ絵札データ配列
+  const [miniListPc, setMiniListPc] = useState([]);  //ミニ絵札データ配列（PC)
   
   const [language, setLanguage]= useState("default")
   const [level, setLevel]= useState("default")
@@ -383,17 +383,17 @@ export const Main = (props) => {
   //引数にcurrentTurnを入れないとうまくいかない
   //mini絵札を追加する(player)
   const addMini = (currentTurn) => {
-    setMiniCard((prevminiCard) => {
-      const newminiCard = [...prevminiCard, basicLists[currentTurn].answer]
-      return newminiCard;
+    setMiniList((prevminiList) => {
+      const newminiList = [...prevminiList, basicLists[currentTurn].answer]
+      return newminiList;
     });
   }
   
   //mini絵札を追加する(PC)
   const addMiniPc = (currentTurn) => {
-    setMiniCardPc((prevminiCardPc) => {
-      const newminiCardPc = [...prevminiCardPc, basicLists[currentTurn].answer]
-      return newminiCardPc;
+    setMiniListPc((prevminiListPc) => {
+      const newminiListPc = [...prevminiListPc, basicLists[currentTurn].answer]
+      return newminiListPc;
     });
   }
 
@@ -489,10 +489,9 @@ export const Main = (props) => {
           playKouka={playKouka}
           //Card-handleClick用(useState) + MiniArea用
           currentTurn={currentTurn}
-          //MiniArea用 ??どこで使用しているか不明
-          //上にあるcurrentTurnを、MiniAreacでも使用
-          miniCard={miniCard}
-          miniCardPc={miniCardPc}
+          //MiniArea用 
+          miniList={miniList}
+          miniListPc={miniListPc}
         />
 
       {isPopup ? 
