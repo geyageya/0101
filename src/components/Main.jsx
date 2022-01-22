@@ -4,14 +4,13 @@ import {PlayArea} from "./PlayArea";
 import {Popup} from "./Popup";
 import {Result} from "./Result";
 import {RadioScreen} from "./RadioScreen";
-
 import {useSetup } from "../hooks/useSetup";
 import {useKouka} from "../hooks/useKouka";
 import { Title } from "./Title";
 
 import { Typewriter } from "./Typewriter";
 
-export const Main = (props) => {
+export const Main = () => {
   console.log("Main - Parent")
 
   const {basicLists, karutaLists, setKarutaLists, chooseArea, setArea}= useSetup();
@@ -19,7 +18,7 @@ export const Main = (props) => {
   const {playKouka} = useKouka();
 
   //■■■■■useState■■■■■
-
+  //ゲーム中毎回更新
   const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
   
   const [currentTurn, setCurrentTurn] = useState(0);         //turnカウント
@@ -37,6 +36,7 @@ export const Main = (props) => {
   const [miniList, setMiniList] = useState([]);      //ミニ絵札データ配列
   const [miniListPc, setMiniListPc] = useState([]);  //ミニ絵札データ配列（PC)
   
+  //一回のみ
   const [language, setLanguage]= useState("default")
   const [speed, setSpeed]= useState("default")
   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
