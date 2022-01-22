@@ -9,7 +9,7 @@ export const MiniArea =memo((props) => {
       <ul 
         className ={`absolute mx-auto left-0 right-0 w-[372px] px-1 flex flex-wrap justify-start gap-1 ${props.tailwind} md:w-[532px] lg:w-[920px]`}
       >
-        {props.miniList.map(picture =>{
+         {props.miniList.map(picture =>{
         return(
           <li key={picture}>
             <MiniCard 

@@ -1,11 +1,12 @@
-import {memo} from "react";
+// import {memo} from "react";
 
 import { Button } from "./Button"
 import { RadioLang } from "./RadioLang";
 import { RadioSpeed } from "./RadioSpeed";
 import { RadioArea } from "./RadioArea";
 
-export const RadioScreen = memo((props)=>{
+//メモ化したが、効果なし
+export const RadioScreen = (props)=>{
     console.log("RadioScreen - Child1");
 
   return(
@@ -31,4 +32,4 @@ export const RadioScreen = memo((props)=>{
       </Button>
     </div> 
   ) //return
-}); //RadioScreen
+}; //RadioScreen

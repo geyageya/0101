@@ -2,6 +2,7 @@ import {memo} from "react";
 import { RadioBtn } from "./RadioBtn"
 import { useKouka } from "../hooks/useKouka";
 
+//メモ化効果:2８回削減（RadioLang:５回 →１回, RadioBtn:24回⇨０回）
 export const RadioArea = memo((props)=>{
     console.log("RadioArea- Child1");
 

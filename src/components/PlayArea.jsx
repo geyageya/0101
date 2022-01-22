@@ -2,6 +2,7 @@
 import { MiniArea } from "./MiniArea";
 import { CardList } from "./CardList";
 
+//memo化効果無し
 export const PlayArea =(props) => {
   console.log("PlayArea - Child1");
 

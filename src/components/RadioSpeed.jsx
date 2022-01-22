@@ -2,7 +2,8 @@ import {memo} from "react";
 import { useKouka } from "../hooks/useKouka";
 import { RadioBtn } from "./RadioBtn"
 
-export const RadioSpeed =memo((props) =>{
+//メモ化したが、効果なし
+export const RadioSpeed =(props) =>{
 
   const { playKouka} = useKouka();
 
@@ -53,4 +54,4 @@ export const RadioSpeed =memo((props) =>{
       </div>
       </>
   )
-});
+};

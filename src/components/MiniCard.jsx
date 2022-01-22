@@ -1,6 +1,7 @@
 // import {memo} from "react";
 
 /* ミニ絵札*/
+//memo化効果なし（次ボタンを押した後一回表示されるのみ）
 export const MiniCard =(props) => {
     console.log("MiniCard - Child3");
     

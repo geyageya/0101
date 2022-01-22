@@ -1,6 +1,7 @@
-import {memo} from "react";
+// import {memo} from "react";
 
-export const RadioBtn =memo((props) => {
+//メモ化したが、効果なし
+export const RadioBtn =(props) => {
     console.log("RadioBtn - Child2");
   return(
     <div
@@ -21,4 +22,4 @@ export const RadioBtn =memo((props) => {
       </label>
     </div>
   ) //return
-});
+};

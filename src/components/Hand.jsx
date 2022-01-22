@@ -1,8 +1,8 @@
 import {memo} from "react";
 
-//memo化の効果大。memo化しないと札を取る度に絵札の数x2回レンダリングされる
+//memo効果：36回⇨1回（札数6枚の場合）
 export const Hand =memo((props) =>{
-    console.log("Hand - Child4");
+    console.log("Hand - Child");
     
     return(
       <>
