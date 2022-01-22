@@ -38,7 +38,7 @@ export const Main = (props) => {
   const [miniListPc, setMiniListPc] = useState([]);  //ミニ絵札データ配列（PC)
   
   const [language, setLanguage]= useState("default")
-  const [level, setLevel]= useState("default")
+  const [speed, setSpeed]= useState("default")
   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
     
   // //「札を並べる」ボタンを押す(useCallbackを設定すると絵札が表示されない)
@@ -112,26 +112,26 @@ export const Main = (props) => {
   
   //PcPlayer--------------------------------------
   const startTimer = () => {
-    switch (level){
+    switch (speed){
       case "default":
         timerRef.current = setTimeout(() => {
         pcPlayer();
         }, 8000);
-        setLevel("default")
+        setSpeed("default")
         break
   
-      case "levelOne":
+      case "speedOne":
         timerRef.current = setTimeout(() => {
           pcPlayer();
           }, 12000);
         break
   
-      case "levelTwo":
+      case "speedTwo":
         timerRef.current = setTimeout(() => {
           pcPlayer();
           }, 8000);
         break
-      case "levelThree":
+      case "speedThree":
         timerRef.current = setTimeout(() => {
           pcPlayer();
           }, 5000);
@@ -153,7 +153,7 @@ export const Main = (props) => {
   //timer2 (引数 newCurrentTurn)
   //switch
   const startTimer2 = (newCurrentTurn) => {
-    switch (level){
+    switch (speed){
       case "default":
         if (newCurrentTurn < basicLists.length-3) { //0,1,2,3,4,5]
           timerRef.current = setTimeout(() => {
@@ -170,10 +170,10 @@ export const Main = (props) => {
               pcPlayer2(newCurrentTurn);
               }, 4000);
           }
-          setLevel("default")
+          setSpeed("default")
           break
   
-      case "levelOne":
+      case "speedOne":
         if (newCurrentTurn < basicLists.length-3) { //最後から4枚目以上
         timerRef.current = setTimeout(() => {
           pcPlayer2(newCurrentTurn);
@@ -191,7 +191,7 @@ export const Main = (props) => {
         }
         break
   
-      case "levelTwo":
+      case "speedTwo":
         if (newCurrentTurn < basicLists.length-3) { 
         timerRef.current = setTimeout(() => {
           pcPlayer2(newCurrentTurn);
@@ -208,7 +208,7 @@ export const Main = (props) => {
             }, 3000);
         }
         break
-      case "levelThree":
+      case "speedThree":
         if (newCurrentTurn < basicLists.length-3) { 
         timerRef.current = setTimeout(() => {
           pcPlayer2(newCurrentTurn);
@@ -433,7 +433,7 @@ export const Main = (props) => {
           //RadioArea用
           setArea = {setArea}
           //RadioSpeed用
-          setLevel = {setLevel}
+          setSpeed = {setSpeed}
         />
        :
         <>

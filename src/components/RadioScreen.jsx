@@ -21,7 +21,7 @@ export const RadioScreen = memo((props)=>{
         setArea ={props.setArea}
       />
       <RadioSpeed
-        setLevel = {props.setLevel}
+        setSpeed = {props.setSpeed}
       />
       <Button 
         tailwind="bg-red-600 mt-10 text-white cursor-pointer transform hover:scale-110 transition-transform"

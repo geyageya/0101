@@ -6,17 +6,17 @@ export const RadioSpeed =memo((props) =>{
 
   const { playKouka} = useKouka();
 
-  const playLevelOne =(e) => {
-    props.setLevel("levelOne")
+  const speedLevelOne =(e) => {
+    props.setSpeed("levelOne")
     playKouka(7)
   }
   
-  const playLevelTwo =(e) => {
-    props.setLevel("levelTwo")
+  const speedLevelTwo =(e) => {
+    props.setSpeed("levelTwo")
     playKouka(7)
   }
-  const playLevelThree=(e) => {
-    props.setLevel("levelThree")
+  const speedLevelThree=(e) => {
+    props.setSpeed("levelThree")
     playKouka(7)
   }
   return (
@@ -27,28 +27,28 @@ export const RadioSpeed =memo((props) =>{
       </div>
       <div className="flex  m-1 gap-2 md:flex-wrap md:gap-6 md:m-5">
         <RadioBtn
-          id="levelOne" 
-          name="level" 
-          value="levelOne"
-          htmlFor="levelOne"
+          id="speedlevelOne" 
+          name="speed" 
+          value="speedlevelOne"
+          htmlFor="speedlevelOne"
           text =" ゆっくり"
-          onChange={()=> playLevelOne()}
+          onChange={()=> speedLevelOne()}
         />
         <RadioBtn
-          id="levelTwo" 
-          name="level" 
-          value="levelTwo"
-          htmlFor="levelTwo"
+          id="speedlevelTwo" 
+          name="speed" 
+          value="speedlevelTwo"
+          htmlFor="speedlevelTwo"
           text =" 少し速い"
-          onChange={()=> playLevelTwo()}
+          onChange={()=> speedLevelTwo()}
         />
         <RadioBtn
-          id="levelThree" 
-          name="level" 
-          value="levelThree"
-          htmlFor="levelThree"
+          id="speedlevelThree" 
+          name="speed" 
+          value="speedlevelThree"
+          htmlFor="speedlevelThree"
           text ="もっと速い"
-          onChange={()=> playLevelThree()}
+          onChange={()=> speedLevelThree()}
         />
       </div>
       </>
