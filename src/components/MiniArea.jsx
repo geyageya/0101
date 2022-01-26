@@ -13,7 +13,7 @@ export const MiniArea =memo((props) => {
         return(
           <li key={picture}>
             <MiniCard 
-             //MiniCard用 MiniCardから
+             //MiniCard用--MiniAreaから
              src={picture} />
           </li>
         )

@@ -4,7 +4,6 @@ export const useSetup =() => {
   //かるたデータ
   const [basicLists,setBasicLists] = useState([]);  //API利用時
   const [karutaLists,setKarutaLists] = useState(basicLists);  //絵札用データ配列
-
   //トップ画面
   const [area, setArea]= useState("default")
 

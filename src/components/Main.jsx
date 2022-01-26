@@ -7,45 +7,75 @@ import {RadioScreen} from "./RadioScreen";
 import {useSetup } from "../hooks/useSetup";
 import {useKouka} from "../hooks/useKouka";
 import { Title } from "./Title";
+import { ClueBox } from "./ClueBox";
+import {CardList} from "./CardList";
+import {CardGrid} from "./CardGrid";
+import { MiniArea } from "./MiniArea";
 
-import { Typewriter } from "./Typewriter";
+// import useSound from 'use-sound';
 
 export const Main = () => {
   console.log("Main - Parent")
 
+  // const {koukaSounds} = useKouka();
   const {basicLists, karutaLists, setKarutaLists, chooseArea, setArea}= useSetup();
-
   const {playKouka} = useKouka();
 
-  //■■■■■useState■■■■■
+  //内容
+  // (1) useState
+  // (2) handleボタン
+  // (3) 読み句
+  // (4) PCプレーヤー
+  // (5) ポップアップボタンを押した後
+  // (6) ゲーム中の表示（手、絵札・ミニ絵札）
+  // その他
+  // JSX
+
+  //■■■■■■■■■■■■■■■■■■■■■■■■■ (1)useState ■■■■■■■■■■■■■■■■■■■■■■■■■
   //ゲーム中毎回更新
-  const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
-  
-  const [currentTurn, setCurrentTurn] = useState(0);         //turnカウント
-  const [score, setScore] = useState(0);                     //スコア・カウント
-  const [isScored, setIsScored] = useState(false);           //player得点の有無
-  const timerRef = useRef(null);                              //タイマー設定用  
+   //一回のみ
+   const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
+   const [language, setLanguage]= useState("default")
+   const [speed, setSpeed]= useState("default")
 
   const [isStarted, setIsStarted] = useState(false)           //「ゲーム開始」ボタンの反応制御
-  
-
+  const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
   const [text, setText] = useState("")             //読み句表示用
-  const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
-  const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
 
+  const [currentTurn, setCurrentTurn] = useState(0);         //turnカウント
+  const [isScored, setIsScored] = useState(false);           //player得点の有無
+  const [score, setScore] = useState(0);                     //スコア・カウント
+
+  const [isPopup, setIsPopup] = useState(false);             //ポップアップの表示・非表示
   const [miniList, setMiniList] = useState([]);      //ミニ絵札データ配列
   const [miniListPc, setMiniListPc] = useState([]);  //ミニ絵札データ配列（PC)
+  const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
+
+  // const [play, {stop}] = useSound(koukaSounds[0])
+
+  // const kouka =
+  //   [
+  //     "../siin.mp3",    //playKouka(0)
+  //     "../pan.mp3",     //playKouka(1)
+  //     "../bubu.mp3",    //playKouka(2)
+  //     "../chan.mp3",    //playKouka(3)
+  //     "../rappa.mp3",   //playKouka(4)
+  //     "../clap.mp3",    //playKouka(5)
+  //     "../chiin.mp3",   //playKouka(6)
+  //     "../button1.mp3",   //playKouka(7)
+  //     "../button2.mp3",   //playKouka(8)
+  //     "../suiteki.mp3",   //playKouka(9)
+  //   ]
   
-  //一回のみ
-  const [language, setLanguage]= useState("default")
-  const [speed, setSpeed]= useState("default")
-  const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
-    
+  
+  //■■■■■■■■■■■■■■■■■■■■■■■■■ (2) handleボタン ■■■■■■■■■■■■■■■■■■■■■■■■■
+
   // //「札を並べる」ボタンを押す(useCallbackを設定すると絵札が表示されない)
   const handleSet = () => {
     chooseArea();
-    playKouka(0);       //効果音 
     setScreen(false)
+    playKouka(0);       //効果音 
+    // play();
   };//handleSet
 
     //「ゲーム開始」ボタンを押す(useCallbackを設定すると読み句の音声や表示が狂う)
@@ -57,7 +87,32 @@ export const Main = () => {
     showClue(currentTurn);
   };//handleStart 
 
-  //読み句の表示（使用言語の設定（逐次・一括表示の切り替えは、Typewriterコンボーネントだけで行う）
+  const handleClick = (selectedId)=> { 
+    setIsAnswered(true);      //絵札のクリックを不可にする
+    stopTimer();              //タイマー解除（PCplayer)
+
+    //正解の場合
+    if (selectedId ===basicLists[currentTurn].id) {//配列のIDを比較
+      // //正解の絵札の上に手を表示
+    
+      playKouka(1);
+      setIsPopup(true);       
+      placeHand();
+      //player独自の操作
+      setScore(score + 1);    //スコア加点
+      setIsScored(true)       //ミニ絵札表示（手前）の有無を決める基準
+      //最後の１枚を撮った場合に加点
+      if (currentTurn===basicLists.length -2)
+      setScore(score + 2);   
+    }
+    //不正解の場合
+    else{
+      setTimeout(()=>{pcPlayer()}, 300);
+    }
+  }//handleClick
+  
+  //■■■■■■■■■■■■■■■■■■■■■■■■■  (3) 読み句 ■■■■■■■■■■■■■■■■■■■■■■■■■
+  //読み句の表示（使用言語の設定（逐次・一括表示の切り替えは、ClueBoxコンボーネントだけで行う）
   const showClue =(currentTurn) =>{
     //最後の一枚の読み句を表示しないようにする
     if(currentTurn < basicLists.length-1){
@@ -78,7 +133,6 @@ export const Main = () => {
       setText(text);
     } //if
   } //showClue
-
 
   //読みあげ （引数あり）以前 currentTurnをcurrentNumとしていたが、理由覚えていない
   let clueSounds=new Audio();
@@ -109,8 +163,10 @@ export const Main = () => {
     clueSounds.preload = "auto";
     clueSounds.loop = false;
   };
-  
-  //PcPlayer--------------------------------------
+
+  //■■■■■■■■■■■■■■■■■■■■■■■■■ (4) PCプレーヤー ■■■■■■■■■■■■■■■■■■■■■■■■■
+  const timerRef = useRef(null);                              //タイマー設定用  
+
   const startTimer = () => {
     switch (speed){
       case "default":
@@ -250,6 +306,7 @@ export const Main = () => {
     placeHandPc();
     setIsPopup(true);
     playKouka(2);
+    // play(2)
     setIsAnswered(true);
   }
   //PCplayer2の動き　(引数 newCurrentTurn)
@@ -258,9 +315,10 @@ export const Main = () => {
     setIsPopup(true);
     setIsAnswered(true);
     playKouka(3);
+    // play(3)
   }
 
-  //ポップアップボタンを押した場合-----------------------------
+  //■■■■■■■■■■■■■■■■■■■■■■■■■  (5) ポップアップボタンを押した後 ■■■■■■■■■■■■■■■■■■■■■■■■■
   //useCallback使ったらエラー出た
   const pressPopupBtn = () => {
 
@@ -287,18 +345,15 @@ export const Main = () => {
      }
    };
    
-   //次の準備ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+   //次の準備ーー
    
    // 「次」ボタンを押した時
     if (currentTurn < basicLists.length-1) { //0,1,2,3,4,5]
      setTimeout(()=>{readClue(newCurrentTurn)}, 1200);
      setTimeout(()=>{showClue(newCurrentTurn)}, 1000);
     //  setTimeout(()=>{showClue(newCurrentTurn)}, 1200); //読み句一括表示の場合のみ
-
      setIsAnswered(false);   //絵札のクリックを可にする
      setIsScored(false); 
-     //表示する読み句の文字数をゼロに戻す（読み句を一次ずつ表示する場合）  
-    //  index.current=0;  //
     }
 
    //タイマー設定（最後手前の札まで
@@ -336,6 +391,8 @@ export const Main = () => {
       eraseLast();          
     }
   }
+
+//■■■■■■■■■■■■■■■■■■■■■■■■■ (6) ゲーム中の表示（手、絵札・ミニ絵札）■■■■■■■■■■■■■■■■■■■■■■■■■
 
   // // //正解の絵札の上に手を表示
   const placeHand = () => {
@@ -380,6 +437,7 @@ export const Main = () => {
     setKarutaLists(result2);  
   }
 
+  //
   //引数にcurrentTurnを入れないとうまくいかない
   //mini絵札を追加する(player)
   const addMini = (currentTurn) => {
@@ -397,31 +455,32 @@ export const Main = () => {
     });
   }
 
+  //■■■■■■■■■■■■■■■■■■■■■■■■■ その他 ■■■■■■■■■■■■■■■■■■■■■■■■■
    //結果画面表示時の効果音
    const soundResult =() => {
     if (score>basicLists.length * 0.5) {
       playKouka(4);
+      // play(4)
     }
     else if (score===basicLists.length * 0.5) {
       playKouka(5);
+      // play(5)
     }
     else
     {
       playKouka(6);
+      // play(6)
     }
   }
-  
-  // //次のゲーム
-  // const newGame =() => {
-  //   window.location.reload();
-  // }
 
   //ボタンのtext
   const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始";
-
   const scoredStatus = isScored ? "正解" : "相手が取りました";
 
-  //------JSX------------------------------------------------------------------------------
+  
+
+
+  //■■■■■■■■■■■■■■■■■■■■■■■■■ JSX ■■■■■■■■■■■■■■■■■■■■■■■■■
   return (
     <div>
       {screen ?
@@ -438,6 +497,7 @@ export const Main = () => {
        :
         <>
        <Title />
+    
        {/* const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始"; */}
           {/* ゲーム開始ボタンを押した後 */}
           {isStarted ?
@@ -465,33 +525,60 @@ export const Main = () => {
                 {gameStatus}
               </Button>
           }
-  
-        <Typewriter text={text} />
-
+        
+        <ClueBox text={text} />
+        
         <PlayArea 
+
           //PlayArea用(backgroundImgの表示分け)
           language = {language}
-          //CardGrid(map関数)
-          karutaLists={karutaLists} 
-          //Card用（絵札の反応制御）--Mainから
-          isAnswered = {isAnswered}
-          //Card-handleClick用(useState) --Mainから
-          basicLists={basicLists}
-          setIsAnswered={setIsAnswered}
-          setIsPopup={setIsPopup}
-          setIsScored={setIsScored}
-          score={score}
-          setScore={setScore}
-          //Card-handleClick用(関数実行) --Mainから
-          stopTimer={stopTimer}
-          pcPlayer={pcPlayer}
-          placeHand={placeHand}
-          playKouka={playKouka}
-          //Card-handleClick用(useState) + MiniArea用
-          currentTurn={currentTurn}
+
+          //以下、JSXをpropsに
+          cardList = {
+            <CardList
+              //CardGrid用 --Mainから
+              karutaLists={karutaLists} 
+              //Card--Mainから
+              isAnswered = {isAnswered}
+              onClick={(id)=>handleClick(id)}
+              
+              cardGrid = {
+                <CardGrid
+                  //CardGrid(map関数) --Mainから
+                  karutaLists={karutaLists} 
+                  //Card--Mainから
+                  isAnswered = {isAnswered}
+                  onClick={(id)=>handleClick(id)}
+                /> 
+              }
+            />
+          }
+          miniArea = {
+            <MiniArea
+            miniList = {miniList} 
+            tailwind="bottom-0 left-0 items-end"
+            currentTurn={currentTurn}
+            />
+          }
+          miniAreaPc = {
+            <MiniArea
+            miniList = {miniListPc} 
+            tailwind="top-0 left-0 items-start"
+            currentTurn={currentTurn}
+            />
+          }
+          //以下、propsのバケツリレーの場合ーーーーーーーーーー
+          //CardGrid(map関数) --Mainから
+          // karutaLists={karutaLists} 
+
+          //Card--Mainから
+          // isAnswered = {isAnswered}
+          // onClick={(id)=>handleClick(id)}
+
           //MiniArea用 
-          miniList={miniList}
-          miniListPc={miniListPc}
+          // currentTurn={currentTurn}
+          // miniList={miniList}
+          // miniListPc={miniListPc}
         />
 
       {isPopup ? 
@@ -511,7 +598,7 @@ export const Main = () => {
             popupMsg={scoredStatus}
             onClick={()=>pressPopupBtn()} 
           />
-        }
+        } 
         </>
         : null
       } 

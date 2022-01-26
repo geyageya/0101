@@ -1,4 +1,4 @@
-import {memo} from "react";
+// import {memo} from "react";
 import { useKouka } from "../hooks/useKouka";
 import { RadioBtn } from "./RadioBtn"
 
@@ -10,15 +10,18 @@ export const RadioSpeed =(props) =>{
   const speedLevelOne =(e) => {
     props.setSpeed("levelOne")
     playKouka(7)
+    // props.play(7)
   }
   
   const speedLevelTwo =(e) => {
     props.setSpeed("levelTwo")
     playKouka(7)
+    // props.play(7)
   }
   const speedLevelThree=(e) => {
     props.setSpeed("levelThree")
     playKouka(7)
+    // props.play(7)
   }
   return (
     <>

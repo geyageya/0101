@@ -1,8 +1,8 @@
 import {useState, useEffect, useRef} from 'react'
 
-export const Typewriter = ({text}) => {
+export const ClueBox = ({text}) => {
 
-  console.log("Typewriter");
+  console.log("ClueBox");
   const index = useRef(0);
 
   const [currentText, setCurrentText] =useState("");

@@ -12,15 +12,18 @@ export const RadioLang = memo((props)=>{
     const checkEnglish =(e) => {
       props.setLanguage("english")
       playKouka(7)
+      // props.play(7)
     };
     const checkJapanese =(e) => {
       props.setLanguage("japanese")
       playKouka(7)
+      // props.play(7)
     };
     
     const checkHiragana =(e) => {
       props.setLanguage("hiragana")
       playKouka(7)
+      // props.play(7)
     };
    
   return(

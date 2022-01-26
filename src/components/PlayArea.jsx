@@ -1,11 +1,8 @@
 // import {memo} from "react";
-import { MiniArea } from "./MiniArea";
-import { CardList } from "./CardList";
 
 //memo化効果無し
 export const PlayArea =(props) => {
   console.log("PlayArea - Child1");
-
   let backgroundImage="";
 
     switch(props.language){
@@ -34,37 +31,30 @@ export const PlayArea =(props) => {
       // className ={`h-[454px] bg-cover  bg-center bg-no-repeat md:h-[630px] lg:h-[520px] mx-auto relative flex justify-center  lg:bg-contain ${props.backgroundImage} `}
       style={playArea}
       >
-      <CardList
+       
+      {props.cardList}
+      {/* <CardList
         //CardGrid用 --Mainから
-        karutaLists={props.karutaLists}
-       //Card用（絵札の反応制御）--Mainから
+        karutaLists={props.karutaLists} 
+        //Card--Mainから
         isAnswered = {props.isAnswered}
-        //Card-handleClick用(useState)  --Mainから
-        basicLists={props.basicLists}
-        currentTurn={props.currentTurn}
-        setIsAnswered={props.setIsAnswered}
-        setIsPopup={props.setIsPopup}
-        setIsScored={props.setIsScored}
-        score={props.score}
-        setScore={props.setScore}
-        //Card-handleClick用(関数実行)  --Mainから
-        pcPlayer={props.pcPlayer}
-        placeHand={props.placeHand}
-        playKouka={props.playKouka}
-        stopTimer={props.stopTimer}
-      />
+        onClick={props.onClick}
+      />  */}
+        {props.miniArea}
       {/* player用 */}
-      <MiniArea
+      {/* <MiniArea
         miniList = {props.miniList} 
         tailwind="bottom-0 left-0 items-end"
         currentTurn={props.currentTurn}
-      />
+      /> */}
+        {props.miniAreaPc}
       {/* PC用 */}
-      <MiniArea
+      {/* <MiniArea
         miniList = {props.miniListPc} 
         tailwind="top-0 left-0 items-start"
         currentTurn={props.currentTurn}
-      />
+      /> */}
+      
       {/* items-start, items-end 札を上下線にそって配列。外側が直線、内側が凸凹*/}
       </main>
     )
