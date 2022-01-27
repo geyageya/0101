@@ -12,6 +12,8 @@ import {CardList} from "./CardList";
 import {CardGrid} from "./CardGrid";
 import { MiniArea } from "./MiniArea";
 
+
+
 // import useSound from 'use-sound';
 
 export const Main = () => {
@@ -526,10 +528,12 @@ export const Main = () => {
               </Button>
           }
         
-        <ClueBox text={text} />
+        <ClueBox 
+          text={text} 
+          language = {language}
+        />
         
         <PlayArea 
-
           //PlayArea用(backgroundImgの表示分け)
           language = {language}
 
