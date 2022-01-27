@@ -2,7 +2,7 @@
 import { useWindupString } from "windups";
 
 //windupsライブラリーを使う場合
-export const ClueBox= ({text,language}) => {
+export const ClueBox= ({text}) => {
   const [currentText] = useWindupString(text,{
     
     pace: (char) => (char === " " ? 80 : 80),  //英語
