@@ -12,10 +12,6 @@ import {CardList} from "./CardList";
 import {CardGrid} from "./CardGrid";
 import { MiniArea } from "./MiniArea";
 
-
-
-// import useSound from 'use-sound';
-
 export const Main = () => {
   console.log("Main - Parent")
 
@@ -52,8 +48,6 @@ export const Main = () => {
   const [miniList, setMiniList] = useState([]);      //ミニ絵札データ配列
   const [miniListPc, setMiniListPc] = useState([]);  //ミニ絵札データ配列（PC)
   const [isResult, setIsResult] = useState(false);           //ゲーム結果の表示・非表示
-
-  // const [play, {stop}] = useSound(koukaSounds[0])
 
   // const kouka =
   //   [
@@ -92,6 +86,7 @@ export const Main = () => {
   const handleClick = (selectedId)=> { 
     setIsAnswered(true);      //絵札のクリックを不可にする
     stopTimer();              //タイマー解除（PCplayer)
+    stopClue();               //機能しているか不明
 
     //正解の場合
     if (selectedId ===basicLists[currentTurn].id) {//配列のIDを比較
@@ -147,7 +142,6 @@ export const Main = () => {
     switch (language){
       case "default":
         clueSounds.src = basicLists[currentTurn].read; //英語
-        setLanguage("default")
         break
       case "english":
         clueSounds.src = basicLists[currentTurn].read; //英語
@@ -161,10 +155,35 @@ export const Main = () => {
       default:
         clueSounds.src = basicLists[currentTurn].read; //英語
     }
-    clueSounds.play();}
+    clueSounds.play();
+    // clueSounds.play();}
     clueSounds.preload = "auto";
-    clueSounds.loop = false;
+    clueSounds.loop = false;}
   };
+
+  const stopClue = (currentTurn)=> {
+    if (currentTurn < basicLists.length -1){
+      //switch
+    switch (language){
+      case "default":
+        clueSounds.src = basicLists[currentTurn].read; //英語
+        break
+      case "english":
+        clueSounds.src = basicLists[currentTurn].read; //英語
+        break
+      case "japanese":
+        clueSounds.src = basicLists[currentTurn].yomu; //日本語
+        break
+      case "hiragana":
+          clueSounds.src = basicLists[currentTurn].yomu; //日本語
+          break
+      default:
+        clueSounds.src = basicLists[currentTurn].read; //英語
+    }
+    clueSounds.pause();
+    clueSounds.currentTime=0;}
+  };
+
 
   //■■■■■■■■■■■■■■■■■■■■■■■■■ (4) PCプレーヤー ■■■■■■■■■■■■■■■■■■■■■■■■■
   const timerRef = useRef(null);                              //タイマー設定用  
