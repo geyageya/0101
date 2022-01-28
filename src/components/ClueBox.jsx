@@ -7,7 +7,12 @@ export const ClueBox= ({text}) => {
     
     pace: (char) => (char === " " ? 80 : 80),  //英語
       // pace: (char) => (char === " " ? 200 : 200),  //日本語
-  });
+    onFinished: () => {
+        text="";
+    }
+  }
+    
+  );
 
   return (
     <>

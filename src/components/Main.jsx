@@ -71,7 +71,6 @@ export const Main = () => {
     chooseArea();
     setScreen(false)
     playKouka(0);       //効果音 
-    // play();
   };//handleSet
 
     //「ゲーム開始」ボタンを押す(useCallbackを設定すると読み句の音声や表示が狂う)
@@ -86,7 +85,7 @@ export const Main = () => {
   const handleClick = (selectedId)=> { 
     setIsAnswered(true);      //絵札のクリックを不可にする
     stopTimer();              //タイマー解除（PCplayer)
-    stopClue();               //機能しているか不明
+    
 
     //正解の場合
     if (selectedId ===basicLists[currentTurn].id) {//配列のIDを比較
@@ -132,56 +131,39 @@ export const Main = () => {
   } //showClue
 
   //読みあげ （引数あり）以前 currentTurnをcurrentNumとしていたが、理由覚えていない
+
+
   let clueSounds=new Audio();
- 
   //useCallbackを設定すると読み句の音声が出ない
   const readClue = (currentTurn)=> {
-
+    
     if (currentTurn < basicLists.length -1){
       //switch
-    switch (language){
-      case "default":
-        clueSounds.src = basicLists[currentTurn].read; //英語
-        break
-      case "english":
-        clueSounds.src = basicLists[currentTurn].read; //英語
-        break
-      case "japanese":
-        clueSounds.src = basicLists[currentTurn].yomu; //日本語
-        break
-      case "hiragana":
+      switch (language){
+        case "default":
+          clueSounds.src = basicLists[currentTurn].read; //英語
+          break
+        case "english":
+          clueSounds.src = basicLists[currentTurn].read; //英語
+          break
+        case "japanese":
           clueSounds.src = basicLists[currentTurn].yomu; //日本語
           break
-      default:
-        clueSounds.src = basicLists[currentTurn].read; //英語
+        case "hiragana":
+            clueSounds.src = basicLists[currentTurn].yomu; //日本語
+            break
+        default:
+          clueSounds.src = basicLists[currentTurn].read; //英語
+      }
     }
     clueSounds.play();
-    // clueSounds.play();}
     clueSounds.preload = "auto";
-    clueSounds.loop = false;}
+    clueSounds.loop = false;
   };
-
   const stopClue = (currentTurn)=> {
-    if (currentTurn < basicLists.length -1){
-      //switch
-    switch (language){
-      case "default":
-        clueSounds.src = basicLists[currentTurn].read; //英語
-        break
-      case "english":
-        clueSounds.src = basicLists[currentTurn].read; //英語
-        break
-      case "japanese":
-        clueSounds.src = basicLists[currentTurn].yomu; //日本語
-        break
-      case "hiragana":
-          clueSounds.src = basicLists[currentTurn].yomu; //日本語
-          break
-      default:
-        clueSounds.src = basicLists[currentTurn].read; //英語
-    }
+    
     clueSounds.pause();
-    clueSounds.currentTime=0;}
+    clueSounds.currentTime=0;
   };
 
 
@@ -375,6 +357,7 @@ export const Main = () => {
     //  setTimeout(()=>{showClue(newCurrentTurn)}, 1200); //読み句一括表示の場合のみ
      setIsAnswered(false);   //絵札のクリックを可にする
      setIsScored(false); 
+     stopClue();               //機能しているか不明
     }
 
    //タイマー設定（最後手前の札まで
@@ -388,6 +371,7 @@ export const Main = () => {
    if (currentTurn === basicLists.length - 2) { //5
       setIsResult(true);    //結果画面を表示する
       soundResult();        //結果画面表示時の効果音
+      stopClue();               //機能しているか不明
    }
  };//pressPopupBtn
 
