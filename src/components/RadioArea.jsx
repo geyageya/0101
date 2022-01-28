@@ -1,6 +1,6 @@
 import React from "react";
 import {memo} from "react";
-import { RadioBtn } from "./RadioBtn"
+import { RadioBtn } from "./RadioBtn";
 import { useKouka } from "../hooks/useKouka";
 
 //メモ化効果:2８回削減（RadioLang:５回 →１回, RadioBtn:24回⇨０回）
@@ -10,35 +10,35 @@ export const RadioArea = memo((props)=>{
     const {playKouka} = useKouka();
 
     const chooseAsia=(e) => {
-      props.setArea("Asia")
-      playKouka(7)
+      props.setArea("Asia");
+      playKouka(7);
       // props.play(7)
-    }
+    };
     const chooseEurope=(e) => {
-      props.setArea("Europe")
-      playKouka(7)
+      props.setArea("Europe");
+      playKouka(7);
       // props.play(7)
-    }
+    };
     const chooseAfrica=(e) => {
-      props.setArea("Africa")
-      playKouka(7)
+      props.setArea("Africa");
+      playKouka(7);
       // props.play(7)
-    }
+    };
     const chooseAmericas=(e) => {
-      props.setArea("Americas")
-      playKouka(7)
+      props.setArea("Americas");
+      playKouka(7);
       // props.play(7)
-    }
+    };
     const chooseOceania=(e) => {
-      props.setArea("Oceania")
-      playKouka(7)
+      props.setArea("Oceania");
+      playKouka(7);
       // props.play(7)
-    }
+    };
     const chooseWorld=(e) => {
-      props.setArea("World")
-      playKouka(7)
+      props.setArea("World");
+      playKouka(7);
       // props.play(7)
-    }
+    };
   return(
    <div>
       <div
@@ -99,5 +99,5 @@ export const RadioArea = memo((props)=>{
         />
       </div>
     </div> //最初のdiv
-  ) //return
+  );//return
 }); //RadioArea

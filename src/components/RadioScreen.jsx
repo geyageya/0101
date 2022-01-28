@@ -1,7 +1,7 @@
 import React from "react";
 // import {memo} from "react";
 
-import { Button } from "./Button"
+import { Button } from "./Button";
 import { RadioLang } from "./RadioLang";
 import { RadioSpeed } from "./RadioSpeed";
 import { RadioArea } from "./RadioArea";
@@ -32,5 +32,5 @@ export const RadioScreen = (props)=>{
         札 を 並 べ る
       </Button>
     </div> 
-  ) //return
+  );//return
 }; //RadioScreen

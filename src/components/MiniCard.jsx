@@ -12,5 +12,5 @@ export const MiniCard =(props) => {
         alt="miniCard" 
         src={props.src} 
       />
-    )
+    );
   };

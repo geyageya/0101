@@ -16,7 +16,7 @@ export const Card =(props) =>{
         src={props.src}  
         id={props.id}
         //表示画像のリンク切れの場合、非表示にする
-        onError={e => e.target.style.display = 'none'}
+        onError={e => e.target.style.display = "none"}
       />
     :
       <img 
@@ -25,12 +25,12 @@ export const Card =(props) =>{
         src={props.src}  
         id={props.id}
         //表示画像のリンク切れの場合、非表示にする
-        onError={e => e.target.style.display = 'none'}
+        onError={e => e.target.style.display = "none"}
         onClick={(e)=>props.onClick(e.target.id)} //OK 
         // onClick={()=>props.onClick(props.id)}  //OK
         
       />
     }
     </div>
-  )//return
-}//Card
+  );//return
+};//Card

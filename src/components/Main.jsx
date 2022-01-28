@@ -14,7 +14,7 @@ import {CardGrid} from "./CardGrid";
 import { MiniArea } from "./MiniArea";
 
 export const Main = () => {
-  console.log("Main - Parent")
+  console.log("Main - Parent");
 
   // const {koukaSounds} = useKouka();
   const {basicLists, karutaLists, setKarutaLists, chooseArea, setArea}= useSetup();
@@ -34,12 +34,12 @@ export const Main = () => {
   //ゲーム中毎回更新
    //一回のみ
    const [screen, setScreen] = useState(true);  //トップ画面の表示・非表示
-   const [language, setLanguage]= useState("default")
-   const [speed, setSpeed]= useState("default")
+   const [language, setLanguage]= useState("default");
+   const [speed, setSpeed]= useState("default");
 
-  const [isStarted, setIsStarted] = useState(false)           //「ゲーム開始」ボタンの反応制御
+  const [isStarted, setIsStarted] = useState(false);         //「ゲーム開始」ボタンの反応制御
   const [isAnswered, setIsAnswered] = useState(true);        //絵札クリックの可否を制御
-  const [text, setText] = useState("")             //読み句表示用
+  const [text, setText] = useState("");        //読み句表示用
 
   const [currentTurn, setCurrentTurn] = useState(0);         //turnカウント
   const [isScored, setIsScored] = useState(false);           //player得点の有無
@@ -70,7 +70,7 @@ export const Main = () => {
   // //「札を並べる」ボタンを押す(useCallbackを設定すると絵札が表示されない)
   const handleSet = () => {
     chooseArea();
-    setScreen(false)
+    setScreen(false);
     playKouka(0);       //効果音 
   };//handleSet
 
@@ -78,7 +78,7 @@ export const Main = () => {
   const handleStart =() => {
     startTimer();           //タイマー設定（１枚目のみ）
     setIsAnswered(false);   //絵札のクリック可能にする
-    setIsStarted(true)   //「ゲーム開始」ボタンの反応停止
+    setIsStarted(true);  //「ゲーム開始」ボタンの反応停止
     readClue(currentTurn);  //読み句の読みあげ
     showClue(currentTurn);
   };//handleStart 
@@ -97,16 +97,17 @@ export const Main = () => {
       placeHand();
       //player独自の操作
       setScore(score + 1);    //スコア加点
-      setIsScored(true)       //ミニ絵札表示（手前）の有無を決める基準
+      setIsScored(true);     //ミニ絵札表示（手前）の有無を決める基準
       //最後の１枚を撮った場合に加点
       if (currentTurn===basicLists.length -2)
       setScore(score + 2);   
     }
     //不正解の場合
     else{
+      /* eslint semi: 0 */
       setTimeout(()=>{pcPlayer()}, 300);
     }
-  }//handleClick
+  };//handleClick
   
   //■■■■■■■■■■■■■■■■■■■■■■■■■  (3) 読み句 ■■■■■■■■■■■■■■■■■■■■■■■■■
   //読み句の表示（使用言語の設定（逐次・一括表示の切り替えは、ClueBoxコンボーネントだけで行う）
@@ -116,20 +117,20 @@ export const Main = () => {
       let text;
       switch (language){
         case "english":
-          text = basicLists[currentTurn].clue //英語
-          break
+          text = basicLists[currentTurn].clue;//英語
+          break;
         case "japanese":
-          text= basicLists[currentTurn].yomiku //日本語
-          break
+          text= basicLists[currentTurn].yomiku;//日本語
+          break;
         case "hiragana":
-          text = basicLists[currentTurn].furigana //英語
-          break
+          text = basicLists[currentTurn].furigana;//英語
+          break;
         default:
-          text= basicLists[currentTurn].clue //英語
+          text= basicLists[currentTurn].clue;//英語
       }
       setText(text);
     } //if
-  } //showClue
+  };//showClue
 
   //読みあげ （引数あり）以前 currentTurnをcurrentNumとしていたが、理由覚えていない
 
@@ -143,16 +144,16 @@ export const Main = () => {
       switch (language){
         case "default":
           clueSounds.src = basicLists[currentTurn].read; //英語
-          break
+          break;
         case "english":
           clueSounds.src = basicLists[currentTurn].read; //英語
-          break
+          break;
         case "japanese":
           clueSounds.src = basicLists[currentTurn].yomu; //日本語
-          break
+          break;
         case "hiragana":
             clueSounds.src = basicLists[currentTurn].yomu; //日本語
-            break
+            break;
         default:
           clueSounds.src = basicLists[currentTurn].read; //英語
       }
@@ -177,25 +178,25 @@ export const Main = () => {
         timerRef.current = setTimeout(() => {
         pcPlayer();
         }, 8000);
-        setSpeed("default")
-        break
+        setSpeed("default");
+        break;
   
       case "speedOne":
         timerRef.current = setTimeout(() => {
           pcPlayer();
           }, 12000);
-        break
+        break;
   
       case "speedTwo":
         timerRef.current = setTimeout(() => {
           pcPlayer();
           }, 8000);
-        break
+        break;
       case "speedThree":
         timerRef.current = setTimeout(() => {
           pcPlayer();
           }, 5000);
-        break
+        break;
     
       default:
         timerRef.current = setTimeout(() => {
@@ -230,8 +231,8 @@ export const Main = () => {
               pcPlayer2(newCurrentTurn);
               }, 4000);
           }
-          setSpeed("default")
-          break
+          setSpeed("default");
+          break;
   
       case "speedOne":
         if (newCurrentTurn < basicLists.length-3) { //最後から4枚目以上
@@ -249,7 +250,7 @@ export const Main = () => {
             pcPlayer2(newCurrentTurn);
             }, 4000);
         }
-        break
+        break;
   
       case "speedTwo":
         if (newCurrentTurn < basicLists.length-3) { 
@@ -267,7 +268,7 @@ export const Main = () => {
             pcPlayer2(newCurrentTurn);
             }, 3000);
         }
-        break
+        break;
       case "speedThree":
         if (newCurrentTurn < basicLists.length-3) { 
         timerRef.current = setTimeout(() => {
@@ -284,7 +285,7 @@ export const Main = () => {
             pcPlayer2(newCurrentTurn);
             }, 2000);
         }
-        break
+        break;
     
       default:
         if (newCurrentTurn < basicLists.length-3) { //0,1,2,3,4,5]
@@ -312,7 +313,7 @@ export const Main = () => {
     playKouka(2);
     // play(2)
     setIsAnswered(true);
-  }
+  };
   //PCplayer2の動き　(引数 newCurrentTurn)
    const pcPlayer2 = (newCurrentTurn) =>{
     placeHandPc2(newCurrentTurn);
@@ -320,7 +321,7 @@ export const Main = () => {
     setIsAnswered(true);
     playKouka(3);
     // play(3)
-  }
+  };
 
   //■■■■■■■■■■■■■■■■■■■■■■■■■  (5) ポップアップボタンを押した後 ■■■■■■■■■■■■■■■■■■■■■■■■■
   //useCallback使ったらエラー出た
@@ -396,70 +397,70 @@ export const Main = () => {
     if (currentTurn === basicLists.length - 2) { 
       eraseLast();          
     }
-  }
+  };
 
 //■■■■■■■■■■■■■■■■■■■■■■■■■ (6) ゲーム中の表示（手、絵札・ミニ絵札）■■■■■■■■■■■■■■■■■■■■■■■■■
 
   // // //正解の絵札の上に手を表示
   const placeHand = () => {
-    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, hand:"/images/hand.png"} : list)
+    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, hand:"/images/hand.png"} : list);
     setKarutaLists(result);  
   };
   
   //手を表示(PC playerお手つき、PCplayer１回目用)
   const placeHandPc = () => {
-    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, handPc:"/images/handPc.png"} : list )
+    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, handPc:"/images/handPc.png"} : list );
     setKarutaLists(result);  
   };
 
   // //手を表示(PC playerお手つき, 2回目以降用)
   const placeHandPc2 = (currentNum) => {
-    const result = karutaLists.map(list => list.id===basicLists[currentNum].id ? {...list, handPc:"/images/handPc.png"} : list )
+    const result = karutaLists.map(list => list.id===basicLists[currentNum].id ? {...list, handPc:"/images/handPc.png"} : list );
     //currentTurnの更新時期のずれにより、不要な所に手や絵が表示されてしまう。その手を消すために以下を実行
-    const result1 = result.map(list => list.id===basicLists[currentTurn].id ? {...list, answer:"", handPc:"", hand:""} : list )
+    const result1 = result.map(list => list.id===basicLists[currentTurn].id ? {...list, answer:"", handPc:"", hand:""} : list );
     setKarutaLists(result1);  
-  } 
+  };
   //重要：絵と手を別々の関数にすると、片方しか機能しない。なので同時に処理する
 
   //正解の絵と手を消す(player)-同じ行にanswer, handを書ける
   const eraseEfudaHand = () => {
     // const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, answer:""} : list )
-    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, answer:"", hand:""} : list )
+    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, answer:"", hand:""} : list );
     setKarutaLists(result);  
-  } 
+  };
 
   //正解の絵と手(PC)を消す
   const eraseEfudaHandPc = () => {
     // const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, answer:""} : list )
-    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, answer:"", handPc:""} : list )
+    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, answer:"", handPc:""} : list );
     setKarutaLists(result);  
-  } 
+  };
 
   //最後2枚の絵札と手(player, pc)を消す
   const eraseLast = () => {
     // const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, answer: ""} : list )
-    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, answer: "", hand:"", handPc:""} : list )
-    const result2 = result.map(list => list.id===basicLists[currentTurn+1].id ? {...list, answer: ""} : list )
+    const result = karutaLists.map(list => list.id===basicLists[currentTurn].id ? {...list, answer: "", hand:"", handPc:""} : list );
+    const result2 = result.map(list => list.id===basicLists[currentTurn+1].id ? {...list, answer: ""} : list );
     setKarutaLists(result2);  
-  }
+  };
 
   //
   //引数にcurrentTurnを入れないとうまくいかない
   //mini絵札を追加する(player)
   const addMini = (currentTurn) => {
     setMiniList((prevminiList) => {
-      const newminiList = [...prevminiList, basicLists[currentTurn].answer]
+      const newminiList = [...prevminiList, basicLists[currentTurn].answer];
       return newminiList;
     });
-  }
+  };
   
   //mini絵札を追加する(PC)
   const addMiniPc = (currentTurn) => {
     setMiniListPc((prevminiListPc) => {
-      const newminiListPc = [...prevminiListPc, basicLists[currentTurn].answer]
+      const newminiListPc = [...prevminiListPc, basicLists[currentTurn].answer];
       return newminiListPc;
     });
-  }
+  };
 
   //■■■■■■■■■■■■■■■■■■■■■■■■■ その他 ■■■■■■■■■■■■■■■■■■■■■■■■■
    //結果画面表示時の効果音
@@ -477,8 +478,7 @@ export const Main = () => {
       playKouka(6);
       // play(6)
     }
-  }
-
+  };
   //ボタンのtext
   const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始";
   const scoredStatus = isScored ? "正解" : "相手が取りました";
@@ -621,9 +621,9 @@ export const Main = () => {
     </>
     }
     </div>        
-    ) //return
+    );//return
 
-}//Main
+};//Main
 
 
 

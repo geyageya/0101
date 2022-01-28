@@ -15,5 +15,5 @@ export const CardList =(props) =>{
           onClick={props.onClick}
         />  */}
       </ul>
-    )
+    );
   };

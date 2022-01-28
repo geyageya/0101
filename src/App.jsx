@@ -1,6 +1,6 @@
 import React from "react";
 import { Main } from "./components/Main";
-import {Footer} from './components/Footer';
+import {Footer} from "./components/Footer";
 
 const App=()=> {
   console.log("App ");
@@ -10,8 +10,8 @@ const App=()=> {
       <Main />
       <Footer />
     </div>
-  )
-} //App
+  );
+}; //App
 
 export default App;
 

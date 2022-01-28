@@ -22,5 +22,5 @@ export const RadioBtn =(props) => {
         {props.text}
       </label>
     </div>
-  ) //return
+  );//return
 };

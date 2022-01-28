@@ -17,8 +17,8 @@ export const MiniArea =memo((props) => {
              //MiniCard用--MiniAreaから
              src={picture} />
           </li>
-        )
+        );
         })}
       </ul>
-    )
+    );
   });

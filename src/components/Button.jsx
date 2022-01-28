@@ -12,5 +12,5 @@ export const Button =memo((props) =>{
       >
         {props.children}
       </button>
-    )
+    );
   });

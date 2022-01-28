@@ -8,7 +8,7 @@ export const Result = (props)=>{
   //次のゲーム
   const newGame =() => {
     window.location.reload();
-  }
+  };
 
     return(
       <div 
@@ -53,7 +53,7 @@ export const Result = (props)=>{
             windowBtnMsg="もう一回？" 
           />
     </div>
-  )
+  );
 };//<Result/>----------------------------------------------------------------
   
   

@@ -1,21 +1,21 @@
-const express = require('express')
-const path = require("path")
-const cors = require("cors")
-const app = express()
-const port = 3001
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const app = express();
+const port = 3001;
 
 
 
 //---以下、Udemy講座で作成（バックエンドとフロントエンドの関係を学ぶのに最適）----
 //バックエンドのみで表示する場合
-app.get('/', (req,res)=>{
-    res.send('<h1>Topページ</h1>')
-})
+app.get("/", (req,res)=>{
+    res.send("<h1>Topページ</h1>");
+});
 
  //Heroku対応
  const PORT = process.env.PORT || 3001;
  app.listen(PORT, ()=> {
- console.log(`I am running':${port}`)
+ console.log(`I am running':${port}`);
  });
 
 // app.get('/about', function (req,res){
@@ -25,10 +25,10 @@ app.get('/', (req,res)=>{
 //フォームで受けとった情報(req.body)を使うために必要
 app.use(express.urlencoded({ extended: false}));
 //publicフォルダー内のhtmlを表示できるようにする（フロントエンド）
-app.use(express.static(path.join(__dirname,"public")))
+app.use(express.static(path.join(__dirname,"public")));
 
 //フロントエンドとして別にする場合（HTMLファイルの置き場を設ける）
-app.post('/api/v1/quiz', function (req, res) {
+app.post("/api/v1/quiz", function (req, res) {
     //bodyに入力情報(数値でなく文字)が入ってくる。
     const answer = req.body.answer;
     //req.bodyに入る情報が文字のため、2ではなく、"2"とする
@@ -36,14 +36,14 @@ app.post('/api/v1/quiz', function (req, res) {
         //バックエンドだけで表示
         // res.send("<h1>正解</h1>");
         //フロントエンドで表示（別途htmlを作りリダイレクト）
-        res.redirect("/correct.html")
+        res.redirect("/correct.html");
     }
     else {
         // res.send("<h1>不正解</h1>");
         //別途htmlページを作りそこにリダイレクトして表示
-        res.redirect("/wrong.html")
+        res.redirect("/wrong.html");
     }
-})
+});
 
 //--------APIサーバー（Udemyと関係ない）
 
@@ -56,7 +56,7 @@ app.use(cors());
 //   optionsSuccessStatus: 200 //レスポンスstatusを200に設定
 // }))
 
-app.get('/api/v1/karuta', function (req, res) {
+app.get("/api/v1/karuta", function (req, res) {
     res.send(
       [
         {"id":"1","clue":"'By the river, a brown tower stands alone.","yomiku":"青タイルが　光るレンガの　ミナレット","answer":"../images/pictures/001_p.png","read":"../sounds/en/001_en.mp3","yomu":"../sounds/jp/001_jp.mp3","flag":"../images/flags/001_AFG_50.png","area":"Asia","subject":"Minaret of Jam","country":"Afghanistan","daizai":"ジャムのミナレット塔","kuni":"アフガニスタン","id-area":"AS-01","furigana":"あおたいるが　ひかるれんがの　みなれっと","hand":"", "handPc":""}
@@ -474,11 +474,11 @@ app.get('/api/v1/karuta', function (req, res) {
         ]
   
    );
-  })
+  });
 
 
 
-  app.get('/api/v1/nextjs', function (req, res) {
+  app.get("/api/v1/nextjs", function (req, res) {
     res.send(
 
         [
@@ -899,7 +899,7 @@ app.get('/api/v1/karuta', function (req, res) {
   
 
     );
-  })
+  });
   
  
   

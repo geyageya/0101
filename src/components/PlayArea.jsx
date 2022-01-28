@@ -9,13 +9,13 @@ export const PlayArea =(props) => {
     switch(props.language){
       case "japanese":
         backgroundImage="url(../images/tatami.png)";
-        break
+        break;
       case "hiragana":
         backgroundImage="url(../images/tatami.png)" ;
-       break
+       break;
       case "english":
         backgroundImage="url(../images/worldmap.png)" ;
-       break
+       break;
       default: //Englishに同じ
         backgroundImage="url(../images/worldmap.png)";
     }//switch
@@ -24,7 +24,7 @@ export const PlayArea =(props) => {
     //差し込み用(props)
     backgroundImage: backgroundImage
     //背景画像だけは、styleを書く必要があった。これが正しいか不明
-  }
+  };
   return(
     <main 
       // className ="h-[454px] md:h-[630px] lg:h-[520px] bg-sky-100 mx-auto relative flex justify-center bg-contain bg-no-repeat bg-[url('https://karuta2020.tokyo/wp-content/uploads/gallery/2106krt_001_c.jpg')]"
@@ -58,5 +58,5 @@ export const PlayArea =(props) => {
       
       {/* items-start, items-end 札を上下線にそって配列。外側が直線、内側が凸凹*/}
       </main>
-    )
+    );
   };

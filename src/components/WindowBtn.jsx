@@ -14,5 +14,5 @@ export const WindowBtn =(props) =>{
         {props.windowBtnMsg}
       </button>
     </div>
-  )
+  );
 };

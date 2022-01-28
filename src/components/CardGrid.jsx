@@ -32,8 +32,8 @@ export const CardGrid =(props) => {
           src={list.handPc}
         /> 
       </li> 
-    )
+    );
   })}
   </>
-  )
+  );
   };

@@ -15,9 +15,9 @@ export const Hand =memo((props) =>{
           className ="absolute w-[110px] h-[110px]"
           alt =""
           src={props.src}  
-          onError={e => e.target.style.display = 'none'} 
+          onError={e => e.target.style.display = "none"} 
           /> 
         }
       </> 
-    )
+    );
   });

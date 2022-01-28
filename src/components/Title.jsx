@@ -12,7 +12,7 @@ export const Title=memo((props)=>{
          世界200ヶ国かるた!
         {/* {props.children} */}
       </h1>
-    )
+    );
   });
 
  

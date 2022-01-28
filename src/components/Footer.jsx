@@ -18,7 +18,7 @@ export const Footer = (props) => {
         音読さん)
       </a>
     </p>
-  )
+  );
   };
 
   

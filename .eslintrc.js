@@ -16,7 +16,10 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "semi": ["error", "always"],
+        "quotes":["error", "double"],
         "react/prop-types":"off",
-        "react/display-name":"off"
+        "react/display-name":"off",
+        // "no-undef": "error"
     }
-}
+};

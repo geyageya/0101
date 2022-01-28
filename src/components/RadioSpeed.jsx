@@ -1,7 +1,7 @@
 import React from "react";
 // import {memo} from "react";
 import { useKouka } from "../hooks/useKouka";
-import { RadioBtn } from "./RadioBtn"
+import { RadioBtn } from "./RadioBtn";
 
 //メモ化したが、効果なし
 export const RadioSpeed =(props) =>{
@@ -9,21 +9,21 @@ export const RadioSpeed =(props) =>{
   const { playKouka} = useKouka();
 
   const speedLevelOne =(e) => {
-    props.setSpeed("levelOne")
-    playKouka(7)
+    props.setSpeed("levelOne");
+    playKouka(7);
     // props.play(7)
-  }
+  };
   
   const speedLevelTwo =(e) => {
-    props.setSpeed("levelTwo")
-    playKouka(7)
+    props.setSpeed("levelTwo");
+    playKouka(7);
     // props.play(7)
-  }
+  };
   const speedLevelThree=(e) => {
-    props.setSpeed("levelThree")
-    playKouka(7)
+    props.setSpeed("levelThree");
+    playKouka(7);
     // props.play(7)
-  }
+  };
   return (
     <>
     <div className="bg-gray-300 my-8"
@@ -57,5 +57,5 @@ export const RadioSpeed =(props) =>{
         />
       </div>
       </>
-  )
+  );
 };

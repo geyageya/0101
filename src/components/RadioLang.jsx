@@ -1,7 +1,7 @@
 import React from "react";
 import {memo} from "react";
 import { useKouka } from "../hooks/useKouka";
-import { RadioBtn } from "./RadioBtn"
+import { RadioBtn } from "./RadioBtn";
 
 //メモ化効果:2８回削減（RadioLang:５回 →１回, RadioBtn:24回⇨０回）
 export const RadioLang = memo((props)=>{
@@ -11,19 +11,19 @@ export const RadioLang = memo((props)=>{
     const {playKouka} = useKouka();
 
     const checkEnglish =(e) => {
-      props.setLanguage("english")
-      playKouka(7)
+      props.setLanguage("english");
+      playKouka(7);
       // props.play(7)
     };
     const checkJapanese =(e) => {
-      props.setLanguage("japanese")
-      playKouka(7)
+      props.setLanguage("japanese");
+      playKouka(7);
       // props.play(7)
     };
     
     const checkHiragana =(e) => {
-      props.setLanguage("hiragana")
-      playKouka(7)
+      props.setLanguage("hiragana");
+      playKouka(7);
       // props.play(7)
     };
    
@@ -63,5 +63,5 @@ export const RadioLang = memo((props)=>{
         />
       </div>
     </div> //最初のdiv
-  ) //return
+  );//return
 }); //RadioLang
