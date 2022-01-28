@@ -1,3 +1,4 @@
+import React from "react";
 import {memo} from "react";
 
 //memo化の効果あり。memo化しないと札を取る度に、数回不要なレンダリングされる

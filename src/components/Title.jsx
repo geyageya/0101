@@ -1,3 +1,4 @@
+import React from "react";
 import {memo} from "react";
 
 //memo化の効果あり。一度しかレンダリングされていない

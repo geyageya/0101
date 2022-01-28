@@ -1,3 +1,4 @@
+import React from "react";
 import {memo} from "react";
 
 //memo効果：36回⇨1回（札数6枚の場合）

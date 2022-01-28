@@ -1,3 +1,4 @@
+import React from "react";
 import {memo} from "react";
 import { RadioBtn } from "./RadioBtn"
 import { useKouka } from "../hooks/useKouka";

@@ -1,3 +1,4 @@
+import React from "react";
 // import {useState,memo} from "react";
 import { WindowBtn } from "./WindowBtn";
 

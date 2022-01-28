@@ -1,3 +1,4 @@
+import React from "react";
 // import {memo} from "react";
 
 //memo化効果なし。札を取る度に2度レンダリング）

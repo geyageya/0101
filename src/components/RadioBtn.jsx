@@ -1,3 +1,4 @@
+import React from "react";
 // import {memo} from "react";
 
 //メモ化したが、効果なし

@@ -1,3 +1,4 @@
+import React from "react";
 // import {memo} from "react";
 
 /* ミニ絵札*/
