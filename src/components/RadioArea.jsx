@@ -9,32 +9,32 @@ export const RadioArea = memo((props)=>{
 
     const {playKouka} = useKouka();
 
-    const chooseAsia=(e) => {
+    const chooseAsia=() => {
       props.setArea("Asia");
       playKouka(7);
       // props.play(7)
     };
-    const chooseEurope=(e) => {
+    const chooseEurope=() => {
       props.setArea("Europe");
       playKouka(7);
       // props.play(7)
     };
-    const chooseAfrica=(e) => {
+    const chooseAfrica=() => {
       props.setArea("Africa");
       playKouka(7);
       // props.play(7)
     };
-    const chooseAmericas=(e) => {
+    const chooseAmericas=() => {
       props.setArea("Americas");
       playKouka(7);
       // props.play(7)
     };
-    const chooseOceania=(e) => {
+    const chooseOceania=() => {
       props.setArea("Oceania");
       playKouka(7);
       // props.play(7)
     };
-    const chooseWorld=(e) => {
+    const chooseWorld=() => {
       props.setArea("World");
       playKouka(7);
       // props.play(7)

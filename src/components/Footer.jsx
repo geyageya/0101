@@ -1,7 +1,7 @@
 import React from "react";
 // import {memo} from "react";
 
-export const Footer = (props) => {
+export const Footer = () => {
   console.log("Footer - Parent");
    
   return(

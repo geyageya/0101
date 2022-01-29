@@ -8,18 +8,18 @@ export const RadioSpeed =(props) =>{
 
   const { playKouka} = useKouka();
 
-  const speedLevelOne =(e) => {
+  const speedLevelOne =() => {
     props.setSpeed("levelOne");
     playKouka(7);
     // props.play(7)
   };
   
-  const speedLevelTwo =(e) => {
+  const speedLevelTwo =() => {
     props.setSpeed("levelTwo");
     playKouka(7);
     // props.play(7)
   };
-  const speedLevelThree=(e) => {
+  const speedLevelThree=() => {
     props.setSpeed("levelThree");
     playKouka(7);
     // props.play(7)

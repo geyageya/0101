@@ -161,8 +161,7 @@ export const Main = () => {
     clueSounds.preload = "auto";
     clueSounds.loop = false;
   };
-  const stopClue = (currentTurn)=> {
-    
+  const stopClue = ()=> {
     clueSounds.pause();
     clueSounds.currentTime=0;
   };
@@ -305,7 +304,7 @@ export const Main = () => {
     }//switch
   };
 
-  // //PCplayerの動き　引数なし
+  // //PCplayerの動き 引数なし
    const pcPlayer = () =>{
     placeHandPc();
     setIsPopup(true);
@@ -313,7 +312,7 @@ export const Main = () => {
     // play(2)
     setIsAnswered(true);
   };
-  //PCplayer2の動き　(引数 newCurrentTurn)
+  //PCplayer2の動き (引数 newCurrentTurn)
    const pcPlayer2 = (newCurrentTurn) =>{
     placeHandPc2(newCurrentTurn);
     setIsPopup(true);
