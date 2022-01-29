@@ -1,0 +1,12 @@
+{
+  //eslint設定
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript"],
+  //prettier設定
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  //その他
+  "files.autoSave": "afterDelay"
+}
