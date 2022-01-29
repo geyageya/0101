@@ -14,7 +14,7 @@ const effectSounds = [
   "sounds/effects/button1.mp3",   //playKouka(7)
   "sounds/effects/button2.mp3",   //playKouka(8)
   "sounds/effects/suiteki.mp3",   //playKouka(9)
-]
+];
 
  const koukaSounds =
   [
@@ -28,7 +28,7 @@ const effectSounds = [
     "../button1.mp3",   //playKouka(7)
     "../button2.mp3",   //playKouka(8)
     "../suiteki.mp3",   //playKouka(9)
-  ]
+  ];
 
 
 
@@ -42,5 +42,5 @@ const playKouka= (effectNum)=> {
   kouka.loop = false;
   kouka.play();
 };
-  return {effectSounds, playKouka, koukaSounds}
+  return {effectSounds, playKouka, koukaSounds};
 };

@@ -12,8 +12,7 @@ export const useSetup =() => {
     //APIデータ取得
     useEffect (() => {
       getApiLists();
-      //下のコメント（不要なwarningを出さないようにするため）
-      // eslint-disable-next-line 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
    //  APIデータを取得

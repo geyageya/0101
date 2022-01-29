@@ -104,8 +104,7 @@ export const Main = () => {
     }
     //不正解の場合
     else{
-      /* eslint semi: 0 */
-      setTimeout(()=>{pcPlayer()}, 300);
+      setTimeout(()=>{pcPlayer();}, 300);
     }
   };//handleClick
   
@@ -354,8 +353,8 @@ export const Main = () => {
    
    // 「次」ボタンを押した時
     if (currentTurn < basicLists.length-1) { //0,1,2,3,4,5]
-     setTimeout(()=>{readClue(newCurrentTurn)}, 1200);
-     setTimeout(()=>{showClue(newCurrentTurn)}, 1000);
+     setTimeout(()=>{readClue(newCurrentTurn);}, 1200);
+     setTimeout(()=>{showClue(newCurrentTurn);}, 1000);
     //  setTimeout(()=>{showClue(newCurrentTurn)}, 1200); //読み句一括表示の場合のみ
      setIsAnswered(false);   //絵札のクリックを可にする
      setIsScored(false); 
