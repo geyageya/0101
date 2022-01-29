@@ -1,18 +1,17 @@
 import React from "react";
 import { Main } from "./components/Main";
-import {Footer} from "./components/Footer";
+import { Footer } from "./components/Footer";
 
 function App() {
   console.log("App ");
 
-  return(
-      <div>
-          <Main />
+  return (
+    <div>
+      <Main />
 
-          <Footer />
-      </div>
+      <Footer />
+    </div>
   );
-}; //App
+} //App
 
 export default App;
-

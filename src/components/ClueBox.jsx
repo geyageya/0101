@@ -3,31 +3,25 @@ import React from "react";
 import { useWindupString } from "windups";
 
 //windupsライブラリーを使う場合
-export const ClueBox= ({text}) => {
-  const [currentText] = useWindupString(text,{
-    
-    pace: (char) => (char === " " ? 80 : 80),  //英語
-      // pace: (char) => (char === " " ? 200 : 200),  //日本語
+export const ClueBox = ({ text }) => {
+  const [currentText] = useWindupString(text, {
+    pace: (char) => (char === " " ? 80 : 80), //英語
+    // pace: (char) => (char === " " ? 200 : 200),  //日本語
     onFinished: () => {
-        text="";
-    }
-  }
-    
-  );
+      text = "";
+    },
+  });
 
   return (
     <>
-      <div
-        className="w-[370px] h-[50px] mx-auto pl-1 mb-1 border rounded-md border-sky-500 md:w-[500px] md:text-lg lg:w-[800px] lg:text-2xl  "
-      >
+      <div className="w-[370px] h-[50px] mx-auto pl-1 mb-1 border rounded-md border-sky-500 md:w-[500px] md:text-lg lg:w-[800px] lg:text-2xl  ">
         {currentText}
       </div>
-        
     </>
   );
 };
 
-// 
+//
 //   switch (language){
 //     case "english":
 //       pace: (char) => (char === " " ? 80 : 80),  //英語
@@ -64,16 +58,16 @@ export const ClueBox= ({text}) => {
 //       index.current += 1;
 //       //文字を表示する間隔を指定（SetTImeoutがないと全ての文字が同時に表示される。）
 //     },100);
-    
+
 //     //アンマウント時の処理（タイマーストップ）
 //     return () => {
 //       clearTimeout(timeoutId)
 //     };
-      
+
 //   },[currentText, text]);
 
 //   return(
-//     <div 
+//     <div
 //     >
 //       <div
 //         className="w-[370px] h-[50px] mx-auto pl-1 mb-1 border rounded-md border-sky-500 md:w-[500px] md:text-lg lg:w-[800px] lg:text-2xl  "
@@ -83,8 +77,7 @@ export const ClueBox= ({text}) => {
 //         {/* 一括表示用。上の関数は全て使用しない */}
 //         {/* {text}  */}
 //       </div>
-      
+
 //     </div>
 //   )
 // };
-

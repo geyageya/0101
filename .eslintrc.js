@@ -20,6 +20,7 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
+    //以下二つはprettierで対応
     // "semi": ["error", "always"],
     // "quotes":["error", "double"],
     "no-undef": "error",
