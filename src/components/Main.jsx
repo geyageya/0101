@@ -17,8 +17,16 @@ export const Main = () => {
   console.log("Main - Parent");
 
   // const {koukaSounds} = useKouka();
-  const { basicLists, karutaLists, setKarutaLists, chooseArea, setArea } =
-    useSetup();
+  const {
+    basicLists,
+    karutaLists,
+    setKarutaLists,
+    chooseArea,
+    setArea,
+    // loading,
+    // error,
+    state,
+  } = useSetup();
   const { playKouka } = useKouka();
 
   //内容
@@ -37,7 +45,7 @@ export const Main = () => {
   const [screen, setScreen] = useState(true); //トップ画面の表示・非表示
   const [language, setLanguage] = useState("default");
   const [speed, setSpeed] = useState("default");
-
+  
   const [isStarted, setIsStarted] = useState(false); //「ゲーム開始」ボタンの反応制御
   const [isAnswered, setIsAnswered] = useState(true); //絵札クリックの可否を制御
   const [text, setText] = useState(""); //読み句表示用
@@ -523,6 +531,15 @@ export const Main = () => {
       ) : (
         <>
           <Title />
+            {state.loading ? (
+              <div>ローディング中</div>
+            ) : state.error ? (
+              <div>{state.error.message}</div>
+            ) : basicLists.length === 0 ? (
+              <div>データは空です</div>
+            ) : (
+              null
+            )}
 
           {/* const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始"; */}
           {/* ゲーム開始ボタンを押した後 */}
