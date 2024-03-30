@@ -477,7 +477,6 @@ app.get("/api/v1/karuta", function (req, res) {
   });
 
 
-
   app.get("/api/v1/nextjs", function (req, res) {
     res.send(
 

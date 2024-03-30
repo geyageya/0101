@@ -5,6 +5,8 @@ import { memo } from "react";
 export const Hand = memo((props) => {
   console.log("Hand - Child");
 
+  
+
   return (
     <>
       {/* マジックコード */}
