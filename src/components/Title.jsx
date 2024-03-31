@@ -11,7 +11,7 @@ export const Title = memo(() => {
       Play karuta!-「世界200ヶ国かるた」で、あそぼう! 
       {/* {props.children} */}
     </h1>
-    <p className="text-2xl mb-4 text-center md:m-7 ">Listen to a clue and touch a matching picture card faster than PC player. You win if you get more cards.</p>
+    <p className="mb-4 text-center md:m-7 ">How to play: Listen to a clue and touch a matching picture card faster than PC player. You win if you get more cards.</p>
   </>
     );
 });
