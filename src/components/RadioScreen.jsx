@@ -14,7 +14,8 @@ export const RadioScreen = (props) => {
 
   return (
     <div className="w-full container mx-auto p-5 bg-lime-100 md:p-10">
-      <h1 className="text-2xl mb-4 text-center md:m-7 ">Play karuta! 「世界200ケ国かるた」で遊ぼう</h1>
+      <h1 className="text-2xl mb-4 text-center md:m-7 ">Play karuta & Learn the world!</h1>
+      <h1 className="text-2xl mb-4 text-center md:m-7 ">「世界200ケ国かるた」で遊ぼう</h1>
       <RadioLang setLanguage={props.setLanguage} />
       <RadioArea setArea={props.setArea} />
       <RadioSpeed setSpeed={props.setSpeed} />
