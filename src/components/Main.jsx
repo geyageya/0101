@@ -25,7 +25,7 @@ export const Main = () => {
     setArea,
     // loading,
     // error,
-    state,
+    // state,
   } = useSetup();
   const { playKouka } = useKouka();
 
@@ -531,7 +531,7 @@ export const Main = () => {
       ) : (
         <>
           <Title />
-            {state.loading ? (
+            {/* {state.loading ? (
               <div>ローディング中</div>
             ) : state.error ? (
               <div>{state.error.message}</div>
@@ -539,7 +539,7 @@ export const Main = () => {
               <div>データは空です</div>
             ) : (
               null
-            )}
+            )} */}
 
           {/* const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始"; */}
           {/* ゲーム開始ボタンを押した後 */}
