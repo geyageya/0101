@@ -30,7 +30,7 @@ export const Result = (props) => {
         <p className="text-lg md:text-xl">You lost! 負け!</p>
       )}
 
-      <p className="my-3 text-base">You got{props.score} cards.- {props.score}枚ゲット。</p>
+      <p className="my-3 text-base">You got({props.score})cards. {props.score}枚ゲット</p>
       <WindowBtn onClick={() => newGame()} windowBtnMsg="Play again? もう一回" />
     </div>
   );
