@@ -39,7 +39,7 @@ export const Popup = (props) => {
         />
       )}
       {props.currentTurn === props.basicLists.length - 2 && (
-        <WindowBtn onClick={props.onClick} windowBtnMsg="See result（結果）" />
+        <WindowBtn onClick={props.onClick} windowBtnMsg="Result 結果" />
       )}
     </div>
   );
