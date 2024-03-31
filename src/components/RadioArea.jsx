@@ -41,7 +41,7 @@ export const RadioArea = memo((props) => {
   };
   return (
     <div>
-      <div className="bg-gray-300 my-8">エリア（１つ選択）</div>
+      <div className="bg-gray-300 my-8">エリアをえらぼう</div>
       <div className="flex flex-wrap gap-5 ml-5 mb-5">
         <RadioBtn
           id="World"

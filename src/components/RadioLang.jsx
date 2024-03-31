@@ -28,7 +28,7 @@ export const RadioLang = memo((props) => {
 
   return (
     <div>
-      <div className="bg-gray-300 mb-8">読み句の言葉（１つ選択）</div>
+      <div className="bg-gray-300 mb-8">読み句をえらぼう。英語でも、あそべるよ</div>
       <div className="flex flex-wrap gap-5 ml-5 mb-5">
         <RadioBtn
           id="english"
@@ -53,7 +53,7 @@ export const RadioLang = memo((props) => {
           name="language"
           value="hiragana"
           htmlFor="hiragana"
-          text=" 日本語（ひらがな）"
+          text=" にほんご（ひらがな）"
           onChange={() => checkHiragana()}
         />
       </div>
