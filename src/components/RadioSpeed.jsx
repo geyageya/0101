@@ -25,14 +25,14 @@ export const RadioSpeed = (props) => {
   };
   return (
     <>
-      <div className="bg-gray-300 my-8">まず「ゆっくり」からはじよう</div>
+      <div className="bg-gray-300 my-8">Speed of Game  （まず「ゆっくり」からはじよう）</div>
       <div className="flex  m-1 gap-2 md:flex-wrap md:gap-6 md:m-5">
         <RadioBtn
           id="speedlevelOne"
           name="speed"
           value="speedlevelOne"
           htmlFor="speedlevelOne"
-          text=" ゆっくり"
+          text="Beginner（ゆっくり）"
           onChange={() => speedLevelOne()}
         />
         <RadioBtn
@@ -40,7 +40,7 @@ export const RadioSpeed = (props) => {
           name="speed"
           value="speedlevelTwo"
           htmlFor="speedlevelTwo"
-          text=" 少し速い"
+          text="Faster（少し速い）"
           onChange={() => speedLevelTwo()}
         />
         <RadioBtn
@@ -48,7 +48,7 @@ export const RadioSpeed = (props) => {
           name="speed"
           value="speedlevelThree"
           htmlFor="speedlevelThree"
-          text="もっと速い"
+          text="Fastest（もっと速い）"
           onChange={() => speedLevelThree()}
         />
       </div>

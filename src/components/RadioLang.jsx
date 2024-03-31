@@ -28,14 +28,14 @@ export const RadioLang = memo((props) => {
 
   return (
     <div>
-      <div className="bg-gray-300 mb-8">読み句をえらぼう。英語でも、あそべるよ</div>
+      <div className="bg-gray-300 mb-8">Choose English or Japanese  （英語でも、あそべるよ）</div>
       <div className="flex flex-wrap gap-5 ml-5 mb-5">
         <RadioBtn
           id="english"
           name="language"
           value="english"
           htmlFor="english"
-          text=" 英 語"
+          text="English"
           onChange={() => checkEnglish()}
         />
       </div>

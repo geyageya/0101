@@ -41,7 +41,7 @@ export const RadioArea = memo((props) => {
   };
   return (
     <div>
-      <div className="bg-gray-300 my-8">エリアをえらぼう</div>
+      <div className="bg-gray-300 my-8">Choose a continent （エリアをえらぼう）</div>
       <div className="flex flex-wrap gap-5 ml-5 mb-5">
         <RadioBtn
           id="World"
@@ -49,7 +49,7 @@ export const RadioArea = memo((props) => {
           value="World"
           onChange={() => chooseWorld()}
           htmlFor="World"
-          text=" 世界（どこでもいい）"
+          text=" World 世界、どこでもいい"
         />
       </div>
       <div className="flex flex-wrap gap-5 m-5">
@@ -59,7 +59,7 @@ export const RadioArea = memo((props) => {
           value="Asia"
           onChange={() => chooseAsia()}
           htmlFor="Asia"
-          text=" アジア"
+          text="Asia アジア"
         />
         <RadioBtn
           id="Europe"
@@ -67,7 +67,7 @@ export const RadioArea = memo((props) => {
           value="Europe"
           onChange={() => chooseEurope()}
           htmlFor="Europe"
-          text=" ヨーロッパ"
+          text="Europe ヨーロッパ"
         />
         <RadioBtn
           id="Africa"
@@ -75,7 +75,7 @@ export const RadioArea = memo((props) => {
           value="Africa"
           onChange={() => chooseAfrica()}
           htmlFor="Africa"
-          text=" アフリカ"
+          text="Africa アフリカ"
         />
         <RadioBtn
           id="Americas"
@@ -83,7 +83,7 @@ export const RadioArea = memo((props) => {
           value="Americas"
           onChange={() => chooseAmericas()}
           htmlFor="Americas"
-          text=" アメリカ"
+          text="Ameicas アメリカ"
         />
         <RadioBtn
           id="Oceania"
@@ -91,7 +91,7 @@ export const RadioArea = memo((props) => {
           value="Oceania"
           onChange={() => chooseOceania()}
           htmlFor="Oceania"
-          text=" オセアニア"
+          text="Oceania オセアニア"
         />
       </div>
     </div> //最初のdiv

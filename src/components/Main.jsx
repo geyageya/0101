@@ -242,7 +242,7 @@ export const Main = () => {
           //最後から4枚目以上
           timerRef.current = setTimeout(() => {
             pcPlayer2(newCurrentTurn);
-          }, 12000);
+          }, 15000);
         } else if (newCurrentTurn === basicLists.length - 3) {
           //最後から3枚目
           timerRef.current = setTimeout(() => {
@@ -511,8 +511,8 @@ export const Main = () => {
     }
   };
   //ボタンのtext
-  const gameStatus = isStarted ? "ゲーム中" : "ゲーム開始";
-  const scoredStatus = isScored ? "正解" : "相手が取りました";
+  const gameStatus = isStarted ? "On game ゲーム中" : "Start！ 開始";
+  const scoredStatus = isScored ? "You won！  取りました" : "Taken! 取られた";
 
   //■■■■■■■■■■■■■■■■■■■■■■■■■ JSX ■■■■■■■■■■■■■■■■■■■■■■■■■
   return (
@@ -546,7 +546,7 @@ export const Main = () => {
           {isStarted ? (
             <>
               {isResult ? (
-                <Button tailwind="bg-gray-500 text-black">ゲーム終了</Button>
+                <Button tailwind="bg-gray-500 text-black">Over（ゲーム終了）</Button>
               ) : (
                 <Button tailwind="bg-gray-200 text-black">{gameStatus}</Button>
               )}

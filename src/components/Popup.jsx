@@ -30,16 +30,16 @@ export const Popup = (props) => {
       />
 
       {props.currentTurn < props.basicLists.length - 3 && (
-        <WindowBtn onClick={props.onClick} windowBtnMsg="次" />
+        <WindowBtn onClick={props.onClick} windowBtnMsg="Next 次" />
       )}
       {props.currentTurn === props.basicLists.length - 3 && (
         <WindowBtn
           onClick={props.onClick}
-          windowBtnMsg="次取ると、最後の札がもらえます"
+          windowBtnMsg="Last turn（次取ると、最後の札もゲット）"
         />
       )}
       {props.currentTurn === props.basicLists.length - 2 && (
-        <WindowBtn onClick={props.onClick} windowBtnMsg="結果を見る" />
+        <WindowBtn onClick={props.onClick} windowBtnMsg="See result（結果）" />
       )}
     </div>
   );

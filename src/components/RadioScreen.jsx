@@ -14,8 +14,7 @@ export const RadioScreen = (props) => {
 
   return (
     <div className="w-full container mx-auto p-5 bg-lime-100 md:p-10">
-      <h1 className="text-2xl mb-4 text-center md:m-7 ">世界200ケ国かるた</h1>
-
+      <h1 className="text-2xl mb-4 text-center md:m-7 ">Play with 200 countries cards! 「世界200ケ国かるた」で遊ぼう</h1>
       <RadioLang setLanguage={props.setLanguage} />
       <RadioArea setArea={props.setArea} />
       <RadioSpeed setSpeed={props.setSpeed} />
@@ -23,7 +22,7 @@ export const RadioScreen = (props) => {
         tailwind="bg-red-600 mt-10 text-white cursor-pointer transform hover:scale-110 transition-transform"
         onClick={props.onClick}
       >
-        札 を 並 べ る
+        Place Cards  札を並べよう
       </Button>
     </div>
   ); //return
