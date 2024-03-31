@@ -512,7 +512,7 @@ export const Main = () => {
   };
   //ボタンのtext
   const gameStatus = isStarted ? "On game ゲーム中" : "Start！ 開始";
-  const scoredStatus = isScored ? "You won！  取りました" : "Taken! 取られた";
+  const scoredStatus = isScored ? "You won 取った" : "Taken! 取られた";
 
   //■■■■■■■■■■■■■■■■■■■■■■■■■ JSX ■■■■■■■■■■■■■■■■■■■■■■■■■
   return (

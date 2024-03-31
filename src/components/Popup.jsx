@@ -30,7 +30,7 @@ export const Popup = (props) => {
       />
 
       {props.currentTurn < props.basicLists.length - 3 && (
-        <WindowBtn onClick={props.onClick} windowBtnMsg="Next 次" />
+        <WindowBtn onClick={props.onClick} windowBtnMsg="Next card（次）" />
       )}
       {props.currentTurn === props.basicLists.length - 3 && (
         <WindowBtn
