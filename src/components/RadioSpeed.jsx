@@ -27,7 +27,7 @@ export const RadioSpeed = (props) => {
     <>
       <div className="bg-gray-300 my-8">Speed of Game  （まず「ゆっくり」からはじよう）</div>
       {/* <div className="flex  m-1 gap-2 md:flex-wrap md:gap-6 md:m-5"> */}
-      <div className="flex  gap-2 flex-wrap">
+      <div className="flex flex-wrap gap-5 m-5">
         <RadioBtn
           id="speedlevelOne"
           name="speed"
