@@ -32,7 +32,7 @@ export const RadioSpeed = (props) => {
           name="speed"
           value="speedlevelOne"
           htmlFor="speedlevelOne"
-          text="Beginner（ゆっくり）"
+          text="Beginner-ゆっくり"
           onChange={() => speedLevelOne()}
         />
         <RadioBtn
@@ -40,7 +40,7 @@ export const RadioSpeed = (props) => {
           name="speed"
           value="speedlevelTwo"
           htmlFor="speedlevelTwo"
-          text="Faster（少し速い）"
+          text="Faster-少し速い"
           onChange={() => speedLevelTwo()}
         />
         <RadioBtn
@@ -48,7 +48,7 @@ export const RadioSpeed = (props) => {
           name="speed"
           value="speedlevelThree"
           htmlFor="speedlevelThree"
-          text="Fastest（もっと速い）"
+          text="Fastest-速い"
           onChange={() => speedLevelThree()}
         />
       </div>
