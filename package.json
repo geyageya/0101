@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "engines": {
-    "node": "22.x"
+    "node": "20.x"
   },
   "version": "0.1.0",
   "private": true,
