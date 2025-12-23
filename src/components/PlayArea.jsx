@@ -1,5 +1,6 @@
 import React from "react";
 // import {memo} from "react";
+import { resolveAsset } from "../utils/assetResolver";
 
 //memo化効果無し
 export const PlayArea = (props) => {
@@ -8,17 +9,17 @@ export const PlayArea = (props) => {
 
   switch (props.language) {
     case "japanese":
-      backgroundImage = "url(../images/tatami.png)";
+      backgroundImage = `url(${resolveAsset("images/tatami.png")})`;
       break;
     case "hiragana":
-      backgroundImage = "url(../images/tatami.png)";
+      backgroundImage = `url(${resolveAsset("images/tatami.png")})`;
       break;
     case "english":
-      backgroundImage = "url(../images/worldmap.png)";
+    backgroundImage = `url(${resolveAsset("images/worldmap.png")})`;
       break;
     default:
       //Englishに同じ
-      backgroundImage = "url(../images/worldmap.png)";
+      backgroundImage = `url(${resolveAsset("images/worldmap.png")})`;
   } //switch
 
   const playArea = {

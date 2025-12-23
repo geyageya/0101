@@ -5,8 +5,12 @@ import React from "react";
 // import { PlayArea } from "./PlayArea";
 
 //メモ化効果なし
+import { resolveAsset } from "../utils/assetResolver";
+
 export const Card = (props) => {
   console.log("Card - Child4");
+  console.log("Card hand =", props.hand);
+
 
   return (
     <div>
@@ -15,7 +19,7 @@ export const Card = (props) => {
           alt=""
           className="max-w-[90px] max-h-[90px]  md:max-w-[130px] md:max-h-[130px] lg:max-w-[150px] lg:max-h-[150px]"
           id={props.id}
-          src={props.src}
+          src={resolveAsset(props.src)}
           //表示画像のリンク切れの場合、非表示にする
           onError={(e) => (e.target.style.display = "none")}
         />
@@ -24,7 +28,7 @@ export const Card = (props) => {
         <img
           className="max-w-[90px] max-h-[90px] cursor-pointer md:max-w-[130px] md:max-h-[130px] lg:max-w-[150px] lg:max-h-[150px]"
           alt=""
-          src={props.src}
+          src={resolveAsset(props.src)}
           id={props.id}
           //表示画像のリンク切れの場合、非表示にする
           onError={(e) => (e.target.style.display = "none")}

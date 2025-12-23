@@ -1,9 +1,13 @@
 import React from "react";
 // import {memo} from "react";
 import { WindowBtn } from "./WindowBtn";
+import { resolveAsset } from "../utils/assetResolver";
+
 
 export const Result = (props) => {
   console.log("Result - Child2");
+  console.log(resolveAsset("images/gold.png"));
+
 
   //次のゲーム
   const newGame = () => {
@@ -18,7 +22,7 @@ export const Result = (props) => {
           <img
             className="w-48 mx-auto my-5"
             alt="prize"
-            src="../images/gold.png"
+           src={resolveAsset("images/gold.png")}
           />
         </>
       )}

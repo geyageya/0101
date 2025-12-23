@@ -17,16 +17,14 @@
     "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
     "use-sound": "^4.0.1",
     "web-vitals": "^2.1.2",
     "windups": "^1.1.9"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +47,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
+    "@vitejs/plugin-react": "^5.1.2",
     "@welldone-software/why-did-you-render": "^6.2.3",
     "autoprefixer": "^10.4.1",
     "eslint": "^8.7.0",
@@ -58,6 +57,10 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
-    "tailwindcss": "^3.0.11"
+    "tailwindcss": "^3.0.11",
+    "vite": "^7.3.0"
+  },
+  "volta": {
+    "node": "20.19.6"
   }
 }

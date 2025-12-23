@@ -1,6 +1,7 @@
 import React from "react";
 // import {useState,memo} from "react";
 import { WindowBtn } from "./WindowBtn";
+import { resolveAsset } from "../utils/assetResolver";
 
 export const Popup = (props) => {
   console.log("Popup - Child2");
@@ -11,7 +12,8 @@ export const Popup = (props) => {
       <img
         className="max-w-[150px] mx-auto"
         alt="efuda"
-        src={props.basicLists[props.currentTurn].answer}
+        src={resolveAsset(props.basicLists[props.currentTurn].answer)}
+
       />
       <p>
         {/* {props.basicLists[props.currentTurn].subject}  */}
@@ -26,7 +28,7 @@ export const Popup = (props) => {
       <img
         className="mx-auto"
         alt="flag"
-        src={props.basicLists[props.currentTurn].flag}
+        src={resolveAsset(props.basicLists[props.currentTurn].flag)}
       />
 
       {props.currentTurn < props.basicLists.length - 3 && (

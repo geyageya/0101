@@ -3,8 +3,9 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.validate": ["javascript"],
   //prettier設定
+  "eslint.validate": ["javascript", "javascriptreact"],
+
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   //その他

@@ -1,4 +1,5 @@
 import React from "react";
+import { resolveAsset } from "../utils/assetResolver";
 import { useState, useRef } from "react";
 import { Button } from "./Button";
 import { PlayArea } from "./PlayArea";
@@ -149,19 +150,19 @@ export const Main = () => {
       //switch
       switch (language) {
         case "default":
-          clueSounds.src = basicLists[currentTurn].read; //英語
+          clueSounds.src = resolveAsset(basicLists[currentTurn].read); //英語
           break;
         case "english":
-          clueSounds.src = basicLists[currentTurn].read; //英語
+          clueSounds.src = resolveAsset(basicLists[currentTurn].read); //英語
           break;
         case "japanese":
-          clueSounds.src = basicLists[currentTurn].yomu; //日本語
+          clueSounds.src = resolveAsset(basicLists[currentTurn].yomu); //日本語
           break;
         case "hiragana":
-          clueSounds.src = basicLists[currentTurn].yomu; //日本語
-          break;
+          clueSounds.src = resolveAsset(basicLists[currentTurn].yomu); //日本語
+          break
         default:
-          clueSounds.src = basicLists[currentTurn].read; //英語
+          clueSounds.src = resolveAsset(basicLists[currentTurn].read); //英語
       }
     }
     clueSounds.play();
@@ -407,7 +408,7 @@ export const Main = () => {
   const placeHand = () => {
     const result = karutaLists.map((list) =>
       list.id === basicLists[currentTurn].id
-        ? { ...list, hand: "/images/hand.png" }
+        ? { ...list, hand: "images/hand.png" }
         : list
     );
     setKarutaLists(result);
@@ -417,7 +418,7 @@ export const Main = () => {
   const placeHandPc = () => {
     const result = karutaLists.map((list) =>
       list.id === basicLists[currentTurn].id
-        ? { ...list, handPc: "/images/handPc.png" }
+        ? { ...list, handPc: "images/handPc.png" }
         : list
     );
     setKarutaLists(result);
@@ -427,7 +428,7 @@ export const Main = () => {
   const placeHandPc2 = (currentNum) => {
     const result = karutaLists.map((list) =>
       list.id === basicLists[currentNum].id
-        ? { ...list, handPc: "/images/handPc.png" }
+        ? { ...list, handPc: "images/handPc.png" }
         : list
     );
     //currentTurnの更新時期のずれにより、不要な所に手や絵が表示されてしまう。その手を消すために以下を実行

@@ -84,7 +84,7 @@ export const useSetup = () => {
     switch (area) {
       case "Asia": {
         const filtered = basicLists.filter((list) => list.area === "Asia");
-        const shuffled = shuffle(filtered).slice(0, 6);
+        const shuffled = shuffle(filtered).slice(0, 12);
         const result = shuffle([...shuffled]);
         setBasicLists(result);
         const result2 = shuffle([...shuffled]);

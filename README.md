@@ -1,70 +1,133 @@
-# Getting Started with Create React App
+# Karuta Game (React + Vite)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a browser-based karuta-style game built with React and Vite.
+It focuses on fast interaction using images and audio, and is designed to be extended
+into an online multiplayer game in the future.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+- React
+- Vite
+- JavaScript
+- Tailwind CSS
+- ESLint / Prettier
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Structure
 
-### `npm test`
+.
+├── public/
+│   ├── images/        # Static images (cards, flags, UI assets)
+│   └── sounds/        # Audio files (effects, EN/JP voices)
+│
+├── src/
+│   ├── components/    # React components
+│   ├── hooks/         # Game logic hooks
+│   ├── utils/         # Shared utilities (asset resolver, etc.)
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── index.html         # Vite entry HTML
+├── vite.config.js
+├── package.json
+└── README.md
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Asset Management
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+All images and audio files are placed under the public directory.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Assets are referenced using public-relative paths, such as:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- images/pictures/001_p.png
+- sounds/en/001_en.mp3
+- sounds/effects/click.mp3
 
-### `npm run eject`
+To support future changes such as basePath, subdirectory hosting, or CDN usage,
+all asset paths are resolved through a centralized resolver.
+Example asset resolver:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+src/utils/assetResolver.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+export const resolveAsset = (relPath) =>
+  `${import.meta.env.BASE_URL}${relPath}`;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This design allows asset URL behavior to be changed in one place only.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Development
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Install dependencies:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npm install
 
-### Code Splitting
+Start development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+npm run dev
 
-### Analyzing the Bundle Size
+Open:
+http://localhost:5173
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## Build & Preview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Build for production:
 
-### Advanced Configuration
+npm run build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Preview production build locally:
 
-### Deployment
+npm run preview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Notes on Build Artifacts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- dist/ (and legacy build/) are auto-generated
+- Do not edit or commit them
+- These directories are ignored via .gitignore
+
+---
+
+## Linting & Formatting
+
+- ESLint is used for code validation
+- Prettier is used for formatting
+- Shared VS Code settings are provided under .vscode/
+
+---
+
+## Removed / Not Used
+
+This project was originally bootstrapped with Create React App (CRA),
+but all CRA-specific features have been removed, including:
+
+- react-scripts
+- reportWebVitals
+- CRA build pipeline
+- CRA-specific public assets
+
+The project now uses Vite exclusively.
+
+---
+
+## Future Plans
+
+- Migration to Next.js
+- Online multiplayer support
+- WebSocket-based real-time gameplay
+- CDN-based asset delivery
+
+The current architecture is designed with these extensions in mind.
+
+---
+
+## License
+
+This project is for educational and experimental purposes.

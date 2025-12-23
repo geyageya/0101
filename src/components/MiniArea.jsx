@@ -1,6 +1,7 @@
 import React from "react";
 import { memo } from "react";
 import { MiniCard } from "./MiniCard";
+import { resolveAsset } from "../utils/assetResolver";
 
 //memo化の効果あり。memo化しないと札を取る度に、数回不要なレンダリングされる
 export const MiniArea = memo((props) => {
@@ -16,6 +17,7 @@ export const MiniArea = memo((props) => {
             <MiniCard
               //MiniCard用--MiniAreaから
               src={picture}
+              
             />
           </li>
         );
