@@ -20,7 +20,7 @@ export const RadioScreen = (props) => {
       <RadioArea setArea={props.setArea} />
       <RadioSpeed setSpeed={props.setSpeed} />
       <Button
-        tailwind="bg-red-600 mt-10 text-white cursor-pointer transform hover:scale-110 transition-transform"
+        tailwind="w-fit block mx-auto bg-red-600 mt-10 text-white cursor-pointer transform hover:scale-110 transition-transform"
         onClick={props.onClick}
       >
         Place Cards  札を並べよう

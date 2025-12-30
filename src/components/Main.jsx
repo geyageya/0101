@@ -59,6 +59,12 @@ export const Main = () => {
   const [miniList, setMiniList] = useState([]); //ミニ絵札データ配列
   const [miniListPc, setMiniListPc] = useState([]); //ミニ絵札データ配列（PC)
   const [isResult, setIsResult] = useState(false); //ゲーム結果の表示・非表示
+  //251230追加
+  const clueRef = useRef(null);              // 読み上げAudioを1本固定
+  const touchLockedRef = useRef(false);      // 札タッチ連打防止
+  const [canGoNext, setCanGoNext] = useState(false); // PopupのNext押せるか
+
+
 
   // const kouka =
   //   [
@@ -84,39 +90,76 @@ export const Main = () => {
   }; //handleSet
 
   //「ゲーム開始」ボタンを押す(useCallbackを設定すると読み句の音声や表示が狂う)
+  // const handleStart = () => {
+  //   startTimer(); //タイマー設定（１枚目のみ）
+  //   setIsAnswered(false); //絵札のクリック可能にする
+  //   setIsStarted(true); //「ゲーム開始」ボタンの反応停止
+  //   readClue(currentTurn); //読み句の読みあげ
+  //   showClue(currentTurn);
+  // }; //handleStart
+
+  //251230修正
+
   const handleStart = () => {
-    startTimer(); //タイマー設定（１枚目のみ）
-    setIsAnswered(false); //絵札のクリック可能にする
-    setIsStarted(true); //「ゲーム開始」ボタンの反応停止
-    readClue(currentTurn); //読み句の読みあげ
-    showClue(currentTurn);
-  }; //handleStart
+  touchLockedRef.current = false; // ★開始時はタッチOK
+  startTimer();
+  setIsAnswered(false);
+  setIsStarted(true);
+  readClue(currentTurn);
+  showClue(currentTurn);
+};
 
   const handleClick = (selectedId) => {
-    setIsAnswered(true); //絵札のクリックを不可にする
-    stopTimer(); //タイマー解除（PCplayer)
+  // ★読み上げ中でも「最初の1回」はOKだが、2回目以降は無反応
+  if (touchLockedRef.current) return;
+  touchLockedRef.current = true; // ★ここでロックON（連打防止）
 
-    //正解の場合
-    if (selectedId === basicLists[currentTurn].id) {
-      //配列のIDを比較
-      // //正解の絵札の上に手を表示
+  setIsAnswered(true);
+  stopTimer();
 
-      playKouka(1);
-      setIsPopup(true);
-      placeHand();
-      //player独自の操作
-      setScore(score + 1); //スコア加点
-      setIsScored(true); //ミニ絵札表示（手前）の有無を決める基準
-      //最後の１枚を撮った場合に加点
-      if (currentTurn === basicLists.length - 2) setScore(score + 2);
-    }
-    //不正解の場合
-    else {
-      setTimeout(() => {
-        pcPlayer();
-      }, 300);
-    }
-  }; //handleClick
+  if (selectedId === basicLists[currentTurn].id) {
+    playKouka(1);
+    setIsPopup(true);
+    placeHand();
+    setScore(score + 1);
+    setIsScored(true);
+    if (currentTurn === basicLists.length - 2) setScore(score + 2);
+  } else {
+    // 不正解でもPopupを出したいならここで出す（今はPC側処理に回してる）
+    // 仕様に合わせるなら「不正解Popup」も出す設計が必要
+    setTimeout(() => {
+      pcPlayer();
+    }, 300);
+  }
+};
+
+
+
+  // const handleClick = (selectedId) => {
+  //   setIsAnswered(true); //絵札のクリックを不可にする
+  //   stopTimer(); //タイマー解除（PCplayer)
+
+  //   //正解の場合
+  //   if (selectedId === basicLists[currentTurn].id) {
+  //     //配列のIDを比較
+  //     // //正解の絵札の上に手を表示
+
+  //     playKouka(1);
+  //     setIsPopup(true);
+  //     placeHand();
+  //     //player独自の操作
+  //     setScore(score + 1); //スコア加点
+  //     setIsScored(true); //ミニ絵札表示（手前）の有無を決める基準
+  //     //最後の１枚を撮った場合に加点
+  //     if (currentTurn === basicLists.length - 2) setScore(score + 2);
+  //   }
+  //   //不正解の場合
+  //   else {
+  //     setTimeout(() => {
+  //       pcPlayer();
+  //     }, 300);
+  //   }
+  // }; //handleClick
 
   //■■■■■■■■■■■■■■■■■■■■■■■■■  (3) 読み句 ■■■■■■■■■■■■■■■■■■■■■■■■■
   //読み句の表示（使用言語の設定（逐次・一括表示の切り替えは、ClueBoxコンボーネントだけで行う）
@@ -143,36 +186,90 @@ export const Main = () => {
 
   //読みあげ （引数あり）以前 currentTurnをcurrentNumとしていたが、理由覚えていない
 
-  let clueSounds = new Audio();
-  //useCallbackを設定すると読み句の音声が出ない
-  const readClue = (currentTurn) => {
-    if (currentTurn < basicLists.length - 1) {
-      //switch
-      switch (language) {
-        case "default":
-          clueSounds.src = resolveAsset(basicLists[currentTurn].read); //英語
-          break;
-        case "english":
-          clueSounds.src = resolveAsset(basicLists[currentTurn].read); //英語
-          break;
-        case "japanese":
-          clueSounds.src = resolveAsset(basicLists[currentTurn].yomu); //日本語
-          break;
-        case "hiragana":
-          clueSounds.src = resolveAsset(basicLists[currentTurn].yomu); //日本語
-          break
-        default:
-          clueSounds.src = resolveAsset(basicLists[currentTurn].read); //英語
-      }
-    }
-    clueSounds.play();
-    clueSounds.preload = "auto";
-    clueSounds.loop = false;
+  // let clueSounds = new Audio();
+  // //useCallbackを設定すると読み句の音声が出ない
+  // const readClue = (currentTurn) => {
+  //   if (currentTurn < basicLists.length - 1) {
+  //     //switch
+  //     switch (language) {
+  //       case "default":
+  //         clueSounds.src = resolveAsset(basicLists[currentTurn].read); //英語
+  //         break;
+  //       case "english":
+  //         clueSounds.src = resolveAsset(basicLists[currentTurn].read); //英語
+  //         break;
+  //       case "japanese":
+  //         clueSounds.src = resolveAsset(basicLists[currentTurn].yomu); //日本語
+  //         break;
+  //       case "hiragana":
+  //         clueSounds.src = resolveAsset(basicLists[currentTurn].yomu); //日本語
+  //         break
+  //       default:
+  //         clueSounds.src = resolveAsset(basicLists[currentTurn].read); //英語
+  //     }
+  //   }
+  //   clueSounds.play();
+  //   clueSounds.preload = "auto";
+  //   clueSounds.loop = false;
+  // };
+  // const stopClue = () => {
+  //   clueSounds.pause();
+  //   clueSounds.currentTime = 0;
+  // };
+//251230修正
+  const getClueSrc = (turn) => {
+  switch (language) {
+    case "japanese":
+    case "hiragana":
+      return basicLists[turn].yomu;
+    case "default":
+    case "english":
+    default:
+      return basicLists[turn].read;
+  }
+};
+
+const readClue = (turn) => {
+  if (turn >= basicLists.length - 1) return;
+
+  if (!clueRef.current) clueRef.current = new Audio();
+  const a = clueRef.current;
+
+  // 読み上げ開始時点では「Next」は押せない
+  setCanGoNext(false);
+
+  a.preload = "auto";
+  a.loop = false;
+
+  a.onended = () => {
+    // 読み上げが終わったら、Popupボタンを押せるようにする
+    setCanGoNext(true);
   };
-  const stopClue = () => {
-    clueSounds.pause();
-    clueSounds.currentTime = 0;
-  };
+
+  a.pause();
+  a.src = resolveAsset(getClueSrc(turn));
+  a.currentTime = 0;
+  a.play().catch(() => {});
+};
+
+const stopClue = () => {
+  const a = clueRef.current;
+  if (!a) return;
+  a.pause();
+  a.currentTime = 0;
+  // 強制停止したならNext可能にしてよい（好みで）
+  setCanGoNext(true);
+};
+
+
+// const stopClue = () => {
+//   const a = clueRef.current;
+//   if (!a) return;
+//   a.pause();
+//   a.currentTime = 0;
+//   // 止めた場合はロックも解除（※必要なら）
+//   inputLockRef.current = false;
+// };
 
   //■■■■■■■■■■■■■■■■■■■■■■■■■ (4) PCプレーヤー ■■■■■■■■■■■■■■■■■■■■■■■■■
   const timerRef = useRef(null); //タイマー設定用
@@ -326,10 +423,19 @@ export const Main = () => {
 
   //■■■■■■■■■■■■■■■■■■■■■■■■■  (5) ポップアップボタンを押した後 ■■■■■■■■■■■■■■■■■■■■■■■■■
   //useCallback使ったらエラー出た
-  const pressPopupBtn = () => {
-    //setCurrentTurn変更がすぐ反映されないため手動で１を加える（or最初の句が２回読まれる）
-    const newCurrentTurn = currentTurn + 1;
-    setCurrentTurn(newCurrentTurn);
+  // const pressPopupBtn = () => {
+  //   //setCurrentTurn変更がすぐ反映されないため手動で１を加える（or最初の句が２回読まれる）
+  //   const newCurrentTurn = currentTurn + 1;
+  //   setCurrentTurn(newCurrentTurn);
+const pressPopupBtn = () => {
+  // ★読み上げが終わってないなら押しても無反応
+  if (!canGoNext) return;
+
+  // 次ターン開始の準備：タッチロック解除（次の読み上げ開始と同時にタッチOK）
+  touchLockedRef.current = false;
+
+  const newCurrentTurn = currentTurn + 1;
+  setCurrentTurn(newCurrentTurn);
 
     //いろいろ消す
     hide();
@@ -349,6 +455,7 @@ export const Main = () => {
       }
     }
 
+    
     //次の準備ーー
 
     // 「次」ボタンを押した時
@@ -363,7 +470,7 @@ export const Main = () => {
       //  setTimeout(()=>{showClue(newCurrentTurn)}, 1200); //読み句一括表示の場合のみ
       setIsAnswered(false); //絵札のクリックを可にする
       setIsScored(false);
-      stopClue(); //機能しているか不明
+      // stopClue(); //機能しているか不明
     }
 
     //タイマー設定（最後手前の札まで
@@ -619,18 +726,34 @@ export const Main = () => {
               {/* scoredStatus = isScored ? "正解" : "相手が取りました"; */}
               {isScored ? (
                 <Popup
-                  basicLists={basicLists}
-                  currentTurn={currentTurn}
-                  popupMsg={scoredStatus}
-                  onClick={() => pressPopupBtn()}
-                />
+  basicLists={basicLists}
+  currentTurn={currentTurn}
+  popupMsg={scoredStatus}
+  onClick={() => pressPopupBtn()}
+  canGoNext={canGoNext}
+/>
+
+                // <Popup
+                //   basicLists={basicLists}
+                //   currentTurn={currentTurn}
+                //   popupMsg={scoredStatus}
+                //   onClick={() => pressPopupBtn()}
+                // />
               ) : (
+                // <Popup
+                //   basicLists={basicLists}
+                //   currentTurn={currentTurn}
+                //   popupMsg={scoredStatus}
+                //   onClick={() => pressPopupBtn()}
+                // />
                 <Popup
-                  basicLists={basicLists}
-                  currentTurn={currentTurn}
-                  popupMsg={scoredStatus}
-                  onClick={() => pressPopupBtn()}
-                />
+  basicLists={basicLists}
+  currentTurn={currentTurn}
+  popupMsg={scoredStatus}
+  onClick={() => pressPopupBtn()}
+  canGoNext={canGoNext}
+/>
+
               )}
             </>
           ) : null}

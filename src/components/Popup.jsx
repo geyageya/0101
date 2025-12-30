@@ -1,48 +1,49 @@
 import React from "react";
-// import {useState,memo} from "react";
 import { WindowBtn } from "./WindowBtn";
 import { resolveAsset } from "../utils/assetResolver";
 
 export const Popup = (props) => {
-  console.log("Popup - Child2");
+  const disabled = !props.canGoNext;
+
+  const isLastTurn = props.currentTurn === props.basicLists.length - 2;
+  const isNearLast = props.currentTurn === props.basicLists.length - 3;
+
+  const btnLabel = isLastTurn
+    ? "Result 結果"
+    : isNearLast
+    ? "Last turn（次取ると、最後の札もゲット）"
+    : "Next card（次）";
 
   return (
     <div className="absolute top-[200px] w-[220px] left-0 right-0 mx-auto p-5 border-2 rounded-md text-center bg-gray-100 shadow-md">
-      <p className=" text-red-600 text-xl md:text-2xl">{props.popupMsg}</p>
+      <p className="text-red-600 text-xl md:text-2xl">{props.popupMsg}</p>
+
       <img
         className="max-w-[150px] mx-auto"
         alt="efuda"
         src={resolveAsset(props.basicLists[props.currentTurn].answer)}
-
       />
-      <p>
-        {/* {props.basicLists[props.currentTurn].subject}  */}
-        {/* 日本語 */}
-        {props.basicLists[props.currentTurn].daizai}
-      </p>
-      <p>
-        {/* {props.basicLists[props.currentTurn].country}  */}
-        {/* 日本語 */}
-        {props.basicLists[props.currentTurn].kuni}
-      </p>
+
+      <p>{props.basicLists[props.currentTurn].daizai}</p>
+      <p>{props.basicLists[props.currentTurn].kuni}</p>
+
       <img
         className="mx-auto"
         alt="flag"
         src={resolveAsset(props.basicLists[props.currentTurn].flag)}
       />
 
-      {props.currentTurn < props.basicLists.length - 3 && (
-        <WindowBtn onClick={props.onClick} windowBtnMsg="Next card（次）" />
-      )}
-      {props.currentTurn === props.basicLists.length - 3 && (
+      <div className="mt-3">
         <WindowBtn
           onClick={props.onClick}
-          windowBtnMsg="Last turn（次取ると、最後の札もゲット）"
+          windowBtnMsg={btnLabel}
+          disabled={disabled}
         />
-      )}
-      {props.currentTurn === props.basicLists.length - 2 && (
-        <WindowBtn onClick={props.onClick} windowBtnMsg="Result 結果" />
+      </div>
+
+      {!props.canGoNext && (
+        <p className="mt-2 text-xs text-gray-500">読み上げが終わるまで待ってね</p>
       )}
     </div>
   );
-}; //<Popup/>---------------------------------------------------------
+};
