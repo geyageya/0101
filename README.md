@@ -89,6 +89,19 @@ npm run dev
 Open:
 http://localhost:5173
 
+
+---
+
+### **👇 この下にそのまま追加**
+
+```md
+## Deployment policy（Production / Preview）
+
+本番環境はロリポップ（https://online.karuta2020.tokyo/）で運用しており、Vite で build した `dist/` の中身を FTP でアップロードしている。  
+Vercel は本番配信には使用せず、GitHub 上のコードが正しく build・動作するかを確認するための **プレビュー環境**として利用している。  
+`main` ブランチは安定版、`deploy/lolipop` ブランチは本番反映前の確認用とし、Vercel の Preview URL で動作確認後、必要に応じてロリポップへ反映する。
+
+
 ---
 
 ## Build & Preview
