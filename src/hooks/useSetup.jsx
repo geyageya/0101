@@ -71,13 +71,23 @@ export const useSetup = () => {
   //   }
   // }, []);
 
+  // const shuffle = useCallback((arr) => {
+  //   for (let i = arr.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [arr[j], arr[i]] = [arr[i], arr[j]];
+  //   }
+  //   return arr;
+  // }, []);
+
   const shuffle = useCallback((arr) => {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[j], arr[i]] = [arr[i], arr[j]];
-    }
-    return arr;
-  }, []);
+  const a = [...arr]; // ★ ここが超重要（コピー）
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[j], a[i]] = [a[i], a[j]];
+  }
+  return a;
+}, []);
+
 
   // //エリア別札選出）
   const chooseArea = () => {
